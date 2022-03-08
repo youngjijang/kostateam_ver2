@@ -21,7 +21,11 @@ public class SugangService {
 		return list;
 	}
 	
-	
+	public List<SugangDTO> selectGrade(String studentId)throws SQLException{
+		List<SugangDTO> list = dao.selectGrade(studentId);
+		//if(sugangDTO==null)throw new 
+		return list;
+	}
 	
 	
 }

@@ -2,13 +2,21 @@ package academy.mvc.model.dto;
 
 public class SugangDTO {
 	private int sNo;
+	private String cName;
 	private String cCode;
 	private String sID;
 	private int score;
 	
 	public SugangDTO() {}
+	
+	
+	public SugangDTO(String cName, int score) {
+		super();
+		this.cName = cName;
+		this.score = score;
+	}
 
-	//ㅎ
+
 	public SugangDTO(int sNo, String cCode, String sID, int score) {
 		super();
 		this.sNo = sNo;
