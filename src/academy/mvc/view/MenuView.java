@@ -5,6 +5,7 @@ import java.util.List;
 import academy.mvc.controller.CourseController;
 import academy.mvc.controller.SugangController;
 import academy.mvc.controller.UserController;
+import academy.mvc.model.dto.CourseDTO;
 import academy.mvc.model.dto.StudentDTO;
 import academy.mvc.model.dto.UserDTO;
 
@@ -18,16 +19,17 @@ public class MenuView {
 			switch(menuNo) {
 				case 1 :
 					CourseController.getCourseList();
+					//SuccessView.printCourseList(list);
 					break;
 					
 				case 2 :
 					//수강코드 키보드입력받음
 					String courseCode = StartView.sc.nextLine();
-					CourseController.insertSugang(courseCode);
+					SugangController.insertSugang(userId, courseCode);
 					break;
 					
 				case 3 :
-					//SugangController.selectScore();
+					SugangController.selectGrade(userId);
 					break;
 					
 				case 4 :
@@ -37,6 +39,7 @@ public class MenuView {
 				case 5 :
 					//연락처 키보드 입력받음
 					System.out.println("변경할 연락처> ");
+					StartView.sc.next();//개행읽기
 					String newTel = StartView.sc.nextLine();
 					UserController.updateUser("student", userId, newTel); //Session추가 후 수정...
 					//비밀번호 변경(미정)
@@ -60,15 +63,17 @@ public class MenuView {
 			int menuNo = StartView.sc.nextInt();
 				switch(menuNo) {
 					case 1 :
-						List<StudentDTO> list = CourseController.getStudentList();
+						CourseController.getStudentList();
 						break;
 					case 2 :
 						//성적입력받는다
 						int score = StartView.sc.nextInt(); //개행 읽기 필요?
-						CourseController.insertScore(score);
+						SugangController.updateScore(userId, score); //성적등록과 수정 메소드 동일
 						break;
 					case 3 :
-						//SugangController.updateScore();
+						System.out.println("변경할 성적> ");
+						int newScore = StartView.sc.nextInt();
+						SugangController.updateScore(userId, newScore);
 						break;
 					case 4 :
 						UserController.showUser("teacher", userId);
@@ -78,9 +83,10 @@ public class MenuView {
 						String newTel = StartView.sc.nextLine();
 						UserController.updateUser("teacher", userId, newTel);
 						break;
-					case 9 : System.exit(0);
-					//StartView로 이동한다
-					//session...
+					case 9 :
+						//StartView로 이동한다
+						System.exit(0);
+						//session...
 				}
 			
 		}

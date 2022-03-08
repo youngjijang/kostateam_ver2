@@ -16,7 +16,7 @@ public class StartView {
 		while(true){
 			System.out.println("-------------Academy Program 시작합니다-------------");
 			System.out.println("사용자 유형을 입력하세요");
-			System.out.println("학생계정-1  강사계정-2 > ");
+			System.out.print("학생계정-1  강사계정-2 > ");
 			kind = sc.nextLine();
 			
 			System.out.print("아이디> ");
