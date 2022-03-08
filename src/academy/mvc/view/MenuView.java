@@ -27,7 +27,7 @@ public class MenuView {
 					break;
 					
 				case 3 :
-					SugangController.selectScore();
+					//SugangController.selectScore();
 					break;
 					
 				case 4 :
@@ -68,7 +68,7 @@ public class MenuView {
 						CourseController.insertScore(score);
 						break;
 					case 3 :
-						SugangController.updateScore();
+						//SugangController.updateScore();
 						break;
 					case 4 :
 						UserController.showUser("teacher", userId);

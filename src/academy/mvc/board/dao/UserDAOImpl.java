@@ -57,14 +57,14 @@ public class UserDAOImpl implements UserDAO {
 		try {
 			if(kind.equals("teacher")) {
 				con = DbUtil.getConnection();
-				ps= con.prepareStatement("update teacher set t_tel = ? where user_id= ?");
+				ps= con.prepareStatement("update teacher set t_tel = ? where t_id= ?");
 				ps.setString(1, newTel);
 				ps.setString(2, userId);
 
 			}else if(kind.equals("student")){
 				
 				con = DbUtil.getConnection();
-				ps= con.prepareStatement("update student set s_tel = ? where user_id= ?");
+				ps= con.prepareStatement("update student set s_tel = ? where s_id= ?");
 				ps.setString(1, newTel);
 				ps.setString(2, userId);
 				
@@ -88,10 +88,17 @@ public class UserDAOImpl implements UserDAO {
 		
 		try {
 			con = DbUtil.getConnection();
-			ps= con.prepareStatement("delete from ? where user_id= ?");
-			  ps.setString(1, kind); 
-			  ps.setString(2, userId);
-			result = ps.executeUpdate();
+			
+			
+			if(kind == "teacher") {
+				ps= con.prepareStatement("delete from teacher where t_id= ?");
+				ps.setString(1, userId);
+				result = ps.executeUpdate();
+	        }else {
+	        	ps= con.prepareStatement("delete from student where s_id= ?");
+				ps.setString(1, userId);
+				result = ps.executeUpdate();
+	        }
 			
 		}finally {
 			DbUtil.dbClose(con, ps);
