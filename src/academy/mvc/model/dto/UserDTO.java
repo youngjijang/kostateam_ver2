@@ -58,14 +58,15 @@ public class UserDTO {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("[userId=");
-		builder.append(userId);
-		builder.append(", userPwd=");
-		builder.append(userPwd);
-		builder.append(", userName=");
+		
+		builder.append(" 개인정보++++");
+		builder.append("\n");
+		builder.append("이름: ");
 		builder.append(userName);
-		builder.append(", userTel=");
+		builder.append("\n");
+		builder.append("연락처: ");
 		builder.append(userTel);
+		builder.append("\n");
 		return builder.toString();
 	}
 	

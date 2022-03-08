@@ -22,7 +22,7 @@ public class TeacherDTO extends UserDTO {
 
 	@Override
 	public String toString() {
-		return super.toString()+", courseCode="+courseCode;
+		return "++++강사"+super.toString()+"강의 코드: "+courseCode;
 	}
 	
 	

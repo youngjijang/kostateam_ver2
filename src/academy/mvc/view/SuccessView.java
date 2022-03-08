@@ -6,6 +6,7 @@ import academy.mvc.model.dto.BoardDTO;
 import academy.mvc.model.dto.CourseDTO;
 import academy.mvc.model.dto.ReplyDTO;
 import academy.mvc.model.dto.StudentDTO;
+import academy.mvc.model.dto.UserDTO;
 
 public class SuccessView {
     /**
@@ -80,5 +81,12 @@ public class SuccessView {
 	 * */
 	public static void printMessage(String message){
 		System.out.println(message);
+	}
+	
+	/**
+	 * 개인정보 출력
+	 */
+	public static void printUserInfo(UserDTO user) {
+		System.out.println(user);
 	}
 }

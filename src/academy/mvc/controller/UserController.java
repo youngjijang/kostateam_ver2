@@ -34,6 +34,7 @@ public class UserController {
 	public static void showUser(String kind, String userId) {
 		try{
 			UserDTO user = userService.showInfo(kind,userId);
+			SuccessView.printUserInfo(user);
 			
 		}catch(Exception e) {
 			//e.printStackTrace();
@@ -47,7 +48,7 @@ public class UserController {
 	public static void updateUser(String kind, String userId, String newTel) {
 		try{
 			userService.updateUser(kind, userId, newTel);
-			//SuccessView
+			SuccessView.printMessage("수정이 완료되었습니다.");
 		}catch(Exception e) {
 			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());

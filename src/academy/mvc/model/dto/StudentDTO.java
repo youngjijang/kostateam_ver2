@@ -27,7 +27,7 @@ public class StudentDTO extends UserDTO {
 
 	@Override
 	public String toString() {
-		return "Student"+super.toString()+", major="+major;
+		return "++++학생"+super.toString()+"전공: "+major;
 	}
 	
 }
