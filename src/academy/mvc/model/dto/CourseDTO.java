@@ -7,14 +7,14 @@ public class CourseDTO {
 	private int cCapa;
 	private int cHour;
 	private String cContent;
-	private int cStart;
-	private int cEnd;
+	private String cStart;
+	private String cEnd;
 	
 
 	public CourseDTO() {}
 
 
-	public CourseDTO(String cCode, String cName, int cCapa, int cHour, String cContent, int cStart, int cEnd) {
+	public CourseDTO(String cCode, String cName, int cCapa, int cHour, String cContent, String cStart, String cEnd) {
 		super();
 		this.cCode = cCode;
 		this.cName = cName;
@@ -76,22 +76,22 @@ public class CourseDTO {
 	}
 
 
-	public int getcStart() {
+	public String getcStart() {
 		return cStart;
 	}
 
 
-	public void setcStart(int cStart) {
+	public void setcStart(String cStart) {
 		this.cStart = cStart;
 	}
 
 
-	public int getcEnd() {
+	public String getcEnd() {
 		return cEnd;
 	}
 
 
-	public void setcEnd(int cEnd) {
+	public void setcEnd(String cEnd) {
 		this.cEnd = cEnd;
 	}
 
