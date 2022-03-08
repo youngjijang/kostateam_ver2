@@ -14,28 +14,25 @@ public class CourseService {
 	/**
 	 * 전체 강의 목록리턴
 	 */
-	public List<CourseDTO> getCourseList() throws SQLException {
-		List<CourseDTO> list = courseDAO.getCourseList();
+	public List<CourseDTO> selectCourseList() throws SQLException {
+		List<CourseDTO> list = courseDAO.selectCourseList();
 
 		if (list.size() == 0) {
-			throw new SQLException("강의 목록이 비었습니다.");
+			throw new NullPointerException("강의 목록이 비었습니다.");
 		}
 		return list;
 	}
 
 	/**
-	 * 강사 ID 받아서 해당 강사의 강의를 수강하는 학생 목록 리턴
+	 * 내 강의 조회-강사
 	 */
-	public List<StudentDTO> getStudentList(String teacherId) throws SQLException {
-		List<StudentDTO> list = courseDAO.getStudentList(teacherId);
-
-		if (list.size() == 0) {
-			throw new SQLException("해당 강의를 수강하는 학생 목록이 비었습니다.");
+	public List<CourseDTO> selectTeacherCourse(String teacherId) throws SQLException {
+		List<CourseDTO> list = courseDAO.selectTeacherCourse(teacherId);
+		
+		if(list.size() == 0) {
+			throw new NullPointerException("강의중인 과목이 없습니다.");
 		}
-
-		return null;
-
+		return list;
 	}
-
 
 }

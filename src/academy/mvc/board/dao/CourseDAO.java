@@ -11,12 +11,18 @@ public interface CourseDAO {
 	/**
 	 * 전체 강의 조회
 	 */
-	List<CourseDTO> getCourseList() throws SQLException;
+	List<CourseDTO> selectCourseList() throws SQLException;
+
 
 	/**
-	 * 내 강의 조회
+	 * 내 강의 조회-강사
 	 */
-	List<StudentDTO> getStudentList(String teacherId) throws SQLException;
+	List<CourseDTO> selectTeacherCourse(String teacherId) throws SQLException;
+	
+	
+	/**
+	 * 수강 인원 리턴 
+	 */
 
 
 }

@@ -14,9 +14,9 @@ public class CourseController {
 	/**
 	 * 전체 강의 목록리턴
 	 */
-	public static void getCourseList() {
+	public static void selectCourseList() {
 		try {
-			List<CourseDTO> list = courseService.getCourseList();
+			List<CourseDTO> list = courseService.selectCourseList();
 			SuccessView.printCourseList(list);
 
 		} catch (Exception e) {
@@ -27,23 +27,16 @@ public class CourseController {
 	}
 
 	/**
-	 * 강사 ID 받아서 해당 강사의 강의를 수강하는 학생 목록 리턴
-	 * 
-	 * @return
+	 * 내 강의 조회-강사
 	 */
-	public static List<StudentDTO> getStudentList() {
+	public static void selectTeacherCourse(String teacherId) {
 		try {
-			StudentDTO studentDTO = new StudentDTO();
-			List<StudentDTO> list = courseService.getStudentList(studentDTO.getUserName());
-
-			SuccessView.printStudentList(list);
-
+			List<CourseDTO> list = courseService.selectTeacherCourse(teacherId);
+			SuccessView.printCourseList(list);
 		} catch (Exception e) {
-//			 e.printStackTrace();
+//			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
-		return null;
-
 	}
 
 
