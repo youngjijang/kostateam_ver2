@@ -6,6 +6,8 @@ import java.util.List;
 import academy.mvc.model.dto.StudentDTO;
 import academy.mvc.model.dto.SugangDTO;
 import academy.mvc.service.SugangService;
+import academy.mvc.view.FailView;
+import academy.mvc.view.SuccessView;
 
 public class SugangController {
 	private static SugangService service = new SugangService();
@@ -16,12 +18,9 @@ public class SugangController {
 	public static void selectMind(String studentId) {		
 		try {
 			List<SugangDTO> list = service.selectMind(studentId);	
-			for (SugangDTO sugangDTO : list) {
-				System.out.println(sugangDTO);
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
+			SuccessView.printSugangList(list);
+		} catch (Exception e) {
+			FailView.errorMessage(e.getMessage());
 		}
 	}
 	
@@ -31,9 +30,9 @@ public class SugangController {
 	public static void selectStudentList(String cCode) {
 		try {
 			List<StudentDTO> list = service.selectStudentList(cCode);
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
+			SuccessView.printStudentList(list);			
+		} catch (Exception e) {
+			FailView.errorMessage(e.getMessage());
 		}	
 	}
 	
@@ -44,9 +43,9 @@ public class SugangController {
 		
 		try {
 			List<SugangDTO> list = service.selectGrade(studentId);
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
+			SuccessView.printScoreByStudentId(list);
+		} catch (Exception e) {
+			FailView.errorMessage(e.getMessage());
 		}
 		
 	}
@@ -57,9 +56,9 @@ public class SugangController {
 	public static void updateScore(String studentId, int score) {
 		try {
 			service.updateScore(studentId, score);
-			
+			SuccessView.printMessage("수정 완료");
 		} catch (Exception e) {
-			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
 		}
 	}
 	
@@ -69,8 +68,8 @@ public class SugangController {
 	public static void insertSugang(String studentId,String cCode) {
 		try {
 			service.insertSugang(studentId, cCode);
-
-		} catch (SQLException e) {
+			SuccessView.printMessage("신청 완료");
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	
@@ -82,16 +81,12 @@ public class SugangController {
 	public static void delectSugang(String studentId,String cCode) {
 		try {
 			service.delectSugang(studentId, cCode);
-		} catch (SQLException e) {
+			SuccessView.printMessage("철회 성공");
+		} catch (Exception e) {
 			e.printStackTrace();
 		}	
 	}
 	
 	
-	
-	public static void main(String[] args) {
-		selectMind("거북이");
-		
-	
-	}
+
 }

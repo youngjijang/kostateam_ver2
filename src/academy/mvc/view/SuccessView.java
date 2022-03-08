@@ -6,6 +6,7 @@ import academy.mvc.model.dto.BoardDTO;
 import academy.mvc.model.dto.CourseDTO;
 import academy.mvc.model.dto.ReplyDTO;
 import academy.mvc.model.dto.StudentDTO;
+import academy.mvc.model.dto.SugangDTO;
 import academy.mvc.model.dto.UserDTO;
 
 public class SuccessView {
@@ -22,6 +23,17 @@ public class SuccessView {
 		System.out.println();
 	}
 	
+	/**
+	 * 수강중인 과목 list 검색
+	 * */
+	public static void printSugangList(List<SugangDTO> list) {
+		System.out.println("---------수강과목 " + list.size() + "---------");
+		for (SugangDTO sugangDTO : list) {
+			System.out.println(sugangDTO);
+		}
+		
+	}
+	
 	
 	/**
 	 * 강의 출력
@@ -34,8 +46,11 @@ public class SuccessView {
 	/**
 	 * StudentDTO를 받아 성적 출력
 	 * */
-	public static void printScoreByStudentId(){
-		System.out.println();
+	public static void printScoreByStudentId(List<SugangDTO> list){
+		for (SugangDTO sugangDTO : list) {
+			System.out.println("과목 : "+sugangDTO.getcName()+" , 성적 : "+sugangDTO.getScore());
+		}
+		
 	}
 	
 	/**

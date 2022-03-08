@@ -12,25 +12,27 @@ public class SugangService {
 	SugangDAO dao = new SugangDAOImpl();
 	public List<SugangDTO> selectMind(String studentId)throws SQLException {
 		
-		List<SugangDTO> list =dao.selectMind(studentId);		
+		List<SugangDTO> list =dao.selectMind(studentId);	
+		if(list.size()==0)throw new NullPointerException("수강한 과목이 없습니다.");
 		return list;
 	}
 	
 	public List<StudentDTO> selectStudentList(String cCode)throws SQLException{
 		List<StudentDTO> list = dao.selectStudentList(cCode);
+		if(list.size()==0)throw new NullPointerException("수강중인 학생이 없습니다.");
 		return list;
 	}
 	
 	public List<SugangDTO> selectGrade(String studentId)throws SQLException{
 		List<SugangDTO> list = dao.selectGrade(studentId);
-		//if(sugangDTO==null)throw new 
+		if(list.size()==0)throw new NullPointerException("수강한 과목이 없습니다.");
 		return list;
 	}
 	
 	
 	public void updateScore(String studentId, int score) throws SQLException{
 		int result = dao.updateScore(studentId, score);
-		if(result == 0 )throw new SQLException("등록안됨");
+		if(result == 0 )throw new SQLException("등록 실패");
 		
 	}
 	
