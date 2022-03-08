@@ -9,43 +9,68 @@ public class BoardDTO {
 
 	
 	public BoardDTO() {}
-	public BoardDTO(int boardNo, String content, int boardPwd, String writer) {
+
+
+	public BoardDTO(int boardNo, String content, String boardDate, int boardPwd, String writer) {
 		super();
 		this.boardNo = boardNo;
 		this.content = content;
+		this.boardDate = boardDate;
 		this.boardPwd = boardPwd;
 		this.writer = writer;
 	}
+
+
 	public int getBoardNo() {
 		return boardNo;
 	}
+
+
 	public void setBoardNo(int boardNo) {
 		this.boardNo = boardNo;
 	}
+
+
 	public String getContent() {
 		return content;
 	}
+
+
 	public void setContent(String content) {
 		this.content = content;
 	}
+
+
 	public String getBoardDate() {
 		return boardDate;
 	}
+
+
 	public void setBoardDate(String boardDate) {
 		this.boardDate = boardDate;
 	}
+
+
 	public int getBoardPwd() {
 		return boardPwd;
 	}
+
+
 	public void setBoardPwd(int boardPwd) {
 		this.boardPwd = boardPwd;
 	}
+
+
 	public String getWriter() {
 		return writer;
 	}
+
+
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
+
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
