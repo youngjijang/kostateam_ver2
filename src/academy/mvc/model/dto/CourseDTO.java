@@ -1,6 +1,5 @@
 package academy.mvc.model.dto;
 
-//ㅎ
 public class CourseDTO {
 	private String cCode;
 	private String cName;
