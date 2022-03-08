@@ -28,4 +28,22 @@ public class SugangService {
 	}
 	
 	
+	public void updateScore(String studentId, int score) throws SQLException{
+		int result = dao.updateScore(studentId, score);
+		if(result == 0 )throw new SQLException("등록안됨");
+		
+	}
+	
+	public void insertSugang(String studentId,String cCode) throws SQLException{
+		int result = dao.insertSugang(studentId, cCode);
+		if(result == 0 )throw new SQLException("수강신청 안됨");
+		
+	}
+	
+	public void delectSugang(String studentId,String cCode) throws SQLException{
+		int result = dao.delectSugang(studentId, cCode);
+		if(result == 0 )throw new SQLException("수강철회 안됨");
+		
+	}
+	
 }

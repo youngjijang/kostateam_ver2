@@ -77,10 +77,9 @@ public class SugangDAOImpl implements SugangDAO {
 		
 		try {	
 			con = DbUtil.getConnection();
-			String sql ="SELECT C.COURSE_NAME, S.SCORE FROM COURSE C ,SUGANG S WHERE C.COURSE_CODE =(SELECT COURSE_CODE FROM SUGANG WHERE S_ID = ?) AND S.S_ID=?"; //proFile.getProperty("board.selectAll");
+			String sql ="select course_name, score from sugang join course using(course_code) where s_id = ?"; //proFile.getProperty("board.selectAll");
 			ps= con.prepareStatement(sql);
 			ps.setString(1, studentId);		
-			ps.setString(2, studentId);	
 			rs=ps.executeQuery();				
 			if(rs.next()) {			
 				
@@ -97,21 +96,62 @@ public class SugangDAOImpl implements SugangDAO {
 	}
 
 	@Override
-	public int insertScore(String studentId, int score) throws SQLException {
-		
-		return 0;
+	public int updateScore(String studentId, int score) throws SQLException {
+		Connection con= null;		
+		PreparedStatement ps=null;	
+		int result =0;
+		String sql = "UPDATE SUGANG SET SCORE = ? WHERE S_ID = ?";//proFile.getProperty("");
+		try {
+			con = DbUtil.getConnection();	
+			ps= con.prepareStatement(sql);
+			ps.setInt(1, score);
+			ps.setString(2, studentId);
+			result = ps.executeUpdate();
+			
+		} finally {
+			DbUtil.dbClose(con, ps);			
+		}
+		return result;	
+
 	}
 
 	@Override
-	public int insertSugang(String studentId) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insertSugang(String studentId,String cCode) throws SQLException {
+		Connection con= null;		
+		PreparedStatement ps=null;	
+		int result =0;
+		String sql = "insert into sugang values(sugang_seq.nextval, ?, ?, null);";//proFile.getProperty("");
+		try {
+			con = DbUtil.getConnection();	
+			ps= con.prepareStatement(sql);	
+			ps.setString(1, cCode);
+			ps.setString(2, studentId);
+			result = ps.executeUpdate();
+			
+		} finally {
+			DbUtil.dbClose(con, ps);			
+		}
+		return result;
+
 	}
 
 	@Override
-	public int delectSugang(String studentId) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+	public int delectSugang(String studentId,String cCode) throws SQLException {
+		Connection con= null;		
+		PreparedStatement ps=null;	
+		int result =0;
+		String sql = "delete sugang where s_id = ? and course_code = ?";//proFile.getProperty("");
+		try {
+			con = DbUtil.getConnection();	
+			ps= con.prepareStatement(sql);			
+			ps.setString(1, studentId);
+			ps.setString(2, cCode);
+			result = ps.executeUpdate();
+			
+		} finally {
+			DbUtil.dbClose(con, ps);			
+		}
+		return result;
 	}
 
 }

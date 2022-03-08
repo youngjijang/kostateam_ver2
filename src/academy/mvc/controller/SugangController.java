@@ -10,16 +10,24 @@ import academy.mvc.service.SugangService;
 public class SugangController {
 	private static SugangService service = new SugangService();
 	
+	/**
+	 * 수강중인 과목 확인-학생
+	 * */
 	public static void selectMind(String studentId) {		
 		try {
 			List<SugangDTO> list = service.selectMind(studentId);	
-			
+			for (SugangDTO sugangDTO : list) {
+				System.out.println(sugangDTO);
+			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 	
+	/**
+	 * 수강중인 학생 목록-강사
+	 * */
 	public static void selectStudentList(String cCode) {
 		try {
 			List<StudentDTO> list = service.selectStudentList(cCode);
@@ -29,6 +37,9 @@ public class SugangController {
 		}	
 	}
 	
+	/**
+	 * 수강성적확인-학생
+	 * */
 	public static void selectGrade(String studentId) {
 		
 		try {
@@ -40,33 +51,47 @@ public class SugangController {
 		
 	}
 	
-	
-	
-	
-	
-	
-	
-
-	public static void selectScore() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public static void updateScore() {
-		// TODO Auto-generated method stub
-		
+	/**
+	 * 학생 성적 수정-강사
+	 * */
+	public static void updateScore(String studentId, int score) {
+		try {
+			service.updateScore(studentId, score);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
+	/**
+	 * 강의 신청-학생
+	 * */
+	public static void insertSugang(String studentId,String cCode) {
+		try {
+			service.insertSugang(studentId, cCode);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	
+	}
+	
+	/**
+	 * 강의 철회-학생
+	 * */
+	public static void delectSugang(String studentId,String cCode) {
+		try {
+			service.delectSugang(studentId, cCode);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
+	}
 	
 	
-	
-	
-	
-	/*
 	
 	public static void main(String[] args) {
-		selectGrade("거북이");
+		selectMind("거북이");
 		
-	}*/
 	
+	}
 }

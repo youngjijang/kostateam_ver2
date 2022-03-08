@@ -27,19 +27,19 @@ public interface SugangDAO {
 	
 	
 /**
- * 학생 성적 등록-강사
+ * 학생 성적 수정-강사
  * */
-	int insertScore(String studentId,int score)throws SQLException;
+	int updateScore(String studentId,int score)throws SQLException;
 	
 /**
  * 강의 신청-학생
  * */
-	int insertSugang(String studentId)throws SQLException;
+	int insertSugang(String studentId,String cCode)throws SQLException;
 	
 /**
  * 강의 철회-학생
  * */
-	int delectSugang(String studentId)throws SQLException;
+	int delectSugang(String studentId,String cCode)throws SQLException;
 	
 
 	
