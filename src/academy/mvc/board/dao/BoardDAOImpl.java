@@ -30,7 +30,7 @@ public class BoardDAOImpl implements BoardDAO {
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				//열의 정보를 가져와서 BoardDTO에 담는다.
-				BoardDTO dto = new BoardDTO(rs.getInt(1), rs.getString(2),rs.getString(3), rs.getString(4), rs.getString(5));
+				BoardDTO dto = new BoardDTO(rs.getInt(1), rs.getString(2),rs.getString(3), rs.getInt(4), rs.getString(5));
 							
 				//BoardDTO를 list에 추가한다.
 				list.add(dto);
@@ -60,7 +60,7 @@ public class BoardDAOImpl implements BoardDAO {
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				//열의 정보를 가져와서 BoardDTO에 담는다.
-				BoardDTO dto = new BoardDTO(rs.getInt(1), rs.getString(2),rs.getString(3), rs.getString(4), rs.getString(5));
+				BoardDTO dto = new BoardDTO(rs.getInt(1), rs.getString(2),rs.getString(3), rs.getInt(4), rs.getString(5));
 							
 				//BoardDTO를 list에 추가한다.
 				list.add(dto);
@@ -89,8 +89,7 @@ public class BoardDAOImpl implements BoardDAO {
 			rs = ps.executeQuery();
 			if(rs.next()) {
 				//열의 정보를 가져와서 BoardDTO에 담는다.
-				boardDTO = new BoardDTO(rs.getInt(1), rs.getString(2),rs.getString(3), 
-						rs.getString(4), rs.getString(5));
+				BoardDTO dto = new BoardDTO(rs.getInt(1), rs.getString(2),rs.getString(3), rs.getInt(4), rs.getString(5));
 			}
 			
 		}finally {
@@ -110,9 +109,8 @@ public class BoardDAOImpl implements BoardDAO {
 			con = DbUtil.getConnection();
 			ps= con.prepareStatement(sql);
 			//?의 개수만큼 순서대로 setXxx설정 필요.
-			ps.setString(1, boardDTO.getSubject());
-			ps.setString(2, boardDTO.getWriter());
-			ps.setString(3, boardDTO.getContent());
+			ps.setString(1, boardDTO.getWriter());
+			ps.setString(2, boardDTO.getContent());
 			
 			result = ps.executeUpdate();
 			
@@ -134,6 +132,7 @@ public class BoardDAOImpl implements BoardDAO {
 			//?의 개수만큼 순서대로 setXxx설정 필요.
 			ps.setString(1, boardDTO.getContent());
 			ps.setInt(2, boardDTO.getBoardNo());
+			ps.setString(3, boardDTO.getBoardDate());
 			
 			result = ps.executeUpdate();
 			
