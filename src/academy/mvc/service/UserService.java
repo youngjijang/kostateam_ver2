@@ -8,7 +8,7 @@ import academy.mvc.board.dao.UserDAO;
 import academy.mvc.board.dao.UserDAOImpl;
 import academy.mvc.model.dto.UserDTO;
 import academy.mvc.session.Session;
-import academy.mvc.session.SessionSet;
+import academy.mvc.session.SessionList;
 
 public class UserService {
 	UserDAO userDao = new UserDAOImpl();
