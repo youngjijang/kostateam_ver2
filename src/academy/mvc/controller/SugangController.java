@@ -10,25 +10,42 @@ import academy.mvc.service.SugangService;
 public class SugangController {
 	private static SugangService service = new SugangService();
 	
-	public static void SelectMind(String studentId) {		
+	public static void selectMind(String studentId) {		
 		try {
 			List<SugangDTO> list = service.selectMind(studentId);	
-			//System.out.println(list.get(0));
+			
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public static void SelectStudentList(String cCode) {
+	public static void selectStudentList(String cCode) {
 		try {
 			List<StudentDTO> list = service.selectStudentList(cCode);
-			for (StudentDTO studentDTO : list) {
-				System.out.println(studentDTO.getUserTel());		
-			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}	
 	}
+	
+	public static void selectGrade(String studentId) {
+		
+		try {
+			List<SugangDTO> list = service.selectGrade(studentId);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 
 	public static void selectScore() {
 		// TODO Auto-generated method stub
@@ -45,11 +62,11 @@ public class SugangController {
 	
 	
 	
-	
 	/*
+	
 	public static void main(String[] args) {
-		SelectStudentList("A100");
-		//SelectMind("11");
+		selectGrade("거북이");
+		
 	}*/
 	
 }

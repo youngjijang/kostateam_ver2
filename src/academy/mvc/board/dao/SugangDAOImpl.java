@@ -70,13 +70,35 @@ public class SugangDAOImpl implements SugangDAO {
 
 	@Override
 	public List<SugangDTO> selectGrade(String studentId) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		List<SugangDTO> list= new ArrayList<SugangDTO>();
+		Connection con =null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;	
+		
+		try {	
+			con = DbUtil.getConnection();
+			String sql ="SELECT C.COURSE_NAME, S.SCORE FROM COURSE C ,SUGANG S WHERE C.COURSE_CODE =(SELECT COURSE_CODE FROM SUGANG WHERE S_ID = ?) AND S.S_ID=?"; //proFile.getProperty("board.selectAll");
+			ps= con.prepareStatement(sql);
+			ps.setString(1, studentId);		
+			ps.setString(2, studentId);	
+			rs=ps.executeQuery();				
+			if(rs.next()) {			
+				
+				String cName =rs.getString(1);
+				int score =rs.getInt(2);
+				SugangDTO sugangDTO = new SugangDTO(cName,score);
+				list.add(sugangDTO);
+			}		
+		} finally {
+			DbUtil.dbClose(con, ps, rs);
+		}
+		return list;
+
 	}
 
 	@Override
 	public int insertScore(String studentId, int score) throws SQLException {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 
