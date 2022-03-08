@@ -25,4 +25,8 @@ public interface CourseDAO {
 	 */
 
 
+	/**
+	 * 선택한 과목
+	 * */
+	CourseDTO selectCartCourse(String cCode)throws SQLException;
 }

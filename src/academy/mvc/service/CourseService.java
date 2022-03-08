@@ -34,5 +34,15 @@ public class CourseService {
 		}
 		return list;
 	}
+	
+	
+	/**
+	 * 선택과목정보-cart
+	 * */
+	public CourseDTO selectCartCourse(String cCode) throws SQLException{
+		CourseDTO dto = courseDAO.selectCartCourse(cCode);
+		if(dto ==null)throw new NullPointerException("해당 과목이 없습니다.");
+		return dto;	
+	}
 
 }

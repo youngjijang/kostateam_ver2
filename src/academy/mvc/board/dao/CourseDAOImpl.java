@@ -9,6 +9,7 @@ import java.util.List;
 
 import academy.mvc.model.dto.CourseDTO;
 import academy.mvc.model.dto.StudentDTO;
+import academy.mvc.model.dto.SugangDTO;
 import academy.mvc.util.DbUtil;
 
 public class CourseDAOImpl implements CourseDAO {
@@ -61,6 +62,36 @@ public class CourseDAOImpl implements CourseDAO {
 			DbUtil.dbClose(con, ps, rs);
 		}
 		return list;
+	}
+
+	@Override
+	public CourseDTO selectCartCourse(String cCode) throws SQLException {
+		Connection con =null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		CourseDTO courseDTO =null;
+		try {	
+			con = DbUtil.getConnection();
+			String sql ="SELECT * FROM COURSE WHERE COURSE_CODE = ?";//proFile.getProperty("");
+			ps= con.prepareStatement(sql);
+			ps.setString(1, cCode);		
+			rs=ps.executeQuery();		
+			
+			if(rs.next()) {			
+				String coCode = rs.getString(1);
+				String cName = rs.getString(2);
+				int cCapa = rs.getInt(3);
+				int cHour = rs.getInt(4);;
+				String cContent = rs.getString(5);
+				String cStart = rs.getString(6);
+				String cEnd = rs.getString(7);
+				courseDTO = new CourseDTO(coCode,cName,cCapa,cHour,cContent,cStart,cEnd);										
+											
+			}
+		} finally {
+			DbUtil.dbClose(con, ps, rs);
+		}
+		return courseDTO;
 	}
 
 
