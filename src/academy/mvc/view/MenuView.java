@@ -32,6 +32,7 @@ public class MenuView {
 					
 				case 4 :
 					UserController.showUser("student", userId);
+					break;
 					
 				case 5 :
 					//연락처 키보드 입력받음
@@ -39,6 +40,7 @@ public class MenuView {
 					String newTel = StartView.sc.nextLine();
 					UserController.updateUser("student", userId, newTel); //Session추가 후 수정...
 					//비밀번호 변경(미정)
+					break;
 
 				case 9 :
 					//StartView로 이동한다
@@ -70,10 +72,12 @@ public class MenuView {
 						break;
 					case 4 :
 						UserController.showUser("teacher", userId);
+						break;
 					case 5 :
 						System.out.println("변경할 연락처> ");
 						String newTel = StartView.sc.nextLine();
 						UserController.updateUser("teacher", userId, newTel);
+						break;
 					case 9 : System.exit(0);
 					//StartView로 이동한다
 					//session...

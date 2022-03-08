@@ -20,18 +20,22 @@ public class UserDAOImpl implements UserDAO {
 		 UserDTO user = null;
 		 try {
 			   con = DbUtil.getConnection();
-			   ps= con.prepareStatement("select * from ? where user_id=? and user_pwd=?");
-			   ps.setString(1, kind);
-			   ps.setString(2, userId);
-			   ps.setInt(3, userPwd);
-			   
-		        rs = ps.executeQuery(); 
 		        
 		        if(kind == "teacher") {
+		        	ps= con.prepareStatement("select * from teacher where t_id=? and t_pwd=?");
+					ps.setString(1, userId);
+					ps.setInt(2, userPwd);
+					   
+			        rs = ps.executeQuery(); 
 		        	if(rs.next()) {
 		        		user = new TeacherDTO(rs.getString(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(4) );
 		        	}
 		        }else {
+		        	ps= con.prepareStatement("select * from student where s_id=? and s_pwd=?");
+					ps.setString(1, userId);
+					ps.setInt(2, userPwd);
+					   
+			        rs = ps.executeQuery(); 
 		        	if(rs.next()) {
 			        	user = new StudentDTO(rs.getString(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(4) );
 			        }
