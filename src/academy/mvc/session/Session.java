@@ -1,41 +1,51 @@
 package academy.mvc.session;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+
 /**
  * 각회원의 관련된 정보 저장하는 객체
  * 필드: 회원아이디, 강의리스트
  * */
-import java.util.List;
+
+import java.util.Set;
+
+
 
 /**
  * 사용자 객체
  * */
 public class Session {
 	private String sessionId;
-	private List <String> attributes; //휘발성 강의 장바구니 >>수강신청으로 이어진다
+	private Map<String,Object> attributes; //휘발성 강의 장바구니 >>수강신청으로 이어진다
 	
 	
 	public Session() {}
 	public Session(String sessionId) {
 		this.sessionId = sessionId;
-		attributes = new ArrayList<String>();
+		attributes = new HashMap<>();
 	}
 	public String getSessionId() {
 		return sessionId;
 	}
 	
 	//추가
-	public void setAttribute(String name, String courseCode) {//String userId, courseList
-		attributes.add(courseCode);
+	public void setAttribute(String ID, Object values) {//String userId, courseList
+		attributes.put(ID,values);
 	}
 	
-	//조회(list에 no에 해당하는 courseCode 찾기)
-	public String getAttribute(int no) {//cart
-		return attributes.get(no);
+	//조회
+	public Object getAttribute(String ID) {//cart
+		return attributes.get(ID);
 	}
 	
 	//제거(장바구니를 비울때 사용한다)
-	public void removeAttribute(int no) {//cart
-		attributes.remove(no);
+	public void removeAttribute(String ID) {//cart
+
+		attributes.remove(ID);
 	}
 	
 	
@@ -43,11 +53,11 @@ public class Session {
 		this.sessionId = sessionId;
 	}
 	
-	public List<String> getAttributes() {
+	public Map<String,Object> getAttributes() {
 		return attributes;
 	}
 	
-	public void setAttributes(List<String> attributes) {
+	public void setAttributes(Map<String,Object> attributes) {
 		this.attributes = attributes;
 	}
 	

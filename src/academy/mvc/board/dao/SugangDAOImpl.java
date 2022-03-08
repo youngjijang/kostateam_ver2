@@ -50,7 +50,7 @@ public class SugangDAOImpl implements SugangDAO {
 		ResultSet rs = null;				
 		try {	
 			con = DbUtil.getConnection();
-			String sql ="SELECT * FROM STUDENT WHERE S_ID IN(SELECT S_ID FROM SUGANG WHERE COURSE_CODE LIKE (SELECT COURSE_CODE FROM TEACHER WHERE T_ID = ?));"; //proFile.getProperty("board.selectAll");
+			String sql ="SELECT * FROM STUDENT WHERE S_ID IN(SELECT S_ID FROM SUGANG WHERE COURSE_CODE LIKE (SELECT COURSE_CODE FROM TEACHER WHERE T_ID = ?))"; //proFile.getProperty("board.selectAll");
 			ps= con.prepareStatement(sql);
 			ps.setString(1, teacherID);			
 			rs=ps.executeQuery();	

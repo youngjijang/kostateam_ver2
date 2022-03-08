@@ -1,6 +1,9 @@
 package academy.mvc.view;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import academy.mvc.model.dto.BoardDTO;
 import academy.mvc.model.dto.CourseDTO;
@@ -8,6 +11,7 @@ import academy.mvc.model.dto.ReplyDTO;
 import academy.mvc.model.dto.StudentDTO;
 import academy.mvc.model.dto.SugangDTO;
 import academy.mvc.model.dto.UserDTO;
+
 
 public class SuccessView {
     /**
@@ -42,7 +46,7 @@ public class SuccessView {
 		System.out.println(course);
 		System.out.println();
 	}
-	
+
 	/**
 	 * StudentDTO를 받아 성적 출력
 	 * */
@@ -104,4 +108,20 @@ public class SuccessView {
 	public static void printUserInfo(UserDTO user) {
 		System.out.println(user);
 	}
+	
+	/**
+	 *장바구니
+	 * */
+	public static void printViewCart(String id , Map<CourseDTO,String> cart) {
+		for(CourseDTO courseDTO: cart.keySet()) {
+		String cCode = courseDTO.getcCode();//강의번호
+		String cName = courseDTO.getcName();//강의이름
+		String cContent = courseDTO.getcContent();//내용
+		
+		
+		System.out.println(cCode+" : "+cName+" : "+cContent);
+		}
+	
+	}
+	
 }
