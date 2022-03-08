@@ -31,7 +31,7 @@ public class CourseController {
 	 * 
 	 * @return
 	 */
-	public static void getStudentList() {
+	public static List<StudentDTO> getStudentList() {
 		try {
 			StudentDTO studentDTO = new StudentDTO();
 			List<StudentDTO> list = courseService.getStudentList(studentDTO.getUserName());
@@ -42,20 +42,10 @@ public class CourseController {
 //			 e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
+		return null;
 
 	}
 
-	/**
-	 * 강의 등록
-	 **/
-	public static void insertCourse() {
-		try {
-			
-			
-		} catch (Exception e) {
-//			e.printStackTrace();
-			FailView.errorMessage(e.getMessage());
-		}
-	}
+
 
 }

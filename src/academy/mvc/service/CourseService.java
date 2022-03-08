@@ -37,12 +37,5 @@ public class CourseService {
 
 	}
 
-	/**
-	 * 강의 등록
-	 **/
-	public int insertCourse(CourseDTO courseDTO) throws SQLException {
 
-		
-		return 0;
-	}
 }

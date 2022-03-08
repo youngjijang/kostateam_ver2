@@ -18,10 +18,5 @@ public interface CourseDAO {
 	 */
 	List<StudentDTO> getStudentList(String teacherId) throws SQLException;
 
-	/**
-	 * 강의 등록-강사
-	 **/
-	int insertCourse(CourseDTO courseDTO) throws SQLException;
-	
 
 }

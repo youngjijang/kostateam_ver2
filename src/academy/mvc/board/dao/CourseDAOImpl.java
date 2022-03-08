@@ -63,31 +63,6 @@ public class CourseDAOImpl implements CourseDAO {
 		return list;
 	}
 
-	@Override
-	public int insertCourse(CourseDTO courseDTO) throws SQLException {
-		Connection con = null;
-		PreparedStatement ps = null;
-		int result = 0;
 
-		try {
-			con = DbUtil.getConnection();
-			ps = con.prepareStatement("insert into course values(?, ?, ?, ?, ?, ?, ?");
-
-			ps.setString(1, courseDTO.getcCode());
-			ps.setString(2, courseDTO.getcName());
-			ps.setInt(3, courseDTO.getcCapa());
-			ps.setInt(4, courseDTO.getcHour());
-			ps.setString(5, courseDTO.getcContent());
-			ps.setString(6, courseDTO.getcStart());
-			ps.setString(7, courseDTO.getcEnd());
-			
-			result = ps.executeUpdate();
-
-
-		} finally {
-			DbUtil.dbClose(con, ps);
-		}
-		return result;
-	}
 
 }
