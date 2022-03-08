@@ -81,5 +81,26 @@ public class ReplyDTO {
 	public void setReplyRegdate(String replyRegdate) {
 		this.replyRegdate = replyRegdate;
 	}
-	  
+
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("ReplyDTO [replyNo=");
+		builder.append(replyNo);
+		builder.append(", replyContent=");
+		builder.append(replyContent);
+		builder.append(", boardNo=");
+		builder.append(boardNo);
+		builder.append(", replyName=");
+		builder.append(replyName);
+		builder.append(", replyPwd=");
+		builder.append(replyPwd);
+		builder.append(", replyRegdate=");
+		builder.append(replyRegdate);
+		builder.append("]");
+		return builder.toString();
+	}
+	
+	
 }
