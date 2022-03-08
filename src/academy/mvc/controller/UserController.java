@@ -18,9 +18,9 @@ public class UserController {
 		try{
 			userService.userLogin(userId, userPwd, kind);
 			if(kind.equals("student"))
-				MenuView.studentMenu(userId);
+				MenuView.studentMenu(userId, kind);
 			else 
-				MenuView.teacherMenu(userId);
+				MenuView.teacherMenu(userId, kind);
 		}catch(Exception e) {
 			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());

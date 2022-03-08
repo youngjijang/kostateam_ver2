@@ -47,6 +47,21 @@ public class BoardController {
 		public static void main(String[] args) {
 	System.out.println();
 }
+
+		public static void replyDelete(int boardNo, int replyNo, int replyPwd) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public static void replyInsert(String content, int boardNo, String writer, int replyPwd) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public static void deleteBoard(int deleteNo) {
+			// TODO Auto-generated method stub
+			
+		}
 		
 }
 //
