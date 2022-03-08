@@ -22,13 +22,7 @@ public class TeacherDTO extends UserDTO {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Teacher ");
-		super.toString();
-		builder.append(", courseCode=");
-		builder.append(courseCode);
-		builder.append("]");
-		return builder.toString();
+		return super.toString()+", courseCode="+courseCode;
 	}
 	
 	

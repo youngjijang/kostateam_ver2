@@ -8,7 +8,8 @@ import academy.mvc.board.dao.UserDAO;
 import academy.mvc.board.dao.UserDAOImpl;
 import academy.mvc.model.dto.UserDTO;
 import academy.mvc.session.Session;
-import academy.mvc.session.SessionList;
+import academy.mvc.session.SessionSet;
+
 
 public class UserService {
 	UserDAO userDao = new UserDAOImpl();
@@ -17,20 +18,22 @@ public class UserService {
 	
 	
 	public UserDTO userLogin(String userId, int userPwd, String kind) throws SQLException,NullPointerException{
+		
 		UserDTO now = userDao.userLogin(userId, userPwd, kind);
-		if(user == null) {
+		
+		if(now == null) {
 			throw new NullPointerException("정보를 다시 확인해주세요.");
 		}
 		
-		//Session session = new Session(userId);
+		Session session = new Session(userId);
 		
 		
-		//SessionSet sessionSet = SessionSet.getInstance();
-		//sessionSet.add(session);
+		SessionSet sessionSet = SessionSet.getInstance();
+		sessionSet.add(session);
 		
 		
 		user.put(kind, now);
-		//System.out.println(user);
+		//System.out.println(now);
 		
 		return now;
 	}
@@ -38,7 +41,8 @@ public class UserService {
 	
 	public UserDTO showInfo (String kind, String userId) throws NullPointerException{
 		UserDTO now = user.get(kind);
-		if(now.getUserId()==userId) {
+		//System.out.println(now);
+		if(now.getUserId().equals(userId)) {
 			return now;
 		}else {
 			throw new NullPointerException("정보찾기에 실패했습니다.");
@@ -58,3 +62,4 @@ public class UserService {
 		}
 	}
 }
+

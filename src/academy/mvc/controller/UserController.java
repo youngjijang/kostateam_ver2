@@ -17,12 +17,12 @@ public class UserController {
 	public static void userLogin(String userId, int userPwd, String kind) {
 		try{
 			userService.userLogin(userId, userPwd, kind);
-			if(kind == "student")
+			if(kind.equals("student"))
 				MenuView.studentMenu(userId);
 			else 
 				MenuView.teacherMenu(userId);
 		}catch(Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
 	}
@@ -36,8 +36,8 @@ public class UserController {
 			UserDTO user = userService.showInfo(kind,userId);
 			
 		}catch(Exception e) {
-			e.printStackTrace();
-			FailView.errorMessage("");
+			//e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
 		}
 	}
 	
@@ -49,8 +49,8 @@ public class UserController {
 			userService.updateUser(kind, userId, newTel);
 			//SuccessView
 		}catch(Exception e) {
-			e.printStackTrace();
-			FailView.errorMessage("");
+			//e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
 		}
 	}
 	
@@ -62,8 +62,8 @@ public class UserController {
 			userService.deleteUser(kind, userId);
 			//SuccessView
 		}catch(Exception e) {
-			e.printStackTrace();
-			//FailView
+			//e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
 		}
 		
 	}

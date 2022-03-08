@@ -27,13 +27,7 @@ public class StudentDTO extends UserDTO {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Student");
-		super.toString();
-		builder.append(", major=");
-		builder.append(major);
-		builder.append("]");
-		return builder.toString();
+		return "Student"+super.toString()+", major="+major;
 	}
 	
 }
