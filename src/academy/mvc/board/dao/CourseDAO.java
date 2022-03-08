@@ -8,6 +8,7 @@ import academy.mvc.model.dto.CourseDTO;
 public interface CourseDAO {
 	// 아직 CourseDTO가 없기에 import를 할 주소값이없어 import는 없으므로 확인해야함
 
+	//테스
 
 	/**
 	 * 전체 강의 조회-학생
