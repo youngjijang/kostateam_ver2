@@ -1,5 +1,7 @@
 package academy.mvc.model.dto;
 
+import java.util.List;
+
 public class BoardDTO {
 	private int boardNo; // 글번호
 	private String content; // 내용
@@ -7,6 +9,7 @@ public class BoardDTO {
 	private int boardPwd;//비번
 	private String writer; // 작성자
 
+	private List<ReplyDTO> repliesList ;
 	
 	public BoardDTO() {}
 
@@ -70,6 +73,9 @@ public class BoardDTO {
 		this.writer = writer;
 	}
 
+	public List<ReplyDTO> getReplyList() {
+		return repliesList;
+	}
 
 	@Override
 	public String toString() {
