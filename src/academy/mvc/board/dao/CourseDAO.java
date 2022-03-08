@@ -24,6 +24,6 @@ public interface CourseDAO {
 	 * 강의 등록-강사
 	 *
 	 **/
-	int insertCourse(CourseDTO course) throws SQLException;
+	int insertCourse(CourseDTO courseDTO) throws SQLException;
 
 }

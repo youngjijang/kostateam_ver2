@@ -25,7 +25,7 @@ public class CourseDAOImpl implements CourseDAO {
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				CourseDTO courseDTO = new CourseDTO(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getString(5), rs.getInt(6), rs.getInt(7));
+				CourseDTO courseDTO = new CourseDTO(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getString(7));
 				list.add(courseDTO);
 			}
 			
@@ -37,13 +37,49 @@ public class CourseDAOImpl implements CourseDAO {
 
 	@Override
 	public List<CourseDTO> selectMind(String teacherId) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<CourseDTO> list = new ArrayList<>();
+		
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement("select * from course where course_code in(select course_code from teacher where t_id = ?)");
+			rs = ps.executeQuery();
+			ps.setString(1, teacherId);
+			
+			while(rs.next()) {
+				CourseDTO courseDTO = new CourseDTO(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getString(7));
+				list.add(courseDTO);
+			}
+			
+		} finally {
+			DbUtil.dbClose(con, ps, rs);
+		}
+		return list;
 	}
 
 	@Override
-	public int insertCourse(CourseDTO course) throws SQLException {
-		// TODO Auto-generated method stub
+	public int insertCourse(CourseDTO courseDTO) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement("insert into course values(?, ?, ?, ?, ?, ?, ?");
+			
+			ps.setString(1, courseDTO.getcCode());
+			ps.setString(2, courseDTO.getcName());
+			ps.setInt(3, courseDTO.getcCapa());
+			ps.setInt(4, courseDTO.getcHour());
+			ps.setString(5, courseDTO.getcContent());
+			ps.setString(6, courseDTO.getcStart());
+			ps.setString(7, courseDTO.getcEnd());
+			
+		} finally {
+			DbUtil.dbClose(con, ps);
+		}
 		return 0;
 	}
 
