@@ -13,20 +13,13 @@ public interface CourseDAO {
 	 */
 	List<CourseDTO> selectCourseList() throws SQLException;
 
-
 	/**
 	 * 내 강의 조회-강사
 	 */
 	List<CourseDTO> selectTeacherCourse(String teacherId) throws SQLException;
-	
-	
-	/**
-	 * 수강 인원 리턴 
-	 */
-
 
 	/**
 	 * 선택한 과목
-	 * */
-	CourseDTO selectCartCourse(String cCode)throws SQLException;
+	 */
+	CourseDTO selectCartCourse(String cCode) throws SQLException;
 }

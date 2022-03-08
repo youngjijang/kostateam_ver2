@@ -47,9 +47,10 @@ public class CourseDAOImpl implements CourseDAO {
 
 		try {
 			con = DbUtil.getConnection();
-			ps = con.prepareStatement("select * from course where course_code in(select course_code from teacher where t_id = ?)");
+			ps = con.prepareStatement(
+					"select * from course where course_code in(select course_code from teacher where t_id = ?)");
 			ps.setString(1, teacherId);
-			
+
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
@@ -66,38 +67,33 @@ public class CourseDAOImpl implements CourseDAO {
 
 	@Override
 	public CourseDTO selectCartCourse(String cCode) throws SQLException {
-		Connection con =null;
+		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		CourseDTO courseDTO =null;
-		try {	
+		CourseDTO courseDTO = null;
+		try {
 			con = DbUtil.getConnection();
-			String sql ="SELECT * FROM COURSE WHERE COURSE_CODE = ?";//proFile.getProperty("");
-			ps= con.prepareStatement(sql);
-			ps.setString(1, cCode);		
-			rs=ps.executeQuery();		
-			
-			if(rs.next()) {			
+			String sql = "SELECT * FROM COURSE WHERE COURSE_CODE = ?";// proFile.getProperty("");
+			ps = con.prepareStatement(sql);
+			ps.setString(1, cCode);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
 				String coCode = rs.getString(1);
 				String cName = rs.getString(2);
 				int cCapa = rs.getInt(3);
-				int cHour = rs.getInt(4);;
+				int cHour = rs.getInt(4);
+				;
 				String cContent = rs.getString(5);
 				String cStart = rs.getString(6);
 				String cEnd = rs.getString(7);
-				courseDTO = new CourseDTO(coCode,cName,cCapa,cHour,cContent,cStart,cEnd);										
-											
+				courseDTO = new CourseDTO(coCode, cName, cCapa, cHour, cContent, cStart, cEnd);
+
 			}
 		} finally {
 			DbUtil.dbClose(con, ps, rs);
 		}
 		return courseDTO;
 	}
-
-
-
-
-
-
 
 }

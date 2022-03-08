@@ -28,21 +28,21 @@ public class CourseService {
 	 */
 	public List<CourseDTO> selectTeacherCourse(String teacherId) throws SQLException {
 		List<CourseDTO> list = courseDAO.selectTeacherCourse(teacherId);
-		
-		if(list.size() == 0) {
+
+		if (list.size() == 0) {
 			throw new NullPointerException("강의중인 과목이 없습니다.");
 		}
 		return list;
 	}
-	
-	
+
 	/**
 	 * 선택과목정보-cart
-	 * */
-	public CourseDTO selectCartCourse(String cCode) throws SQLException{
+	 */
+	public CourseDTO selectCartCourse(String cCode) throws SQLException {
 		CourseDTO dto = courseDAO.selectCartCourse(cCode);
-		if(dto ==null)throw new NullPointerException("해당 과목이 없습니다.");
-		return dto;	
+		if (dto == null)
+			throw new NullPointerException("해당 과목이 없습니다.");
+		return dto;
 	}
 
 }
