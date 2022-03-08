@@ -14,7 +14,7 @@ import academy.mvc.util.DbUtil;
 public class CourseDAOImpl implements CourseDAO {
 
 	@Override
-	public List<CourseDTO> getCourseList() throws SQLException {
+	public List<CourseDTO> selectCourseList() throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -38,23 +38,23 @@ public class CourseDAOImpl implements CourseDAO {
 	}
 
 	@Override
-	public List<StudentDTO> getStudentList(String teacherId) throws SQLException {
+	public List<CourseDTO> selectTeacherCourse(String teacherId) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		List<StudentDTO> list = new ArrayList<>();
+		List<CourseDTO> list = new ArrayList<>();
 
 		try {
 			con = DbUtil.getConnection();
-			ps = con.prepareStatement(
-					"select * from course where course_code in(select course_code from teacher where t_id = ?)");
-			rs = ps.executeQuery();
+			ps = con.prepareStatement("select * from course where course_code in(select course_code from teacher where t_id = ?)");
 			ps.setString(1, teacherId);
+			
+			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				StudentDTO studentDTO = new StudentDTO(rs.getString(1), rs.getInt(2), rs.getString(3), rs.getString(4),
-						rs.getString(5));
-				list.add(studentDTO);
+				CourseDTO courseDTO = new CourseDTO(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4),
+						rs.getString(5), rs.getString(6), rs.getString(7));
+				list.add(courseDTO);
 			}
 
 		} finally {
@@ -62,6 +62,10 @@ public class CourseDAOImpl implements CourseDAO {
 		}
 		return list;
 	}
+
+
+
+
 
 
 
