@@ -27,9 +27,9 @@ public class SugangController {
 	/**
 	 * 수강중인 학생 목록-강사
 	 * */
-	public static void selectStudentList(String cCode) {
+	public static void selectStudentList(String teacherID) {
 		try {
-			List<StudentDTO> list = service.selectStudentList(cCode);
+			List<StudentDTO> list = service.selectStudentList(teacherID);
 			SuccessView.printStudentList(list);			
 		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());

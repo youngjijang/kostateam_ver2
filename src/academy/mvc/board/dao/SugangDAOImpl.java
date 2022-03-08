@@ -42,16 +42,17 @@ public class SugangDAOImpl implements SugangDAO {
 	}
 		
 	@Override
-	public List<StudentDTO> selectStudentList(String cCode) throws SQLException {
+	public List<StudentDTO> selectStudentList(String teacherID) throws SQLException {
 		List<StudentDTO> list= new ArrayList<StudentDTO>();
+		
 		Connection con =null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;				
 		try {	
 			con = DbUtil.getConnection();
-			String sql ="SELECT * FROM STUDENT WHERE S_ID IN(SELECT S_ID FROM SUGANG WHERE COURSE_CODE LIKE ?)"; //proFile.getProperty("board.selectAll");
+			String sql ="SELECT * FROM STUDENT WHERE S_ID IN(SELECT S_ID FROM SUGANG WHERE COURSE_CODE LIKE (SELECT COURSE_CODE FROM TEACHER WHERE T_ID = ?));"; //proFile.getProperty("board.selectAll");
 			ps= con.prepareStatement(sql);
-			ps.setString(1, cCode);			
+			ps.setString(1, teacherID);			
 			rs=ps.executeQuery();	
 				
 			while(rs.next()) {			

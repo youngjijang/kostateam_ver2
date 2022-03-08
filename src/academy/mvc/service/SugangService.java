@@ -17,8 +17,8 @@ public class SugangService {
 		return list;
 	}
 	
-	public List<StudentDTO> selectStudentList(String cCode)throws SQLException{
-		List<StudentDTO> list = dao.selectStudentList(cCode);
+	public List<StudentDTO> selectStudentList(String teacherID)throws SQLException{
+		List<StudentDTO> list = dao.selectStudentList(teacherID);
 		if(list.size()==0)throw new NullPointerException("수강중인 학생이 없습니다.");
 		return list;
 	}
