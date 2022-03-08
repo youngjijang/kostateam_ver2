@@ -12,8 +12,8 @@ public class MenuView {
     public static void studentMenu(String userId){
 		//controller로 이동해서 id, pwd체크하고 왔다
 		while(true){
-			System.out.println("--------------------------학생 메뉴--------------------------");
-			System.out.println("1.강의목록 2.수강신청 3.성적확인 4.연락처수정 9.로그아웃");
+			System.out.println("-------------------------------학생 메뉴-----------------------------");
+			System.out.println("1.강의목록 2.수강신청 3.성적확인 4.개인정보확인 5.개인정보수정 9.로그아웃");
 			int menuNo = StartView.sc.nextInt();
 			switch(menuNo) {
 				case 1 :
@@ -31,6 +31,9 @@ public class MenuView {
 					break;
 					
 				case 4 :
+					UserController.showUser("student", userId);
+					
+				case 5 :
 					//연락처 키보드 입력받음
 					System.out.println("변경할 연락처> ");
 					String newTel = StartView.sc.nextLine();
@@ -47,11 +50,11 @@ public class MenuView {
 	}
 
 	
-	public static void teacherMenu(String id){
+	public static void teacherMenu(String userId){
 		//controller로 이동해서 id, pwd체크하고 왔다
 		while(true){
-			System.out.println("--------------------------강사 메뉴--------------------------");
-			System.out.println("1.학생목록 2.성적등록 3.성적수정 4.회원정보수정 5.로그아웃");
+			System.out.println("-------------------------------강사 메뉴-----------------------------");
+			System.out.println("1.학생목록 2.성적등록 3.성적수정 4.개인정보확인 5.개인정보수정 9.로그아웃");
 			int menuNo = StartView.sc.nextInt();
 				switch(menuNo) {
 					case 1 :
@@ -66,10 +69,12 @@ public class MenuView {
 						SugangController.updateScore();
 						break;
 					case 4 :
+						UserController.showUser("teacher", userId);
+					case 5 :
 						System.out.println("변경할 연락처> ");
 						String newTel = StartView.sc.nextLine();
-						UserController.updateUser("teacher", id, newTel);
-					case 5 : System.exit(0);
+						UserController.updateUser("teacher", userId, newTel);
+					case 9 : System.exit(0);
 					//StartView로 이동한다
 					//session...
 				}
