@@ -63,6 +63,8 @@ public class UserService {
 	public void updateUser(String kind, String userId, String newTel) throws SQLException {
 		if(userDao.updateUser(userId, kind, newTel)==0){
 			throw new SQLException("수정되지않았습니다.");
+		}else {
+			user.get(kind).setUserTel(newTel);
 		}
 	}
 	
