@@ -224,13 +224,18 @@ public class MenuView {
 						SugangController.selectStudentList(userId);
 						break;
 					case 2 :
+						System.out.print("학생ID> ");
+						String studentId = sc.nextLine();
+						System.out.print("성적> ");
 						int score = sc.nextInt();
-						SugangController.updateScore(userId, score); //성적등록과 수정 메소드 동일
+						SugangController.updateScore(studentId, score);
 						break;
 					case 3 :
+						System.out.print("변경할 학생ID> ");
+						studentId = sc.nextLine();
 						System.out.print("변경할 성적> ");
 						int newScore = sc.nextInt();
-						SugangController.updateScore(userId, newScore);
+						SugangController.updateScore(studentId, newScore);
 						break;
 					case 4 :
 						UserController.showUser("teacher", userId);
