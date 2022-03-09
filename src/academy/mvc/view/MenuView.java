@@ -56,6 +56,7 @@ public class MenuView {
 					if(input.equals("Y") || input.equals("y")) loginMenu();
 					else System.exit(0);
 				}
+				break;
 			case 2 :
 				System.out.println("환영합니다!! 가입하실 사용자 유형을 입력하세요.");
 				System.out.print("학생계정-1  강사계정-2 > ");
@@ -88,6 +89,7 @@ public class MenuView {
 				}else {
 					FailView.errorMessage("사용자 유형이 틀렸습니다.");
 				}
+				break;
 				
 			case 9 :
 				System.out.println("프로그램을 종료합니다.");
