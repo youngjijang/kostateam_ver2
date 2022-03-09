@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import academy.mvc.model.dto.ManagerDTO;
 import academy.mvc.model.dto.StudentDTO;
 import academy.mvc.model.dto.TeacherDTO;
 import academy.mvc.model.dto.UserDTO;
@@ -128,7 +129,7 @@ public class UserDAOImpl implements UserDAO {
 					   
 			        rs = ps.executeQuery(); 
 		        	if(rs.next()) {
-			        	user = new StudentDTO(rs.getString(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5) );
+			        	user = new ManagerDTO(rs.getString(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5) );
 			        }
 		        }
 		        
