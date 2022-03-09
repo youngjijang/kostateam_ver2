@@ -22,7 +22,7 @@ public class BoardDAOImpl implements BoardDAO {
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		List<BoardDTO> list = new ArrayList<BoardDTO>(); //리턴값
-		String sql= proFile.getProperty("board.selectAll");//select * from board order by board_no desc
+		String sql= proFile.getProperty("select * from board order by board_no desc");//select * from board order by board_no desc
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
@@ -100,7 +100,7 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public int boardInsert(BoardDTO boardDTO) throws SQLException {
+	public int insertBoard(String content, int boardPwd, String userId) throws SQLException {
 		Connection con=null;
 		PreparedStatement ps=null;
 		int result=0;
@@ -108,9 +108,7 @@ public class BoardDAOImpl implements BoardDAO {
 		try {
 			con = DbUtil.getConnection();
 			ps= con.prepareStatement(sql);
-			//?의 개수만큼 순서대로 setXxx설정 필요.
-			ps.setString(1, boardDTO.getWriter());
-			ps.setString(2, boardDTO.getContent());
+
 			
 			result = ps.executeUpdate();
 			
@@ -164,17 +162,16 @@ public class BoardDAOImpl implements BoardDAO {
 
 
 	@Override
-	public int replyInsert(ReplyDTO replyDTO) throws SQLException { //댓글내용, 부모글번호
+	public int replyInsert(String content, int boardNo, String writer, int replyPwd) throws SQLException { //댓글내용, 부모글번호
 		Connection con=null;
 		PreparedStatement ps=null;
 		int result=0;
-		String sql=proFile.getProperty("reply.insert");//insert into reply values(reply_no_seq.nextval , ?, ? , sysdate)
+		String sql=proFile.getProperty("insert into reply values(reply_no_seq.nextval , ?, ? , sysdate)");//insert into reply values(reply_no_seq.nextval , ?, ? , sysdate)
 		try {
 			con = DbUtil.getConnection();
 			ps= con.prepareStatement(sql);
 			//?의 개수만큼 순서대로 setXxx설정 필요.
-			ps.setString(1, replyDTO.getReplyContent());
-			ps.setInt(2, replyDTO.getBoardNo());
+			
 			
 			result = ps.executeUpdate();
 			
@@ -183,11 +180,28 @@ public class BoardDAOImpl implements BoardDAO {
 		}
 		return result;
 	}
-
-
-
-
-
+	
+	  private List<ReplyDTO> replySelect(Connection con, int boardNo)throws SQLException{
+			PreparedStatement ps =null;
+			ResultSet rs=null;
+			List<ReplyDTO>  list = new ArrayList<ReplyDTO>();
+			String sql=proFile.getProperty("reply.selectByboardNo");//select * from reply where board_no=?
+	    	try {
+	    		ps = con.prepareStatement(sql);
+	    		ps.setInt(1, boardNo);
+	    		
+	    		rs = ps.executeQuery();
+	    		while(rs.next()) {
+	    			ReplyDTO reply = new ReplyDTO(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4),rs.getInt(5), rs.getString(6));
+	    			list.add(reply);
+	    		}
+	    		
+	    	}finally {
+	    		DbUtil.dbClose(null, ps, rs);
+	    	}
+	    	
+	    	return list;
+	    }
 
 
 }

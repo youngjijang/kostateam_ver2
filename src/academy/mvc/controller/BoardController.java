@@ -27,43 +27,66 @@ public class BoardController {
 			  FailView.errorMessage(e.getMessage()); 
 		   }
 	   }
-
-		/**
-		 * 댓글등록하기
-		 * */
-		public static void replyInsert(ReplyDTO replyDTO) {
+	   
+	   public static void deleteBoard(int deleteNo) {
 			try {
-		       boardService.replyInsert(replyDTO);  
-		       SuccessView.printMessage(replyDTO.getBoardNo()+" 글에 댓글이 등록되었습니다.");
-			}catch (SQLException e) {
-				//e.printStackTrace();
-				FailView.errorMessage("댓글등록에 실패하였습니다.");
-				
-			}catch (RuntimeException e) {
-				FailView.errorMessage(e.getMessage());
-			}
+				  boardService.boardDelete(deleteNo);
+				  SuccessView.printMessage("삭제되었습니다.");
+				}catch (SQLException e) {
+					//e.printStackTrace();
+					FailView.errorMessage(e.getMessage());
+				}
 		}
+	   
+	   public static void insertBoard(String content, int boardPwd, String userId) {
+			try {
+				   boardService.insertBoard(content,boardPwd,userId);
+				   SuccessView.printMessage("등록되었습니다.");
+				}catch (SQLException e) {
+					//e.printStackTrace();
+					FailView.errorMessage(e.getMessage());
+				}
+			
+		}
+
+
 
 
 		public static void replyDelete(int boardNo, int replyNo, int replyPwd) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		public static void replyInsert(String content, int boardNo, String writer, int replyPwd) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		public static void deleteBoard(int deleteNo) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		public static void insertBoard(String content, int boardPwd, String userId) {
-			// TODO Auto-generated method stub
+			try {
+				boardService.replyDelete(boardNo,replyNo,replyPwd);
+				 SuccessView.printMessage("댓글이 삭제되었습니다.");
+			}catch (SQLException e) {
+				e.printStackTrace();
+				FailView.errorMessage(e.getMessage());
+			}
 			
 		}
 		
+		
+		/**
+		 * 댓글등록하기
+		 * */
+
+		  public static void replyInsert(String content, int boardNo, String writer, int replyPwd) { 
+			  try {
+			       boardService.replyInsert(content,boardNo,writer,replyPwd);  
+				}catch (SQLException e) {
+					//e.printStackTrace();
+					FailView.errorMessage("댓글등록에 실패하였습니다.");
+					
+				}catch (RuntimeException e) {
+					FailView.errorMessage(e.getMessage());
+				}
+		  }
+		
+
+		
+		
+		
+
+
+		
+	
 }
 //

@@ -39,8 +39,8 @@ public class BoardServiceImpl implements BoardService {
 
 	
 	@Override
-	public void boardInsert(BoardDTO boardDTO) throws SQLException {
-		int result = boardDAO.boardInsert(boardDTO);
+	public void insertBoard(String content, int boardPwd, String userId) throws SQLException {
+		int result = boardDAO.insertBoard(content,boardPwd,userId);
 		if(result==0)throw new SQLException("등록되지않았습니다.^^");
 
 	}
@@ -61,10 +61,18 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void replyInsert(ReplyDTO replyDTO) throws SQLException  {
-	    int result = boardDAO.replyInsert(replyDTO);
+	public void replyInsert(String content, int boardNo, String writer, int replyPwd) throws SQLException  {
+	    int result = boardDAO.replyInsert(content,boardNo,writer,replyPwd);
 		if(result==0)throw new RuntimeException("댓글 등록에 실패하였습니다.");
 	}
+
+	@Override
+	public void replyDelete(int boardNo, int replyNo, int replyPwd) throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 
 	
 

@@ -25,13 +25,6 @@ public interface BoardDAO {
 	BoardDTO boardSelectByNo(int boardNo) throws SQLException ;
 	
 	
-	
-	/**
-	 * 게시판 등록하기
-	 */
-	int boardInsert(BoardDTO boardDTO) throws SQLException;
-	
-	
 	/**
 	 * 게시판 수정하기
 	 */
@@ -45,6 +38,13 @@ public interface BoardDAO {
 	/**
 	 * 댓글 등록하기
 	 * */
-	int replyInsert(ReplyDTO replyDTO) throws SQLException;
+	int replyInsert(String content, int boardNo, String writer, int replyPwd) throws SQLException;
+	
+	/**
+	 * 게시판 등록하기
+	 * @throws SQLException 
+	 */
+	int insertBoard(String content, int boardPwd, String userId) throws SQLException;
+	
 	
 }
