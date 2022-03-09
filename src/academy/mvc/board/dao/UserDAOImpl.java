@@ -30,12 +30,17 @@ public class UserDAOImpl implements UserDAO {
 				
 			        rs = ps.executeQuery(); 
 		        	
-		        }else {
+		        }else if(kind == "student") {
 		        	ps= con.prepareStatement("select count(*) from student where s_id=?");
 					ps.setString(1, userId);
 					   
 			        rs = ps.executeQuery(); 
 
+		        }else {
+		        	ps= con.prepareStatement("select count(*) from manager where m_id=?");
+					ps.setString(1, userId);
+					   
+			        rs = ps.executeQuery(); 
 		        }
 		        if(rs.next()) {
 		        	if(rs.getInt(1)==0) return false;
@@ -64,8 +69,16 @@ public class UserDAOImpl implements UserDAO {
 				ps.setString(4, userTel);
 				ps.setString(5, thing);
 				result = ps.executeUpdate();
-			}else {
+			}else if(kind=="student"){
 				ps= con.prepareStatement("INSERT INTO student VALUES (?, ?, ?, ?, ?)");
+				ps.setString(1, userId);
+				ps.setInt(2, userPwd);
+				ps.setString(3, userName);
+				ps.setString(4, userTel);
+				ps.setString(5, thing);
+				result = ps.executeUpdate();
+			}else {
+				ps= con.prepareStatement("INSERT INTO manager VALUES (?, ?, ?, ?, ?)");
 				ps.setString(1, userId);
 				ps.setInt(2, userPwd);
 				ps.setString(3, userName);
