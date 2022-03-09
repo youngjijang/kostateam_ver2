@@ -1,5 +1,7 @@
 package academy.mvc.controller;
 
+import java.sql.SQLException;
+
 import academy.mvc.model.dto.UserDTO;
 import academy.mvc.service.UserService;
 import academy.mvc.view.FailView;
@@ -8,6 +10,21 @@ import academy.mvc.view.SuccessView;
 
 public class UserController {
 	static UserService userService = new UserService();
+	
+	/**
+	 * 회원가입
+	 */
+	public static void userJoin(String kind, String userId, int userPwd, String userName, String userTel, String thing) {
+		try {
+			userService.userJoin(kind, userId, userPwd, userName, userTel, thing);
+			SuccessView.printMessage("회원가입이 완료되었습니다!");
+			MenuView.loginMenu();
+		}catch(SQLException e) {
+			FailView.errorMessage(e.getMessage());
+			//e.printStackTrace();
+			MenuView.loginMenu();
+		}
+	}
 	
 	/**
 	 *로그인

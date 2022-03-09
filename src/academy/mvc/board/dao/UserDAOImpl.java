@@ -11,7 +11,76 @@ import academy.mvc.model.dto.UserDTO;
 import academy.mvc.util.DbUtil;
 //ㅎ
 public class UserDAOImpl implements UserDAO {
+	
+	/**
+	 * 중복확인
+	 * 없으면 false 있으면 true
+	 */
+	@Override
+	public boolean idCheck(String kind, String userId) throws SQLException{
+		 Connection con=null;
+		 PreparedStatement ps=null;
+		 ResultSet rs=null;
+		 try {
+			   con = DbUtil.getConnection();
+		        
+		        if(kind == "teacher") {
+		        	ps= con.prepareStatement("select count(*) from teacher where t_id=?");
+					ps.setString(1, userId);
+				
+			        rs = ps.executeQuery(); 
+		        	
+		        }else {
+		        	ps= con.prepareStatement("select count(*) from student where s_id=?");
+					ps.setString(1, userId);
+					   
+			        rs = ps.executeQuery(); 
 
+		        }
+		        if(rs.next()) {
+		        	if(rs.getInt(1)==0) return false;
+		        }
+		        return true;
+		        
+	        }finally {
+	        	DbUtil.dbClose(con, ps, rs);
+	        }
+	}
+	
+	@Override
+	public int userJoin(String kind, String userId, int userPwd, String userName, String userTel, String thing)
+			throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		int result=0;
+		
+		try {
+			con = DbUtil.getConnection();
+			if(kind=="teacher") {
+				ps= con.prepareStatement("INSERT INTO teacher VALUES (?, ?, ?, ?, ?)");
+				ps.setString(1, userId);
+				ps.setInt(2, userPwd);
+				ps.setString(3, userName);
+				ps.setString(4, userTel);
+				ps.setString(5, thing);
+				result = ps.executeUpdate();
+			}else {
+				ps= con.prepareStatement("INSERT INTO student VALUES (?, ?, ?, ?, ?)");
+				ps.setString(1, userId);
+				ps.setInt(2, userPwd);
+				ps.setString(3, userName);
+				ps.setString(4, userTel);
+				ps.setString(5, thing);
+				result = ps.executeUpdate();
+			}
+			
+			
+		}finally {
+			DbUtil.dbClose(con, ps);
+		}
+		
+		return result;
+	}
 	@Override
 	public UserDTO userLogin(String userId, int userPwd, String kind) throws SQLException {
 		 Connection con=null;

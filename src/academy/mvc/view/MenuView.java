@@ -17,6 +17,9 @@ public class MenuView {
 		String userId;
 		int userPwd;
 		String kind;
+		String userName;
+		String userTel;
+		String major;
 		
 		while(true){
 			System.out.println("**************Academy Program 시작합니다**************");
@@ -26,42 +29,69 @@ public class MenuView {
 			
 			switch(menuNo){
 			
-				case 1 : 
-					System.out.println("사용자 유형을 입력하세요.");
-					System.out.print("학생계정-1  강사계정-2  매니저계정-3 > ");
-					kind = sc.nextLine();
+			case 1 : 
+				System.out.println("사용자 유형을 입력하세요.");
+				System.out.print("학생계정-1  강사계정-2 > ");
+				kind = sc.nextLine();
+				
+				System.out.print("아이디> ");
+				userId = sc.nextLine();
+				System.out.print("비밀번호> ");
+				userPwd = Integer.parseInt(sc.nextLine());
+				
+				if(kind.equals("1")) {
+					kind = "student";
+					UserController.userLogin(userId, userPwd, kind);
+					//다음 메뉴 선택하러 이동
+					homeMenu(userId, kind);
+				}else if(kind.equals("2")) {
+					kind = "teacher";
+					UserController.userLogin(userId, userPwd, kind);
+				}else {
+					FailView.errorMessage("사용자 유형이 틀렸습니다.");
 					
+					System.out.println("다시 입력하려면 Y, 프로그램을 종료하려면 N을 누르세요");
+					System.out.print("입력> ");
+					String input = sc.nextLine();
+					if(input.equals("Y") || input.equals("y")) loginMenu();
+					else System.exit(0);
+				}
+			case 2 :
+				System.out.println("환영합니다!! 가입하실 사용자 유형을 입력하세요.");
+				System.out.print("학생계정-1  강사계정-2 > ");
+				kind = sc.nextLine();
+				if(kind.equals("1")) {
+					kind = "student";
 					System.out.print("아이디> ");
 					userId = sc.nextLine();
 					System.out.print("비밀번호> ");
 					userPwd = Integer.parseInt(sc.nextLine());
+					System.out.print("이름> ");
+					userName = sc.nextLine();
+					System.out.print("연락처> ");
+					userTel = sc.nextLine();
+					System.out.print("전공> ");
+					major = sc.nextLine();
+					UserController.userJoin(kind, userId, userPwd, userName, userTel, major);
 					
-					if(kind.equals("1")) {
-						kind = "student";
-						UserController.userLogin(userId, userPwd, kind);
-						//다음 메뉴 선택하러 이동
-						homeMenu(userId, kind);
-					}else if(kind.equals("2")) {
-						kind = "teacher";
-						UserController.userLogin(userId, userPwd, kind);
-					}else if(kind.equals("3")) {
-						kind = "manager";
-						UserController.userLogin(userId, userPwd, kind);
-					}
-					else {
-						FailView.errorMessage("사용자 유형이 틀렸습니다.");
-						
-						System.out.println("다시 입력하려면 Y, 프로그램을 종료하려면 N을 누르세요");
-						System.out.print("입력> ");
-						String input = sc.nextLine();
-						if(input.equals("Y") || input.equals("y")) loginMenu();
-						else System.exit(0);
-					}
-				case 2 :
-					//회원가입
-				case 9 :
-					System.out.println("프로그램을 종료합니다.");
-					System.exit(0);
+				}else if(kind.equals("2")) {
+					kind = "teacher";
+					System.out.print("아이디> ");
+					userId = sc.nextLine();
+					System.out.print("비밀번호> ");
+					userPwd = Integer.parseInt(sc.nextLine());
+					System.out.print("이름> ");
+					userName = sc.nextLine();
+					System.out.print("연락처> ");
+					userTel = sc.nextLine();
+					UserController.userJoin(kind, userId, userPwd, userName, userTel, null);
+				}else {
+					FailView.errorMessage("사용자 유형이 틀렸습니다.");
+				}
+				
+			case 9 :
+				System.out.println("프로그램을 종료합니다.");
+				System.exit(0);
 			}
 		}
 	}

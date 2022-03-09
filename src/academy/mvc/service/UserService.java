@@ -39,6 +39,16 @@ public class UserService {
 	}
 	
 	
+	public void userJoin(String kind, String userId, int userPwd, String userName, String userTel, String thing) throws SQLException {
+		if(userDao.idCheck(kind, userId)) {
+			throw new SQLException("중복된id입니다.");
+		}else {
+			if(userDao.userJoin(kind, userId, userPwd, userName, userTel, thing)==0){
+				throw new SQLException("회원가입이 정상 완료되지않았습니다.");
+			}
+		}	
+	}
+	
 	public UserDTO showInfo (String kind, String userId) throws NullPointerException{
 		UserDTO now = user.get(kind);
 		//System.out.println(now);
