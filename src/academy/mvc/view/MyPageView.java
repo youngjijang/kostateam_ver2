@@ -6,7 +6,7 @@ import academy.mvc.controller.UserController;
 
 public class MyPageView {
 	
-    public static void studentMenu(String userId, String kind){
+    public static void studentMenu(String userId, String kind) throws NumberFormatException{
 		while(true){
 			System.out.println("---------------------"+userId+ "님의 마이페이지 ( "+kind+" )----------------------");
 			System.out.println("1.수강현황 | 2.성적확인 | 3.개인정보확인 | 4.개인정보수정 | 5.홈으로 | 9.로그아웃");
@@ -44,7 +44,7 @@ public class MyPageView {
 	}
     
     
-	public static void teacherMenu(String userId, String kind){
+	public static void teacherMenu(String userId, String kind) throws NumberFormatException{
 		while(true){
 			System.out.println("---------------------------"+userId+ "님의 마이페이지 ( "+kind+" )---------------------------");
 			System.out.println("1.학생목록 | 2.성적등록 | 3.성적수정 | 4.개인정보확인 | 5.개인정보수정 | 6.홈으로 | 9.로그아웃");
@@ -90,7 +90,7 @@ public class MyPageView {
 		}
 	}
 	
-	public static void managerMenu(String userId, String kind) {
+	public static void managerMenu(String userId, String kind) throws NumberFormatException{
 		while(true) {
 			System.out.println("---------------------------"+userId+ "님의 마이페이지 ( "+kind+" )---------------------------");
 			System.out.println("1.강의등록 | 2.강의수정 | 3.강의삭제 | 6.홈으로 | 9.로그아웃");

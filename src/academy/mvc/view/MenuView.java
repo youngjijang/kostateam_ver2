@@ -12,7 +12,7 @@ import academy.mvc.controller.UserController;
 public class MenuView {
 	static Scanner sc = new Scanner(System.in);
 	
-	public static void loginMenu() {
+	public static void loginMenu() throws NumberFormatException{
 		
 		String userId;
 		int userPwd;
@@ -34,30 +34,27 @@ public class MenuView {
 				System.out.print("학생계정-1  강사계정-2  매니저계정-3 > ");
 				kind = sc.nextLine();
 				
-				try {
-					System.out.print("아이디> ");
-					userId = sc.nextLine();
-					System.out.print("비밀번호> ");
-					userPwd = Integer.parseInt(sc.nextLine());
-				
-					if(kind.equals("1")) {
-						kind = "student";
-						UserController.userLogin(userId, userPwd, kind);
-						//다음 메뉴 선택하러 이동
-						homeMenu(userId, kind);
-					}else if(kind.equals("2")) {
-						kind = "teacher";
-						UserController.userLogin(userId, userPwd, kind);
-					}else if(kind.equals("3")) {
-						kind = "manager";
-						UserController.userLogin(userId, userPwd, kind);
-					}
-					else {
-						FailView.errorMessage("사용자 유형이 틀렸습니다.");
-					}
-				}catch(NumberFormatException e) {
-					FailView.errorMessage("제대로 입력하세요.");
+				System.out.print("아이디> ");
+				userId = sc.nextLine();
+				System.out.print("비밀번호> ");
+				userPwd = Integer.parseInt(sc.nextLine());
+			
+				if(kind.equals("1")) {
+					kind = "student";
+					UserController.userLogin(userId, userPwd, kind);
+					//다음 메뉴 선택하러 이동
+					homeMenu(userId, kind);
+				}else if(kind.equals("2")) {
+					kind = "teacher";
+					UserController.userLogin(userId, userPwd, kind);
+				}else if(kind.equals("3")) {
+					kind = "manager";
+					UserController.userLogin(userId, userPwd, kind);
 				}
+				else {
+					FailView.errorMessage("사용자 유형이 틀렸습니다.");
+				}
+				
 				break;
 			case 2 :
 				System.out.println("환영합니다!! 가입하실 사용자 유형을 입력하세요.");
@@ -101,7 +98,7 @@ public class MenuView {
 	}
 	
 	//
-	public static void homeMenu(String userId, String kind) {
+	public static void homeMenu(String userId, String kind) throws NumberFormatException{
 		while(true) {
 			System.out.println("----------------------------------------홈 메뉴--------------------------------------");
 			System.out.println("1.공지게시판 | 2.강의목록 | 3.수강신청 | 4.마이페이지 | 5.로그아웃 | 9.프로그램 종료");
@@ -133,7 +130,7 @@ public class MenuView {
 	}
 	
  
-    public static void sugangMenu(String userId, String kind) { //studentMenu와 연결하기
+    public static void sugangMenu(String userId, String kind) throws NumberFormatException{ //studentMenu와 연결하기
     	//메뉴출력
     	while(true) {
 	    	System.out.println("-----------------------수강신청 메뉴-----------------------");
@@ -175,7 +172,7 @@ public class MenuView {
     }
 
 	
-	public static void boardMenu(String userId, String kind) {
+	public static void boardMenu(String userId, String kind) throws NumberFormatException{
 		while(true) {
 			System.out.println("-----------------------------------공지게시판----------------------------------");
 			System.out.println("1.게시글목록 | 2.게시글등록 | 3.게시글삭제 | 4.댓글등록 | 5.댓글삭제 | 9.홈으로");
