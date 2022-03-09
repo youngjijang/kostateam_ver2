@@ -296,7 +296,7 @@ public class MenuView {
 						String content = sc.nextLine();
 						System.out.print("비밀번호> ");
 						int boardPwd = sc.nextInt();
-						//BoardController.insertBoard(content, boardPwd, userId); //boardNo, 날짜는 시퀀스와 sysdate사용
+						BoardController.insertBoard(content, boardPwd, userId); //boardNo, 날짜는 시퀀스와 sysdate사용
 					}else FailView.errorMessage("권한이 없습니다.");
 					break;
 				case 3 :
