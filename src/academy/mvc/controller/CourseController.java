@@ -42,9 +42,10 @@ public class CourseController {
 	/**
 	 * 강의 등록
 	 */
-	public static void insertCourse(CourseDTO courseDTO) {
+	public static void insertCourse(String cCode, String cName, int cCapa, int cHour, String cContent, String cStart, String cEnd) {
+		CourseDTO course = new CourseDTO(cCode, cName, cCapa, cHour, cContent, cStart, cEnd);
 		try {
-			courseService.insertCourse(courseDTO);
+			courseService.insertCourse(course);
 			SuccessView.printMessage("강의 등록에 성공하였습니다.");
 		} catch (Exception e) {
 //			e.printStackTrace();

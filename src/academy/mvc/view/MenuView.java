@@ -274,7 +274,7 @@ public class MenuView {
 					String cStart = sc.nextLine();
 					System.out.println("강의종료일> ");
 					String cEnd = sc.nextLine();
-					CourseController.insertCourse(null);
+					CourseController.insertCourse(cCode, cName, cCapa, cHour, cContent, cStart, cEnd);
 					
 					break;
 				case 2 : 
