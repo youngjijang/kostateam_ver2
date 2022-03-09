@@ -70,7 +70,7 @@ public class SugangController {
 			service.insertSugang(studentId, cCode);
 			SuccessView.printMessage("신청 완료");
 		} catch (Exception e) {
-			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
 		}
 	
 	}
@@ -83,7 +83,7 @@ public class SugangController {
 			service.delectSugang(studentId, cCode);
 			SuccessView.printMessage("철회 성공");
 		} catch (Exception e) {
-			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
 		}	
 	}
 	

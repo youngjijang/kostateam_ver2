@@ -14,6 +14,7 @@ import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
 
 import academy.mvc.model.dto.CourseDTO;
 import academy.mvc.model.dto.StudentDTO;
+import academy.mvc.service.CartService;
 import academy.mvc.service.CourseService;
 import academy.mvc.service.SugangService;
 import academy.mvc.session.Session;
@@ -25,7 +26,7 @@ import academy.mvc.view.SuccessView;
 
 public class CartController {
 	private static CourseService courseService = new CourseService();
-
+	private static CartService cartService = new CartService();
 	
 	public static void putCart(String sID,String cCode) {
 		
@@ -67,6 +68,22 @@ public class CartController {
 			SuccessView.printViewCart(sID , cart);
 		}
 
+	}//view 끝
+	
+	
+	
+	
+	public static void allInsertCart(String sID) {
+		try {
+			SessionSet ss = SessionSet.getInstance();
+			Session session = ss.get(sID);
+			Map<CourseDTO,String> cart = (Map<CourseDTO,String>)session.getAttribute("cart");
+			cartService.allInsertCart(sID, cart);
+			SuccessView.printMessage("수강신청 완료");
+		} catch (Exception e) {
+			FailView.errorMessage(e.getMessage());
+		}
+		
 	}
 	
 	

@@ -167,7 +167,7 @@ public class MenuView {
     	//메뉴출력
     	while(true) {
 	    	System.out.println("-----------------------수강신청 메뉴-----------------------");
-	    	System.out.println("1.강의목록 | 2.수강신청 | 3.신청취소 | 4.신청현황 | 5.장바구니담기 | 6.장바구니목록 | 7.홈으로");
+	    	System.out.println("1.강의목록 | 2.수강신청 | 3.신청취소 | 4.신청현황 | 5.장바구니담기 | 6.장바구니목록 | 7.장바구니목록 일괄신청 | 8.홈으로");
 	    	int menuNo = Integer.parseInt(sc.nextLine());
 			switch(menuNo) {
 				case 1 :
@@ -193,6 +193,9 @@ public class MenuView {
 					break;
 				case 6 :	
 					CartController.viewCart(userId);
+					break;
+				case 7 :	
+					CartController.allInsertCart(userId);
 					break;
 				default :
 					homeMenu(userId, kind);
