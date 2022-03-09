@@ -59,6 +59,11 @@ public class BoardController {
 			// TODO Auto-generated method stub
 			
 		}
+
+		public static void insertBoard(String content, int boardPwd, String userId) {
+			// TODO Auto-generated method stub
+			
+		}
 		
 }
 //

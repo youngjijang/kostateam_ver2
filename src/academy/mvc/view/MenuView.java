@@ -146,7 +146,6 @@ public class MenuView {
 				case 4 :
 					System.out.println("연락처를 변경합니다.");
 					System.out.print("변경할 연락처> ");
-					//sc.next();//개행읽기
 					String newTel = sc.nextLine();
 					UserController.updateUser("student", userId, newTel); //Session추가 후 수정...
 					//비밀번호 변경(미정)
@@ -175,6 +174,7 @@ public class MenuView {
 					CourseController.selectCourseList();
 					break;
 				case 2 :
+					System.out.print("신청할 강의코드> ");
 					String courseCode = sc.nextLine();
 					SugangController.insertSugang(userId, courseCode);
 					break;
@@ -300,9 +300,12 @@ public class MenuView {
 					}else FailView.errorMessage("권한이 없습니다.");
 					break;
 				case 3 :
-					System.out.print("삭제할 글번호>");
-					int deleteNo = sc.nextInt();
-					BoardController.deleteBoard(deleteNo);
+					System.out.println("**게시글 삭제는 강사만 가능합니다**");
+					if(kind.equals("teacher")) {
+						System.out.print("삭제할 글번호>");
+						int deleteNo = sc.nextInt();
+						BoardController.deleteBoard(deleteNo);
+					}else FailView.errorMessage("권한이 없습니다.");
 					break;
 				case 4 :
 					System.out.print("내용> ");
