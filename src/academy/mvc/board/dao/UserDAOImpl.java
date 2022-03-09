@@ -99,8 +99,17 @@ public class UserDAOImpl implements UserDAO {
 		        	if(rs.next()) {
 		        		user = new TeacherDTO(rs.getString(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5) );
 		        	}
-		        }else {
+		        }else if (kind == "student"){ 
 		        	ps= con.prepareStatement("select * from student where s_id=? and s_pwd=?");
+					ps.setString(1, userId);
+					ps.setInt(2, userPwd);
+					   
+			        rs = ps.executeQuery(); 
+		        	if(rs.next()) {
+			        	user = new StudentDTO(rs.getString(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5) );
+			        }
+		        } else {
+		        	ps= con.prepareStatement("select * from manager where m_id=? and m_pwd=?");
 					ps.setString(1, userId);
 					ps.setInt(2, userPwd);
 					   

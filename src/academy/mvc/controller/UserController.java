@@ -1,5 +1,6 @@
 package academy.mvc.controller;
 
+import java.awt.Menu;
 import java.sql.SQLException;
 
 import academy.mvc.model.dto.UserDTO;
@@ -34,10 +35,13 @@ public class UserController {
 	public static void userLogin(String userId, int userPwd, String kind) {
 		try{
 			userService.userLogin(userId, userPwd, kind);
-			if(kind.equals("student"))
+			if(kind.equals("student")) {
 				MenuView.homeMenu(userId, kind);
-			else 
+			} else if(kind.equals("teacher")) {
 				MenuView.homeMenu(userId, kind);
+			} else { 
+				MenuView.managerMenu(userId, kind);
+			}
 		}catch(Exception e) {
 			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());

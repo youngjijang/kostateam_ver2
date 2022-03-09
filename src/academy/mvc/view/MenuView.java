@@ -31,7 +31,7 @@ public class MenuView {
 			
 			case 1 : 
 				System.out.println("사용자 유형을 입력하세요.");
-				System.out.print("학생계정-1  강사계정-2 > ");
+				System.out.print("학생계정-1  강사계정-2  매니저계정-3 > ");
 				kind = sc.nextLine();
 				
 				System.out.print("아이디> ");
@@ -47,7 +47,11 @@ public class MenuView {
 				}else if(kind.equals("2")) {
 					kind = "teacher";
 					UserController.userLogin(userId, userPwd, kind);
-				}else {
+				}else if(kind.equals("3")) {
+					kind = "manager";
+					UserController.userLogin(userId, userPwd, kind);
+				}
+				else {
 					FailView.errorMessage("사용자 유형이 틀렸습니다.");
 				}
 				break;
@@ -256,21 +260,37 @@ public class MenuView {
 				switch(menuNo) {
 				case 1 :
 					System.out.println("강의를 등록합니다.");
-					System.out.println("등록할 강의>");
-					String courseCode = sc.nextLine();
-//					CourseController.insertCourse(); 
+					System.out.println("강의코드>");
+					String cCode = sc.nextLine();
+					System.out.println("강의이름> ");
+					String cName = sc.nextLine();
+					System.out.println("최대 수강인원> ");
+					int cCapa = Integer.parseInt(sc.nextLine());
+					System.out.println("총 강의시간> ");
+					int cHour = Integer.parseInt(sc.nextLine());
+					System.out.println("강의설명> ");
+					String cContent = sc.nextLine();
+					System.out.println("강의시작일> ");
+					String cStart = sc.nextLine();
+					System.out.println("강의종료일> ");
+					String cEnd = sc.nextLine();
+					CourseController.insertCourse(null);
+					
 					break;
 				case 2 : 
 					System.out.println("강의를 수정합니다.");
-					System.out.print("수정할 강의> ");
-					String course = sc.nextLine();
-//					CourseController.updateCourse();
+					System.out.print("수정할 강의코드> ");
+					cCode = sc.nextLine();
+					System.out.println("수정할 강의설명> ");
+					cContent = sc.nextLine();
+					CourseController.updateCourese(cCode, cContent);
 					break;
 				case 3 : 
 					System.out.println("강의를 삭제합니다.");
 					System.out.print("삭제할 강의> ");
-					courseCode = sc.nextLine();
-//					CourseController.deleteCourse();
+					cCode = sc.nextLine();
+					CourseController.deleteCourse(cCode);
+					break;
 				case 6 :
 					homeMenu(userId, kind);
 					break;
