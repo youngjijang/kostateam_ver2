@@ -27,7 +27,7 @@ public class MenuView {
 			
 				case 1 : 
 					System.out.println("사용자 유형을 입력하세요.");
-					System.out.print("학생계정-1  강사계정-2 > ");
+					System.out.print("학생계정-1  강사계정-2  매니저계정-3 > ");
 					kind = sc.nextLine();
 					
 					System.out.print("아이디> ");
@@ -43,7 +43,11 @@ public class MenuView {
 					}else if(kind.equals("2")) {
 						kind = "teacher";
 						UserController.userLogin(userId, userPwd, kind);
-					}else {
+					}else if(kind.equals("3")) {
+						kind = "manager";
+						UserController.userLogin(userId, userPwd, kind);
+					}
+					else {
 						FailView.errorMessage("사용자 유형이 틀렸습니다.");
 						
 						System.out.println("다시 입력하려면 Y, 프로그램을 종료하려면 N을 누르세요");
@@ -200,6 +204,42 @@ public class MenuView {
 		}
 	}
 	
+	public static void managerMenu(String userId, String kind) {
+		//controller로 이동해서 id, pwd체크하고 왔다
+		while(true) {
+			System.out.println("---------------------------"+userId+ "님의 마이페이지 ( "+kind+" )---------------------------");
+			System.out.println("1.강의등록 | 2.강의수정 | 3.강의삭제 | 6.홈으로 | 9.로그아웃");
+			int menuNo = Integer.parseInt(sc.nextLine());
+				switch(menuNo) {
+				case 1 :
+					System.out.println("강의를 등록합니다.");
+					System.out.println("등록할 강의>");
+					String courseCode = sc.nextLine();
+//					CourseController.insertCourse(); 
+					break;
+				case 2 : 
+					System.out.println("강의를 수정합니다.");
+					System.out.print("수정할 강의> ");
+					String course = sc.nextLine();
+//					CourseController.updateCourse();
+					break;
+				case 3 : 
+					System.out.println("강의를 삭제합니다.");
+					System.out.print("삭제할 강의> ");
+					courseCode = sc.nextLine();
+//					CourseController.deleteCourse();
+				case 6 :
+					homeMenu(userId, kind);
+					break;
+				case 9 :
+					loginMenu();
+					break;
+					//session...
+				default :
+					FailView.errorMessage("메뉴를 잘못 입력하였습니다.");
+				}
+		}
+	}
 	
 	public static void boardMenu(String userId, String kind) {
 		System.out.println("-----------------------------------공지게시판----------------------------------");
