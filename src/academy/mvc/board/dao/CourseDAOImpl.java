@@ -20,10 +20,11 @@ public class CourseDAOImpl implements CourseDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<CourseDTO> list = new ArrayList<>();
+		String sql = "select * from course";
 
 		try {
 			con = DbUtil.getConnection();
-			ps = con.prepareStatement("select * from course");
+			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
@@ -44,11 +45,11 @@ public class CourseDAOImpl implements CourseDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<CourseDTO> list = new ArrayList<>();
+		String sql = "select * from course where course_code in(select course_code from teacher where t_id = ?)";
 
 		try {
 			con = DbUtil.getConnection();
-			ps = con.prepareStatement(
-					"select * from course where course_code in(select course_code from teacher where t_id = ?)");
+			ps = con.prepareStatement(sql);
 			ps.setString(1, teacherId);
 
 			rs = ps.executeQuery();
@@ -94,6 +95,78 @@ public class CourseDAOImpl implements CourseDAO {
 			DbUtil.dbClose(con, ps, rs);
 		}
 		return courseDTO;
+	}
+
+	@Override
+	public int insertCourse(CourseDTO courseDTO) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement("insert into course valuse(?, ?, ?, ?, ?, ?, ?)");
+
+			ps.setString(1, courseDTO.getcCode());
+			ps.setString(2, courseDTO.getcName());
+			ps.setInt(3, courseDTO.getcCapa());
+			ps.setInt(4, courseDTO.getcHour());
+			ps.setString(5, courseDTO.getcContent());
+			ps.setString(6, courseDTO.getcStart());
+			ps.setString(7, courseDTO.getcEnd());
+
+			result = ps.executeUpdate();
+
+		} finally {
+			DbUtil.dbClose(con, ps);
+		}
+
+		return result;
+	}
+
+	@Override
+	public int updateCourse(String cCode, String cContent) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		String sql = "update course set course_content = ? where course_code = ?";
+
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+
+			ps.setString(1, cContent);
+			ps.setString(2, cCode);
+
+			result = ps.executeUpdate();
+
+		} finally {
+			DbUtil.dbClose(con, ps);
+		}
+
+		return result;
+	}
+
+	@Override
+	public int deleteCourse(String cCode) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		String sql = "delete course where course_code = ?";
+
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+
+			ps.setString(1, cCode);
+
+			result = ps.executeUpdate();
+
+		} finally {
+			DbUtil.dbClose(con, ps);
+		}
+
+		return result;
 	}
 
 }

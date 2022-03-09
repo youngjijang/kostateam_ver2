@@ -39,4 +39,43 @@ public class CourseController {
 		}
 	}
 
+	/**
+	 * 강의 등록
+	 */
+	public static void insertCourse(CourseDTO courseDTO) {
+		try {
+			courseService.insertCourse(courseDTO);
+			SuccessView.printMessage("강의 등록에 성공하였습니다.");
+		} catch (Exception e) {
+//			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		}
+	}
+
+	/**
+	 * 강의 수정
+	 */
+	public static void updateCourese(String cCode, String cContent) {
+		try {
+			courseService.updateCourse(cCode, cContent);
+			SuccessView.printMessage("강의 수정에 성공하였습니다.");
+		} catch (Exception e) {
+//			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		}
+	}
+
+	/**
+	 * 강의 삭제
+	 */
+	public static void deleteCourse(String cCode) {
+		try {
+			courseService.deleteCourse(cCode);
+			SuccessView.printMessage("강의 삭제에 성공하였습니다.");
+		} catch (Exception e) {
+//			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		}
+	}
+
 }

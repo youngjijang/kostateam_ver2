@@ -14,7 +14,7 @@ public class CourseService {
 	/**
 	 * 전체 강의 목록리턴
 	 */
-	public List<CourseDTO> selectCourseList() throws SQLException {
+	public List<CourseDTO> selectCourseList() throws NullPointerException, SQLException {
 		List<CourseDTO> list = courseDAO.selectCourseList();
 
 		if (list.size() == 0) {
@@ -26,7 +26,7 @@ public class CourseService {
 	/**
 	 * 내 강의 조회-강사
 	 */
-	public List<CourseDTO> selectTeacherCourse(String teacherId) throws SQLException {
+	public List<CourseDTO> selectTeacherCourse(String teacherId) throws NullPointerException, SQLException {
 		List<CourseDTO> list = courseDAO.selectTeacherCourse(teacherId);
 
 		if (list.size() == 0) {
@@ -43,6 +43,36 @@ public class CourseService {
 		if (dto == null)
 			throw new NullPointerException("해당 과목이 없습니다.");
 		return dto;
+	}
+
+	/**
+	 * 강의 등록
+	 */
+	public void insertCourse(CourseDTO courseDTO) throws SQLException {
+		int result = courseDAO.insertCourse(courseDTO);
+		if (result == 0) {
+			throw new SQLException("강의 등록에 실패했습니다.");
+		}
+	}
+
+	/**
+	 * 강의 수정
+	 */
+	public void updateCourse(String cCode, String cContent) throws SQLException {
+		int result = courseDAO.updateCourse(cCode, cContent);
+		if (result == 0) {
+			throw new SQLException("강의 수정에 실패했습니다.");
+		}
+	}
+
+	/**
+	 * 강의 삭제
+	 */
+	public void deleteCourse(String cCode) throws SQLException {
+		int result = courseDAO.deleteCourse(cCode);
+		if (result == 0) {
+			throw new SQLException("강의 삭제에 실패했습니다.");
+		}
 	}
 
 }

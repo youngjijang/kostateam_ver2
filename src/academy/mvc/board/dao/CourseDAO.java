@@ -22,4 +22,20 @@ public interface CourseDAO {
 	 * 선택한 과목
 	 */
 	CourseDTO selectCartCourse(String cCode) throws SQLException;
+
+	/**
+	 * 강의 등록
+	 */
+	int insertCourse(CourseDTO courseDTO) throws SQLException;
+
+	/**
+	 * 강의 수정 (강의 내용만 수정)
+	 */
+	int updateCourse(String cCode, String cContent) throws SQLException;
+
+	/**
+	 * 강의 삭제
+	 */
+	int deleteCourse(String cCode) throws SQLException;
+
 }

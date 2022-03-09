@@ -8,10 +8,9 @@ public class CourseDTO {
 	private String cContent;
 	private String cStart;
 	private String cEnd;
-	
 
-	public CourseDTO() {}
-
+	public CourseDTO() {
+	}
 
 	public CourseDTO(String cCode, String cName, int cCapa, int cHour, String cContent, String cStart, String cEnd) {
 		super();
@@ -24,76 +23,61 @@ public class CourseDTO {
 		this.cEnd = cEnd;
 	}
 
-
 	public String getcCode() {
 		return cCode;
 	}
-
 
 	public void setcCode(String cCode) {
 		this.cCode = cCode;
 	}
 
-
 	public String getcName() {
 		return cName;
 	}
-
 
 	public void setcName(String cName) {
 		this.cName = cName;
 	}
 
-
 	public int getcCapa() {
 		return cCapa;
 	}
-
 
 	public void setcCapa(int cCapa) {
 		this.cCapa = cCapa;
 	}
 
-
 	public int getcHour() {
 		return cHour;
 	}
-
 
 	public void setcHour(int cHour) {
 		this.cHour = cHour;
 	}
 
-
 	public String getcContent() {
 		return cContent;
 	}
-
 
 	public void setcContent(String cContent) {
 		this.cContent = cContent;
 	}
 
-
 	public String getcStart() {
 		return cStart;
 	}
-
 
 	public void setcStart(String cStart) {
 		this.cStart = cStart;
 	}
 
-
 	public String getcEnd() {
 		return cEnd;
 	}
 
-
 	public void setcEnd(String cEnd) {
 		this.cEnd = cEnd;
 	}
-
 
 	@Override
 	public String toString() {
@@ -115,7 +99,5 @@ public class CourseDTO {
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
-	
+
 }
