@@ -7,6 +7,7 @@ import academy.mvc.model.dto.UserDTO;
 import academy.mvc.service.UserService;
 import academy.mvc.view.FailView;
 import academy.mvc.view.MenuView;
+import academy.mvc.view.MyPageView;
 import academy.mvc.view.SuccessView;
 
 public class UserController {
@@ -40,7 +41,7 @@ public class UserController {
 			} else if(kind.equals("teacher")) {
 				MenuView.homeMenu(userId, kind);
 			} else { 
-				MenuView.managerMenu(userId, kind);
+				MyPageView.managerMenu(userId, kind);
 			}
 		}catch(Exception e) {
 			//e.printStackTrace();

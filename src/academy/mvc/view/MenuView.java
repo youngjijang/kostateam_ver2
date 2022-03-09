@@ -119,8 +119,8 @@ public class MenuView {
 					else FailView.errorMessage("학생만 수강신청 가능합니다.");
 					break;
 				case 4 :
-					if(kind.equals("student")) studentMenu(userId, kind);
-					else if(kind.equals("teacher")) teacherMenu(userId,kind);
+					if(kind.equals("student")) MyPageView.studentMenu(userId, kind);
+					else if(kind.equals("teacher")) MyPageView.teacherMenu(userId,kind);
 				case 5 :
 					loginMenu();
 				case 9 :
@@ -132,45 +132,7 @@ public class MenuView {
 		}
 	}
 	
-    public static void studentMenu(String userId, String kind){
-		//controller로 이동해서 id, pwd체크하고 왔다
-		while(true){
-			System.out.println("---------------------"+userId+ "님의 마이페이지 ( "+kind+" )----------------------");
-			System.out.println("1.수강현황 | 2.성적확인 | 3.개인정보확인 | 4.개인정보수정 | 5.홈으로 | 9.로그아웃");
-			int menuNo = Integer.parseInt(sc.nextLine());
-			switch(menuNo) {
-				case 1 :
-					SugangController.selectMind(userId);
-					System.out.println("수강신청 페이지로 가려면 Y를 누르세요");
-					String select = sc.nextLine();
-					if(select.equals("Y")||select.equals("y")) sugangMenu(userId, kind);
-					break;
-				case 2 :
-					SugangController.selectGrade(userId);
-					break;
-				case 3 :
-					UserController.showUser(kind, userId);
-					break;
-				case 4 :
-					System.out.println("연락처를 변경합니다.");
-					System.out.print("변경할 연락처> ");
-					String newTel = sc.nextLine();
-					UserController.updateUser("student", userId, newTel); //Session추가 후 수정...
-					//비밀번호 변경(미정)
-					break;
-				case 5 :
-					homeMenu(userId, kind);
-					break;
-				case 9:
-					loginMenu();
-					break;
-				default :
-					FailView.errorMessage("메뉴를 잘못 입력하였습니다.");
-			}
-		}	
-	}
-    
-    
+ 
     public static void sugangMenu(String userId, String kind) { //studentMenu와 연결하기
     	//메뉴출력
     	while(true) {
@@ -212,106 +174,6 @@ public class MenuView {
     	}
     }
 
-	
-	public static void teacherMenu(String userId, String kind){
-		//controller로 이동해서 id, pwd체크하고 왔다
-		while(true){
-			System.out.println("---------------------------"+userId+ "님의 마이페이지 ( "+kind+" )---------------------------");
-			System.out.println("1.학생목록 | 2.성적등록 | 3.성적수정 | 4.개인정보확인 | 5.개인정보수정 | 6.홈으로 | 9.로그아웃");
-			int menuNo = Integer.parseInt(sc.nextLine());
-				switch(menuNo) {
-					case 1 :
-						SugangController.selectStudentList(userId);
-						break;
-					case 2 :
-						System.out.print("학생ID> ");
-						String studentId = sc.nextLine();
-						System.out.print("성적> ");
-						int score = sc.nextInt();
-						SugangController.updateScore(studentId, score);
-						break;
-					case 3 :
-						System.out.print("변경할 학생ID> ");
-						studentId = sc.nextLine();
-						System.out.print("변경할 성적> ");
-						int newScore = sc.nextInt();
-						SugangController.updateScore(studentId, newScore);
-						break;
-					case 4 :
-						UserController.showUser("teacher", userId);
-						break;
-					case 5 :
-						System.out.print("연락처를 변경합니다.");
-						System.out.print("변경할 연락처> ");
-						String newTel = sc.nextLine();
-						UserController.updateUser("teacher", userId, newTel);
-						break;
-					case 6 :
-						homeMenu(userId, kind);
-						break;
-					case 9 :
-						loginMenu();
-						break;
-						//session...
-					default :
-						FailView.errorMessage("메뉴를 잘못 입력하였습니다.");
-				}
-			
-		}
-	}
-	
-	public static void managerMenu(String userId, String kind) {
-		//controller로 이동해서 id, pwd체크하고 왔다
-		while(true) {
-			System.out.println("---------------------------"+userId+ "님의 마이페이지 ( "+kind+" )---------------------------");
-			System.out.println("1.강의등록 | 2.강의수정 | 3.강의삭제 | 6.홈으로 | 9.로그아웃");
-			int menuNo = Integer.parseInt(sc.nextLine());
-				switch(menuNo) {
-				case 1 :
-					System.out.println("강의를 등록합니다.");
-					System.out.println("강의코드>");
-					String cCode = sc.nextLine();
-					System.out.println("강의이름> ");
-					String cName = sc.nextLine();
-					System.out.println("최대 수강인원> ");
-					int cCapa = Integer.parseInt(sc.nextLine());
-					System.out.println("총 강의시간> ");
-					int cHour = Integer.parseInt(sc.nextLine());
-					System.out.println("강의설명> ");
-					String cContent = sc.nextLine();
-					System.out.println("강의시작일> ");
-					String cStart = sc.nextLine();
-					System.out.println("강의종료일> ");
-					String cEnd = sc.nextLine();
-					CourseController.insertCourse(cCode, cName, cCapa, cHour, cContent, cStart, cEnd);
-					
-					break;
-				case 2 : 
-					System.out.println("강의를 수정합니다.");
-					System.out.print("수정할 강의코드> ");
-					cCode = sc.nextLine();
-					System.out.println("수정할 강의설명> ");
-					cContent = sc.nextLine();
-					CourseController.updateCourese(cCode, cContent);
-					break;
-				case 3 : 
-					System.out.println("강의를 삭제합니다.");
-					System.out.print("삭제할 강의> ");
-					cCode = sc.nextLine();
-					CourseController.deleteCourse(cCode);
-					break;
-				case 6 :
-					homeMenu(userId, kind);
-					break;
-				case 9 :
-					loginMenu();
-					break;
-					//session...
-				default :
-					FailView.errorMessage("메뉴를 잘못 입력하였습니다.");
-				}
-		}
-	}
 	
 	public static void boardMenu(String userId, String kind) {
 		while(true) {
