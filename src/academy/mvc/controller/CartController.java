@@ -81,7 +81,7 @@ public class CartController {
 			cartService.allInsertCart(sID, cart);
 			SuccessView.printMessage("수강신청 완료");
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
 		
