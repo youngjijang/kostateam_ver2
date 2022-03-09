@@ -121,7 +121,7 @@ public class SugangDAOImpl implements SugangDAO {
 		Connection con= null;		
 		PreparedStatement ps=null;	
 		int result =0;
-		String sql = "insert into sugang values(sugang_seq.nextval, ?, ?, null);";//proFile.getProperty("");
+		String sql = "insert into sugang values(sugang_seq.nextval, ?, ?, null)";//proFile.getProperty("");
 		try {
 			con = DbUtil.getConnection();	
 			ps= con.prepareStatement(sql);	
