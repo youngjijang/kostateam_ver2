@@ -34,25 +34,29 @@ public class MenuView {
 				System.out.print("학생계정-1  강사계정-2  매니저계정-3 > ");
 				kind = sc.nextLine();
 				
-				System.out.print("아이디> ");
-				userId = sc.nextLine();
-				System.out.print("비밀번호> ");
-				userPwd = Integer.parseInt(sc.nextLine());
+				try {
+					System.out.print("아이디> ");
+					userId = sc.nextLine();
+					System.out.print("비밀번호> ");
+					userPwd = Integer.parseInt(sc.nextLine());
 				
-				if(kind.equals("1")) {
-					kind = "student";
-					UserController.userLogin(userId, userPwd, kind);
-					//다음 메뉴 선택하러 이동
-					homeMenu(userId, kind);
-				}else if(kind.equals("2")) {
-					kind = "teacher";
-					UserController.userLogin(userId, userPwd, kind);
-				}else if(kind.equals("3")) {
-					kind = "manager";
-					UserController.userLogin(userId, userPwd, kind);
-				}
-				else {
-					FailView.errorMessage("사용자 유형이 틀렸습니다.");
+					if(kind.equals("1")) {
+						kind = "student";
+						UserController.userLogin(userId, userPwd, kind);
+						//다음 메뉴 선택하러 이동
+						homeMenu(userId, kind);
+					}else if(kind.equals("2")) {
+						kind = "teacher";
+						UserController.userLogin(userId, userPwd, kind);
+					}else if(kind.equals("3")) {
+						kind = "manager";
+						UserController.userLogin(userId, userPwd, kind);
+					}
+					else {
+						FailView.errorMessage("사용자 유형이 틀렸습니다.");
+					}
+				}catch(NumberFormatException e) {
+					FailView.errorMessage("제대로 입력하세요.");
 				}
 				break;
 			case 2 :
