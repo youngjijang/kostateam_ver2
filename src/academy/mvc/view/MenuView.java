@@ -49,12 +49,6 @@ public class MenuView {
 					UserController.userLogin(userId, userPwd, kind);
 				}else {
 					FailView.errorMessage("사용자 유형이 틀렸습니다.");
-					
-					System.out.println("다시 입력하려면 Y, 프로그램을 종료하려면 N을 누르세요");
-					System.out.print("입력> ");
-					String input = sc.nextLine();
-					if(input.equals("Y") || input.equals("y")) loginMenu();
-					else System.exit(0);
 				}
 				break;
 			case 2 :
@@ -100,30 +94,33 @@ public class MenuView {
 	
 	//
 	public static void homeMenu(String userId, String kind) {
-		System.out.println("----------------------------------------홈 메뉴--------------------------------------");
-		System.out.println("1.공지게시판 | 2.강의목록 | 3.수강신청 | 4.마이페이지 | 5.로그아웃 | 9.프로그램 종료");
-		int menuNo = Integer.parseInt(sc.nextLine());
-		switch(menuNo) {
-			case 1 :
-				boardMenu(userId, kind);
-				 break;
-			case 2 :
-				CourseController.selectCourseList();
-				break;
-			case 3 :
-				//수강신청은 하위메뉴와 학생메뉴 모두에서 접근 가능
-				if(kind=="student") sugangMenu(userId, kind);
-				else FailView.errorMessage("학생만 수강신청 가능합니다.");
-				break;
-			case 4 :
-				if(kind.equals("student")) studentMenu(userId, kind);
-				else if(kind.equals("teacher")) teacherMenu(userId,kind);
-			case 5 :
-				loginMenu();
-			case 9 :
-				System.exit(0);
-			default :
-				FailView.errorMessage("메뉴를 잘못 입력하였습니다.");
+		while(true) {
+			System.out.println("----------------------------------------홈 메뉴--------------------------------------");
+			System.out.println("1.공지게시판 | 2.강의목록 | 3.수강신청 | 4.마이페이지 | 5.로그아웃 | 9.프로그램 종료");
+			int menuNo = Integer.parseInt(sc.nextLine());
+			switch(menuNo) {
+				case 1 :
+					boardMenu(userId, kind);
+					 break;
+				case 2 :
+					CourseController.selectCourseList();
+					break;
+				case 3 :
+					//수강신청은 하위메뉴와 학생메뉴 모두에서 접근 가능
+					if(kind=="student") sugangMenu(userId, kind);
+					else FailView.errorMessage("학생만 수강신청 가능합니다.");
+					break;
+				case 4 :
+					if(kind.equals("student")) studentMenu(userId, kind);
+					else if(kind.equals("teacher")) teacherMenu(userId,kind);
+				case 5 :
+					loginMenu();
+				case 9 :
+					System.out.println("프로그램을 종료합니다.");
+					System.exit(0);
+				default :
+					FailView.errorMessage("메뉴를 잘못 입력하였습니다.");
+			}
 		}
 	}
 	
@@ -169,37 +166,39 @@ public class MenuView {
     
     public static void sugangMenu(String userId, String kind) { //studentMenu와 연결하기
     	//메뉴출력
-    	System.out.println("-----------------------수강신청 페이지-----------------------");
-    	System.out.println("1.강의목록 | 2.수강신청 | 3.신청취소 | 4.신청현황 | 5.장바구니담기 | 6.장바구니목록 | 7.홈으로");
-    	int menuNo = Integer.parseInt(sc.nextLine());
-		switch(menuNo) {
-			case 1 :
-				CourseController.selectCourseList();
-				break;
-			case 2 :
-				String courseCode = sc.nextLine();
-				SugangController.insertSugang(userId, courseCode);
-				break;
-			case 3 :
-				System.out.print("취소할 강의코드> ");
-				courseCode = sc.nextLine();
-				SugangController.delectSugang(userId, courseCode);
-				break;
-			case 4 :
-				SugangController.selectMind(userId);
-				break;
-			case 5 :
-				System.out.print("담을 강의코드> ");
-				courseCode = sc.nextLine();
-				CartController.putCart(userId, courseCode);
-				break;
-			case 6 :	
-				CartController.viewCart(userId);
-				break;
-			default :
-				homeMenu(userId, kind);
-				
-		}
+    	while(true) {
+	    	System.out.println("-----------------------수강신청 메뉴-----------------------");
+	    	System.out.println("1.강의목록 | 2.수강신청 | 3.신청취소 | 4.신청현황 | 5.장바구니담기 | 6.장바구니목록 | 7.홈으로");
+	    	int menuNo = Integer.parseInt(sc.nextLine());
+			switch(menuNo) {
+				case 1 :
+					CourseController.selectCourseList();
+					break;
+				case 2 :
+					String courseCode = sc.nextLine();
+					SugangController.insertSugang(userId, courseCode);
+					break;
+				case 3 :
+					System.out.print("취소할 강의코드> ");
+					courseCode = sc.nextLine();
+					SugangController.delectSugang(userId, courseCode);
+					break;
+				case 4 :
+					SugangController.selectMind(userId);
+					break;
+				case 5 :
+					System.out.print("담을 강의코드> ");
+					courseCode = sc.nextLine();
+					CartController.putCart(userId, courseCode);
+					break;
+				case 6 :	
+					CartController.viewCart(userId);
+					break;
+				default :
+					homeMenu(userId, kind);
+					
+			}
+    	}
     }
 
 	
@@ -283,53 +282,55 @@ public class MenuView {
 	}
 	
 	public static void boardMenu(String userId, String kind) {
-		System.out.println("-----------------------------------공지게시판----------------------------------");
-		System.out.println("1.게시글목록 | 2.게시글등록 | 3.게시글삭제 | 4.댓글등록 | 5.댓글삭제 | 9.홈으로");
-		int menuNo = Integer.parseInt(sc.nextLine());
-		switch(menuNo) {
-			case 1 : 
-				BoardController.boardSelectByAll(); break;
-			case 2 :
-				System.out.println("**게시글 등록은 강사만 가능합니다**"); //사용자정의 오류처리? grantException
-				if(kind.equals("teacher")) {
+		while(true) {
+			System.out.println("-----------------------------------공지게시판----------------------------------");
+			System.out.println("1.게시글목록 | 2.게시글등록 | 3.게시글삭제 | 4.댓글등록 | 5.댓글삭제 | 9.홈으로");
+			int menuNo = Integer.parseInt(sc.nextLine());
+			switch(menuNo) {
+				case 1 : 
+					BoardController.boardSelectByAll(); break;
+				case 2 :
+					System.out.println("**게시글 등록은 강사만 가능합니다**"); //사용자정의 오류처리? grantException
+					if(kind.equals("teacher")) {
+						System.out.print("내용> ");
+						String content = sc.nextLine();
+						System.out.print("비밀번호> ");
+						int boardPwd = sc.nextInt();
+						//BoardController.insertBoard(content, boardPwd, userId); //boardNo, 날짜는 시퀀스와 sysdate사용
+					}else FailView.errorMessage("권한이 없습니다.");
+					break;
+				case 3 :
+					System.out.print("삭제할 글번호>");
+					int deleteNo = sc.nextInt();
+					BoardController.deleteBoard(deleteNo);
+					break;
+				case 4 :
 					System.out.print("내용> ");
 					String content = sc.nextLine();
+					System.out.print("부모글 번호> ");
+					int boardNo = sc.nextInt();
+					System.out.print("작성자> ");
+					String writer = sc.nextLine();
+					System.out.print("비밀번호(숫자)>");
+					int replyPwd = sc.nextInt();
+					BoardController.replyInsert(content, boardNo, writer, replyPwd); //BoardController에 List<Reply> 추가 필요
+					break;
+				case 5 :
+					System.out.print("부모글 번호> ");
+					boardNo = sc.nextInt();
+					System.out.print("댓글 번호> ");
+					int replyNo = sc.nextInt();
 					System.out.print("비밀번호> ");
-					int boardPwd = sc.nextInt();
-					//BoardController.insertBoard(content, boardPwd, userId); //boardNo, 날짜는 시퀀스와 sysdate사용
-				}else FailView.errorMessage("권한이 없습니다.");
-				break;
-			case 3 :
-				System.out.print("삭제할 글번호>");
-				int deleteNo = sc.nextInt();
-				BoardController.deleteBoard(deleteNo);
-				break;
-			case 4 :
-				System.out.print("내용> ");
-				String content = sc.nextLine();
-				System.out.print("부모글 번호> ");
-				int boardNo = sc.nextInt();
-				System.out.print("작성자> ");
-				String writer = sc.nextLine();
-				System.out.print("비밀번호(숫자)>");
-				int replyPwd = sc.nextInt();
-				BoardController.replyInsert(content, boardNo, writer, replyPwd); //BoardController에 List<Reply> 추가 필요
-				break;
-			case 5 :
-				System.out.print("부모글 번호> ");
-				boardNo = sc.nextInt();
-				System.out.print("댓글 번호> ");
-				int replyNo = sc.nextInt();
-				System.out.print("비밀번호> ");
-				replyPwd = sc.nextInt();
-				BoardController.replyDelete(boardNo, replyNo, replyPwd);
-				break;
-			case 9 :
-				homeMenu(userId, kind);
-				break;
-			default :
-				FailView.errorMessage("메뉴를 잘못 입력하였습니다.");
-				
+					replyPwd = sc.nextInt();
+					BoardController.replyDelete(boardNo, replyNo, replyPwd);
+					break;
+				case 9 :
+					homeMenu(userId, kind);
+					break;
+				default :
+					FailView.errorMessage("메뉴를 잘못 입력하였습니다.");
+					
+			}
 		}
 	}
 	
