@@ -22,18 +22,19 @@ public class MenuView {
 			System.out.println("1.로그인 | 2.회원가입 | 9.프로그램 종료");
 			int menuNo = Integer.parseInt(sc.nextLine());
 			
-			System.out.println("사용자 유형을 입력하세요.");
-			System.out.print("학생계정-1  강사계정-2 > ");
-			kind = sc.nextLine();
-			
-			System.out.print("아이디> ");
-			userId = sc.nextLine();
-			System.out.print("비밀번호> ");
-			userPwd = Integer.parseInt(sc.nextLine());
 			
 			switch(menuNo){
 			
 				case 1 : 
+					System.out.println("사용자 유형을 입력하세요.");
+					System.out.print("학생계정-1  강사계정-2 > ");
+					kind = sc.nextLine();
+					
+					System.out.print("아이디> ");
+					userId = sc.nextLine();
+					System.out.print("비밀번호> ");
+					userPwd = Integer.parseInt(sc.nextLine());
+					
 					if(kind.equals("1")) {
 						kind = "student";
 						UserController.userLogin(userId, userPwd, kind);
@@ -53,6 +54,9 @@ public class MenuView {
 					}
 				case 2 :
 					//회원가입
+				case 9 :
+					System.out.println("프로그램을 종료합니다.");
+					System.exit(0);
 			}
 		}
 	}

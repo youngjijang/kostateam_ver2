@@ -18,12 +18,13 @@ public class UserController {
 		try{
 			userService.userLogin(userId, userPwd, kind);
 			if(kind.equals("student"))
-				MenuView.studentMenu(userId, kind);
+				MenuView.homeMenu(userId, kind);
 			else 
-				MenuView.teacherMenu(userId, kind);
+				MenuView.homeMenu(userId, kind);
 		}catch(Exception e) {
 			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
+			MenuView.loginMenu();
 		}
 	}
 	
