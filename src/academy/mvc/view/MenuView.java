@@ -189,11 +189,11 @@ public class MenuView {
 				SugangController.selectMind(userId);
 				break;
 			case 5 :
+				System.out.print("담을 강의코드> ");
 				courseCode = sc.nextLine();
 				CartController.putCart(userId, courseCode);
 				break;
-			case 6 :
-				courseCode = sc.nextLine();
+			case 6 :	
 				CartController.viewCart(userId);
 				break;
 			default :
