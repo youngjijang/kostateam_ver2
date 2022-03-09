@@ -27,7 +27,7 @@ public class CartController {
 	private static CourseService courseService = new CourseService();
 
 	
-	public static void putCart(String sID,String cCode,int people) {
+	public static void putCart(String sID,String cCode) {
 		
 		try {
 			CourseDTO course = courseService.selectCartCourse(cCode);
@@ -69,14 +69,6 @@ public class CartController {
 
 	}
 	
-	/*
-	public static void main(String[] args) {
-		
-		
-		
-	 	putCart("거북이","A100",1);
-
-	}
-	*/
+	
 	
 }

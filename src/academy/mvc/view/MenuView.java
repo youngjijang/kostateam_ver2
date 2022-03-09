@@ -3,6 +3,7 @@ package academy.mvc.view;
 import java.util.Scanner;
 
 import academy.mvc.controller.BoardController;
+import academy.mvc.controller.CartController;
 import academy.mvc.controller.CourseController;
 import academy.mvc.controller.SugangController;
 import academy.mvc.controller.UserController;
@@ -137,7 +138,7 @@ public class MenuView {
     public static void sugangMenu(String userId, String kind) { //studentMenu와 연결하기
     	//메뉴출력
     	System.out.println("-----------------------수강신청 페이지-----------------------");
-    	System.out.println("1.강의목록 | 2.수강신청 | 3.신청취소 | 4.신청현황 | 5.홈으로");
+    	System.out.println("1.강의목록 | 2.수강신청 | 3.신청취소 | 4.신청현황 | 5.장바구니담기 | 6.장바구니목록 | 7.홈으로");
     	int menuNo = Integer.parseInt(sc.nextLine());
 		switch(menuNo) {
 			case 1 :
@@ -154,6 +155,14 @@ public class MenuView {
 				break;
 			case 4 :
 				SugangController.selectMind(userId);
+				break;
+			case 5 :
+				courseCode = sc.nextLine();
+				CartController.putCart(userId, courseCode);
+				break;
+			case 6 :
+				courseCode = sc.nextLine();
+				CartController.viewCart(userId);
 				break;
 			default :
 				homeMenu(userId, kind);
