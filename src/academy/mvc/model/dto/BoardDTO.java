@@ -14,17 +14,21 @@ public class BoardDTO extends ReplyDTO {
 	private int replyPwd;
 	private String userId;
 	
-	public BoardDTO(int boardNo, String content, String boardDate, int boardPwd, int replyNo, String replecontent, int replyPwd, String userId) {
+	public BoardDTO(int boardNo, String content, String boardDate, int boardPwd, int replyNo, String replecontent,  String userId,int replyPwd,String writer) {
 		super(replyNo, replecontent, replyPwd, userId);
 		this.replyNo = replyNo;
 		this.replecontent = replecontent;
 		this.replyPwd = replyPwd;
+		this.writer =writer;
 		this.userId = userId;
 		this.boardNo = boardNo;
 		this.content = content;
 		this.boardDate = boardDate; 
 		this.boardPwd = boardPwd;
-	} 
+	}
+
+
+
 
 
 	public int getBoardNo() {

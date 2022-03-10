@@ -28,12 +28,15 @@ public class BoardDAOImpl implements BoardDAO {
 		String sql="select a.BOARD_NO,\r\n"
 				+ "       BOARD_CONTENT, \r\n"
 				+ "       BOARD_DATE,\r\n"
+				+ "		  T_ID,\r\n"
 				+ "       BOARD_PWD,\r\n"
 				+ "       REPLY_NO, \r\n"
 				+ "       REPLY_CONTENT, \r\n"
 				+ "       REPLY_WRITER, \r\n"
 				+ "       REPLY_PWD\r\n"
-				+ "from board a, reply b where a.board_no = b.board_no";
+				+ "from board a, reply b\r\n"
+				+ "where a.board_no = b.board_no(+) \r\n"
+				+ "order by a.BOARD_NO";
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
@@ -42,8 +45,9 @@ public class BoardDAOImpl implements BoardDAO {
 				BoardDTO dto = new BoardDTO(rs.getInt("BOARD_NO"), 
 						rs.getString("BOARD_CONTENT"), 
 						rs.getString("BOARD_DATE"), 
-						rs.getInt("BOARD_PWD"),
 						rs.getInt("REPLY_NO"),
+						rs.getInt("BOARD_PWD"),
+						rs.getString("T_ID"),
 						rs.getString("REPLY_CONTENT"),
 						rs.getInt("REPLY_PWD"),
 						rs.getString("REPLY_WRITER"));
@@ -100,9 +104,9 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 
-	//댓글등록안됨 ㅠ
+
 	@Override
-	public int replyInsert(String content, int boardNo, String writer, int replyPwd) throws SQLException { 
+	public int replyInsert(String content, int boardNo, String userId, int replyPwd) throws SQLException { 
 		Connection con=null;
 		PreparedStatement ps=null;
 		int result=0;
@@ -110,11 +114,10 @@ public class BoardDAOImpl implements BoardDAO {
 		try {
 			con = DbUtil.getConnection();
 			ps= con.prepareStatement(sql);
-			result = ps.executeUpdate();
 			
 			ps.setString(1, content);
 			ps.setInt(2, boardNo);
-			ps.setString(3, writer);
+			ps.setString(3, userId);
 			ps.setInt(4, replyPwd);
 			
 			result = ps.executeUpdate();
