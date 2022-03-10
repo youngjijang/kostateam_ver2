@@ -98,10 +98,13 @@ public class MyPageView {
 	public static void managerMenu(String userId, String kind) throws NumberFormatException{
 		while(true) {
 			System.out.println("---------------------------"+userId+ "님의 마이페이지 ( "+kind+" )---------------------------");
-			System.out.println("1.강의등록 | 2.강의수정 | 3.강사지정 | 4.강의삭제 | 5. 개인정보확인 | 9.홈으로");
+			System.out.println("1.강의목록 | 2.강의등록 | 3.강의수정 | 4.강사지정 | 5.강의삭제 | 6.개인정보확인 | 9.홈으로");
 			int menuNo = Integer.parseInt(MenuView.sc.nextLine());
 				switch(menuNo) {
-				case 1 :
+				case 1 : 
+					CourseController.selectCourseList();
+					break;
+				case 2 :
 					System.out.println("강의를 등록합니다.");
 					System.out.print("강의코드>");
 					String cCode = MenuView.sc.nextLine();
@@ -118,17 +121,18 @@ public class MyPageView {
 					System.out.print("강의종료일> ");
 					String cEnd = MenuView.sc.nextLine();
 					try {
-						SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD");
+						SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 						java.util.Date startDate = dateFormat.parse(cStart);
 						java.util.Date endDate = dateFormat.parse(cEnd);
-						if(startDate.after(endDate))
+						
+						if(startDate.before(endDate))
 						CourseController.insertCourse(cCode, cName, cCapa, cHour, cContent, cStart, cEnd);
 						else FailView.errorMessage("시작일과 종료일을 올바르게 입력하세요.");
 					}catch(ParseException ex) {
 						FailView.errorMessage(ex.getMessage());
 					}
 					break;
-				case 2 : 
+				case 3 : 
 					System.out.println("강의를 수정합니다.");
 					System.out.print("수정할 강의코드> ");
 					cCode = MenuView.sc.nextLine();
@@ -136,7 +140,7 @@ public class MyPageView {
 					cContent = MenuView.sc.nextLine();
 					CourseController.updateCourese(cCode, cContent);
 					break;
-				case 3 : 
+				case 4 : 
 					System.out.println("강사를 지정합니다.");
 					System.out.print("강사Id> ");
 					String teacherId = MenuView.sc.nextLine();
@@ -144,13 +148,13 @@ public class MyPageView {
 					cCode = MenuView.sc.nextLine();
 					CourseController.choiceTeacher(teacherId, cCode);
 					break;
-				case 4 : 
+				case 5 : 
 					System.out.println("강의를 삭제합니다.");
 					System.out.print("삭제할 강의> ");
 					cCode = MenuView.sc.nextLine();
 					CourseController.deleteCourse(cCode);
 					break;
-				case 5 :
+				case 6 :
 					UserController.showUser("manager", userId);
 					break;
 				case 9 :
