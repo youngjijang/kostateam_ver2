@@ -20,7 +20,7 @@ public class CourseDAOImpl implements CourseDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<CourseDTO> list = new ArrayList<>();
-		String sql = "select * from course";
+		String sql = "select course_code, course_name, course_capa, course_hour, course_content, to_char(course_start, 'YYYY-MM-DD'), to_char(course_end, 'YYYY-MM-DD') from course";
 
 		try {
 			con = DbUtil.getConnection();
