@@ -99,19 +99,19 @@ public class MyPageView {
 				switch(menuNo) {
 				case 1 :
 					System.out.println("강의를 등록합니다.");
-					System.out.println("강의코드>");
+					System.out.print("강의코드>");
 					String cCode = MenuView.sc.nextLine();
-					System.out.println("강의이름> ");
+					System.out.print("강의이름> ");
 					String cName = MenuView.sc.nextLine();
-					System.out.println("최대 수강인원> ");
+					System.out.print("최대 수강인원> ");
 					int cCapa = Integer.parseInt(MenuView.sc.nextLine());
-					System.out.println("총 강의시간> ");
+					System.out.print("총 강의시간> ");
 					int cHour = Integer.parseInt(MenuView.sc.nextLine());
-					System.out.println("강의설명> ");
+					System.out.print("강의설명> ");
 					String cContent = MenuView.sc.nextLine();
-					System.out.println("강의시작일> ");
+					System.out.print("강의시작일> ");
 					String cStart = MenuView.sc.nextLine();
-					System.out.println("강의종료일> ");
+					System.out.print("강의종료일> ");
 					String cEnd = MenuView.sc.nextLine();
 					CourseController.insertCourse(cCode, cName, cCapa, cHour, cContent, cStart, cEnd);
 					
@@ -120,7 +120,7 @@ public class MyPageView {
 					System.out.println("강의를 수정합니다.");
 					System.out.print("수정할 강의코드> ");
 					cCode = MenuView.sc.nextLine();
-					System.out.println("수정할 강의설명> ");
+					System.out.print("수정할 강의설명> ");
 					cContent = MenuView.sc.nextLine();
 					CourseController.updateCourese(cCode, cContent);
 					break;
