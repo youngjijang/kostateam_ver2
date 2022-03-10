@@ -66,44 +66,51 @@ public class CourseService {
 	 * 강의 수정
 	 */
 	public void updateCourse(String cCode, String cContent) throws SQLException {
-		int result = courseDAO.updateCourse(cCode, cContent);
-		if (result == 0) {
-			throw new SQLException("강의 수정에 실패했습니다.");
+		if(courseDAO.cCodeCheck(cCode)) {
+			int result = courseDAO.updateCourse(cCode, cContent);
+			if (result == 0) {
+				throw new SQLException("강의 수정에 실패했습니다.");
+			}
+		}else {
+			throw new SQLException("존재하지않는 강의코드입니다.");
 		}
+		
 	}
 
 	/**
 	 * 강의 삭제
 	 */
 	public void deleteCourse(String cCode) throws SQLException {
-		int result = courseDAO.deleteCourse(cCode);
-		if (result == 0) {
-			throw new SQLException("강의 삭제에 실패했습니다.");
-		}
+		if(courseDAO.cCodeCheck(cCode)) {
+			int result = courseDAO.deleteCourse(cCode);
+			if (result == 0) {
+				throw new SQLException("강의 삭제에 실패했습니다.");
+			}
+		}else {
+			throw new SQLException("존재하지않는 강의코드입니다.");
+		}	
 	}
 
 	/**
 	 * 강사 지정
 	 */
 	public void choiceTeacher(String teacherId, String cCode)throws SQLException,NullPointerException {
-		List<CourseDTO> list = courseDAO.selectCourseList();
-		boolean result = false;
-		for(CourseDTO course : list) {
-			//System.out.println(course.getcCode());
-			if(cCode.equals(course.getcCode())) {
-				result = true; break;
-			}
+		if(courseDAO.cCodeCheck(cCode)) { // 강의 코드 확인
 			
-		}
-		if(result) {
 			UserDAO userDAO = new UserDAOImpl();
-			if(userDAO.idCheck("teacher", teacherId)) {
-				if(courseDAO.choiceTeacher(teacherId, cCode)==0)
+			if(userDAO.idCheck("teacher", teacherId)) {//강사 id확인
+				if(courseDAO.tCourseCode(cCode)) {
+					throw new SQLException("강사 지정에 실패했습니다. : 해당 강의는 이미 지정된 강사가 존재합니다.");
+				}else {
+					if(courseDAO.choiceTeacher(teacherId, cCode)==0)
 					throw new SQLException("강사 지정에 실패했습니다.");
+				}
 			}else
 				throw new NullPointerException("존재하지않는 강사ID입니다.");
 		}else {
 			throw new NullPointerException("존재하지않는 강의코드입니다.");
-		}
+		}	
+			
+		
 	}
 }

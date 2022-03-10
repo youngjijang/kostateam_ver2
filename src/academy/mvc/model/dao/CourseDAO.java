@@ -7,7 +7,10 @@ import academy.mvc.model.dto.CourseDTO;
 import academy.mvc.model.dto.StudentDTO;
 
 public interface CourseDAO {
-
+	/**
+	 * 강사 지정 강의중복 체크
+	 */
+	boolean tCourseCode( String cCode)throws SQLException;
 	/**
 	 * 강의코드 중복 체크
 	 */

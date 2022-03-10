@@ -211,5 +211,28 @@ public class CourseDAOImpl implements CourseDAO {
 
 		return result;
 	}
+	
+	
+	/**
+	 * 강사 지정 강의코드 중복체크
+	 */
+	@Override
+	public boolean tCourseCode(String cCode) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		con = DbUtil.getConnection();
+
+		ps = con.prepareStatement("select count(*) from teacher where course_code=?");
+		ps.setString(1, cCode);
+
+		rs = ps.executeQuery();
+
+		if (rs.next()) {
+			if (rs.getInt(1) == 0)
+				return false;
+		}
+		return true;
+	}
 
 }
