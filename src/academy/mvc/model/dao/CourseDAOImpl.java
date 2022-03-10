@@ -39,7 +39,7 @@ public class CourseDAOImpl implements CourseDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<CourseDTO> list = new ArrayList<>();
-		String sql = "select course_code, course_name, course_capa, course_hour, course_content, to_char(course_start, 'YYYY-MM-DD'), to_char(course_end, 'YYYY-MM-DD') from course";
+		String sql = "select course_code, course_name, t_name, course_capa, course_hour, course_content, to_char(course_start, 'YYYY-MM-DD'), to_char(course_end, 'YYYY-MM-DD') from course_with_tname_view";
 
 		try {
 			con = DbUtil.getConnection();
@@ -47,8 +47,9 @@ public class CourseDAOImpl implements CourseDAO {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				CourseDTO courseDTO = new CourseDTO(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4),
-						rs.getString(5), rs.getString(6), rs.getString(7));
+				CourseDTO courseDTO = new CourseDTO(rs.getString(1), rs.getString(2), rs.getString(3),
+						rs.getInt(4), rs.getInt(5),
+						rs.getString(6), rs.getString(7), rs.getString(8));
 				list.add(courseDTO);
 			}
 

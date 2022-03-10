@@ -8,7 +8,8 @@ public class CourseDTO {
 	private String cContent;
 	private String cStart;
 	private String cEnd;
-
+	private String tName;
+	
 	public CourseDTO() {
 	}
 
@@ -21,6 +22,11 @@ public class CourseDTO {
 		this.cContent = cContent;
 		this.cStart = cStart;
 		this.cEnd = cEnd;
+	}
+	
+	public CourseDTO(String cCode, String cName, String tName, int cCapa, int cHour, String cContent, String cStart, String cEnd) {
+		this(cCode, cName, cCapa, cHour, cContent, cStart, cEnd);
+		this.tName = tName;
 	}
 
 	public String getcCode() {
@@ -86,6 +92,8 @@ public class CourseDTO {
 		builder.append(cCode);
 		builder.append(" , 강의명 : ");
 		builder.append(cName);
+		builder.append(" , 강사명 : ");
+		builder.append(tName);
 		builder.append(" , 수강인원 : ");
 		builder.append(cCapa);
 		builder.append(" , 시간 : ");
