@@ -39,7 +39,8 @@ public class CourseDAOImpl implements CourseDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<CourseDTO> list = new ArrayList<>();
-		String sql = "select course_code, course_name, t_name, course_capa, course_hour, course_content, to_char(course_start, 'YYYY-MM-DD'), to_char(course_end, 'YYYY-MM-DD') from course_with_tname_view";
+		String sql = "select course_code, course_name, t_name, course_capa, course_hour, course_content, to_char(course_start, 'YYYY-MM-DD'), to_char(course_end, 'YYYY-MM-DD') "
+				+ "FROM course left JOIN teacher USING (course_code)";
 
 		try {
 			con = DbUtil.getConnection();
