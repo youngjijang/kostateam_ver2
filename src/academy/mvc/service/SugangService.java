@@ -3,8 +3,8 @@ package academy.mvc.service;
 import java.sql.SQLException;
 import java.util.List;
 
-import academy.mvc.board.dao.SugangDAO;
-import academy.mvc.board.dao.SugangDAOImpl;
+import academy.mvc.model.dao.SugangDAO;
+import academy.mvc.model.dao.SugangDAOImpl;
 import academy.mvc.model.dto.StudentDTO;
 import academy.mvc.model.dto.SugangDTO;
 

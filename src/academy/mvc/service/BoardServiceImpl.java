@@ -3,8 +3,8 @@ package academy.mvc.service;
 import java.sql.SQLException;
 import java.util.List;
 
-import academy.mvc.board.dao.BoardDAO;
-import academy.mvc.board.dao.BoardDAOImpl;
+import academy.mvc.model.dao.BoardDAO;
+import academy.mvc.model.dao.BoardDAOImpl;
 import academy.mvc.model.dto.BoardDTO;
 
 public class BoardServiceImpl implements BoardService {

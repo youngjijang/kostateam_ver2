@@ -4,8 +4,8 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-import academy.mvc.board.dao.UserDAO;
-import academy.mvc.board.dao.UserDAOImpl;
+import academy.mvc.model.dao.UserDAO;
+import academy.mvc.model.dao.UserDAOImpl;
 import academy.mvc.model.dto.UserDTO;
 import academy.mvc.session.Session;
 import academy.mvc.session.SessionSet;

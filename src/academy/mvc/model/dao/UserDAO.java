@@ -1,4 +1,4 @@
-package academy.mvc.board.dao;
+package academy.mvc.model.dao;
 
 import java.sql.SQLException;
 
