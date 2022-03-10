@@ -64,7 +64,7 @@ public class MyPageView {
 						System.out.print("변경할 학생ID> ");
 						studentId = MenuView.sc.nextLine();
 						System.out.print("변경할 성적> ");
-						int newScore = MenuView.sc.nextInt();
+						int newScore =  Integer.parseInt(MenuView.sc.nextLine());
 						SugangController.updateScore(studentId, newScore);
 						break;
 					case 4 :
