@@ -29,7 +29,7 @@ public interface SugangDAO {
 /**
  * 학생 성적 수정-강사
  * */
-	int updateScore(String studentId,int score)throws SQLException;
+	int updateScore(String studentId,int score,String userId)throws SQLException;
 	
 /**
  * 강의 신청-학생

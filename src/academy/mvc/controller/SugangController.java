@@ -53,9 +53,9 @@ public class SugangController {
 	/**
 	 * 학생 성적 수정-강사
 	 * */
-	public static void updateScore(String studentId, int score) {
+	public static void updateScore(String studentId, int score,String userId) {
 		try {
-			service.updateScore(studentId, score);
+			service.updateScore(studentId, score,userId);
 			SuccessView.printMessage("수정 완료");
 		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());
