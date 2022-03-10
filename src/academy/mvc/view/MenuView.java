@@ -118,6 +118,7 @@ public class MenuView {
 				case 4 :
 					if(kind.equals("student")) MyPageView.studentMenu(userId, kind);
 					else if(kind.equals("teacher")) MyPageView.teacherMenu(userId,kind);
+					else MyPageView.managerMenu(userId, "manager");
 				case 5 :
 					loginMenu();
 				case 9 :

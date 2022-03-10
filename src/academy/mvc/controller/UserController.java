@@ -41,7 +41,7 @@ public class UserController {
 			} else if(kind.equals("teacher")) {
 				MenuView.homeMenu(userId, kind);
 			} else { 
-				MyPageView.managerMenu(userId, kind);
+				MenuView.homeMenu(userId, kind);
 			}
 		}catch(Exception e) {
 			//e.printStackTrace();
