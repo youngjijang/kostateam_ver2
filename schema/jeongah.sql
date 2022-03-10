@@ -5,6 +5,13 @@ select * from sugang;
 drop sequence sugang_seq;
 create sequence sugang_seq;
 
+create table sugang(
+ SUGANG_NO NUMBER constraint sugang_no_pk Primary key,
+ COURSE_CODE VARCHAR2(4) constraint sugang_coursecode_FK REFERENCES course(course_code) ON DELETE CASCADE,
+ S_ID VARCHAR2(20 BYTE) constraint sugang_studentid_FK references student(s_id) on delete cascade,
+ SCORE NUMBER
+);
+
 --초기 데이터
 insert into student values('초보사냥꾼', 1234, '김자바', '010-1111-1111', '컴공');
 insert into student values('거북이', 1234, '박자바', '010-2222-1111', '미디어');
