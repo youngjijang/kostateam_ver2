@@ -98,6 +98,8 @@ public class BoardDAOImpl implements BoardDAO {
 			ps.setString(3, writer);
 			ps.setInt(4, replyPwd);
 			
+			result = ps.executeUpdate();
+			
 		}finally {
 			DbUtil.dbClose(con, ps);
 		}
@@ -116,11 +118,14 @@ public class BoardDAOImpl implements BoardDAO {
 			
 			ps.setInt(1, replyNo);
 			ps.setInt(2, replyPwd);
+			
+			result = ps.executeUpdate();
+			
 		}finally {
 			DbUtil.dbClose(con, ps);
 		}		
 				
-		return replyPwd;
+		return result;
 		}
 	  
 
