@@ -82,7 +82,7 @@ public class SugangDAOImpl implements SugangDAO {
 			ps= con.prepareStatement(sql);
 			ps.setString(1, studentId);		
 			rs=ps.executeQuery();				
-			if(rs.next()) {			
+			while(rs.next()) {			
 				
 				String cName =rs.getString(1);
 				int score =rs.getInt(2);
