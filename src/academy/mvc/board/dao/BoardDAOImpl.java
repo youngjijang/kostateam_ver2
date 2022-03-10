@@ -22,116 +22,37 @@ public class BoardDAOImpl implements BoardDAO {
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		List<BoardDTO> list = new ArrayList<BoardDTO>(); //리턴값
-		String sql= proFile.getProperty("select * from board order by board_no desc");//select * from board order by board_no desc
+		String sql="select * from board order by board_no desc";
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
-			
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				//열의 정보를 가져와서 BoardDTO에 담는다.
+			
 				BoardDTO dto = new BoardDTO(rs.getInt(1), rs.getString(2),rs.getString(3), rs.getInt(4), rs.getString(5));
-							
-				//BoardDTO를 list에 추가한다.
 				list.add(dto);
 			}
 			
 		}finally {
 			DbUtil.dbClose(con, ps, rs);
 		}
-		
 		return list;
 	}
 	
 	
-
-	@Override
-	public List<BoardDTO> boardSelectBySubject(String keyWord) throws SQLException {
-		Connection con=null;
-		PreparedStatement ps=null;
-		ResultSet rs=null;
-		List<BoardDTO> list = new ArrayList<BoardDTO>(); //리턴값
-		String sql= proFile.getProperty("board.selectBySubject");//select * from board where upper(subject) like upper(?)
-		try {
-			con = DbUtil.getConnection();
-			ps = con.prepareStatement(sql);
-			ps.setString(1, "%"+keyWord+"%"); // 
-			
-			rs = ps.executeQuery();
-			while(rs.next()) {
-				//열의 정보를 가져와서 BoardDTO에 담는다.
-				BoardDTO dto = new BoardDTO(rs.getInt(1), rs.getString(2),rs.getString(3), rs.getInt(4), rs.getString(5));
-							
-				//BoardDTO를 list에 추가한다.
-				list.add(dto);
-			}
-			
-		}finally {
-			DbUtil.dbClose(con, ps, rs);
-		}
-		
-		return list;
-		
-	}
-
-	@Override
-	public BoardDTO boardSelectByNo(int boardNo) throws SQLException {
-		Connection con=null;
-		PreparedStatement ps=null;
-		ResultSet rs=null;
-		BoardDTO boardDTO=null;
-		String sql= proFile.getProperty("board.selectByNo");//select * from board where board_no = ? 
-		try {
-			con = DbUtil.getConnection();
-			ps = con.prepareStatement(sql);
-			ps.setInt(1, boardNo);
-			
-			rs = ps.executeQuery();
-			if(rs.next()) {
-				//열의 정보를 가져와서 BoardDTO에 담는다.
-				BoardDTO dto = new BoardDTO(rs.getInt(1), rs.getString(2),rs.getString(3), rs.getInt(4), rs.getString(5));
-			}
-			
-		}finally {
-			DbUtil.dbClose(con, ps, rs);
-		}
-		
-		return boardDTO;
-	}
 
 	@Override
 	public int insertBoard(String content, int boardPwd, String userId) throws SQLException {
 		Connection con=null;
 		PreparedStatement ps=null;
 		int result=0;
-		String sql=proFile.getProperty("board.insert");//insert into board (board_no, subject, writer, content, board_date) values (board_seq.nextval, ?, ?, ?, sysdate)
+		String sql="insert into board values(board_seq.nextval, ?, sysdate, ?, ?)";
 		try {
 			con = DbUtil.getConnection();
 			ps= con.prepareStatement(sql);
-
-			
-			result = ps.executeUpdate();
-			
-		}finally {
-			DbUtil.dbClose(con, ps);
-		}
-		return result;
-	}
-
-	@Override
-	public int boardUpdate(BoardDTO boardDTO) throws SQLException { //JDBC대신 - ORM (Mybatis, JPA)
-		Connection con=null;
-		PreparedStatement ps=null;
-		int result=0;
-		String sql=proFile.getProperty("board.updateByNo");//update board set content = ? where board_no = ?
-		try {
-			con = DbUtil.getConnection();
-			ps= con.prepareStatement(sql);
-			//?의 개수만큼 순서대로 setXxx설정 필요.
-			ps.setString(1, boardDTO.getContent());
-			ps.setInt(2, boardDTO.getBoardNo());
-			ps.setString(3, boardDTO.getBoardDate());
-			
+			ps.setString(1, content);
+			ps.setInt(2, boardPwd);
+			ps.setString(3, userId);	
 			result = ps.executeUpdate();
 			
 		}finally {
@@ -145,11 +66,11 @@ public class BoardDAOImpl implements BoardDAO {
 		Connection con=null;
 		PreparedStatement ps=null;
 		int result=0;
-		String sql=proFile.getProperty("board.deleteByNo");//delete from board where board_no = ?
+		String sql="delete board where board_no = ? and board_pwd = ?";//delete from board where board_no = ?
 		try {
 			con = DbUtil.getConnection();
 			ps= con.prepareStatement(sql);
-			//?의 개수만큼 순서대로 setXxx설정 필요.
+			
 			ps.setInt(1, boardNo);
 			result = ps.executeUpdate();
 			
@@ -160,20 +81,22 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 
-
+	//댓글등록안됨 ㅠ
 	@Override
-	public int replyInsert(String content, int boardNo, String writer, int replyPwd) throws SQLException { //댓글내용, 부모글번호
+	public int replyInsert(String content, int boardNo, String writer, int replyPwd) throws SQLException { 
 		Connection con=null;
 		PreparedStatement ps=null;
 		int result=0;
-		String sql=proFile.getProperty("insert into reply values(reply_no_seq.nextval , ?, ? , sysdate)");//insert into reply values(reply_no_seq.nextval , ?, ? , sysdate)
+		String sql="insert into reply values(reply_seq.nextval, ?, ?, ?, ?)";
 		try {
 			con = DbUtil.getConnection();
 			ps= con.prepareStatement(sql);
-			//?의 개수만큼 순서대로 setXxx설정 필요.
-			
-			
 			result = ps.executeUpdate();
+			
+			ps.setString(1, content);
+			ps.setInt(2, boardNo);
+			ps.setString(3, writer);
+			ps.setInt(4, replyPwd);
 			
 		}finally {
 			DbUtil.dbClose(con, ps);
@@ -181,27 +104,25 @@ public class BoardDAOImpl implements BoardDAO {
 		return result;
 	}
 	
-	  private List<ReplyDTO> replySelect(Connection con, int boardNo)throws SQLException{
-			PreparedStatement ps =null;
-			ResultSet rs=null;
-			List<ReplyDTO>  list = new ArrayList<ReplyDTO>();
-			String sql=proFile.getProperty("reply.selectByboardNo");//select * from reply where board_no=?
-	    	try {
-	    		ps = con.prepareStatement(sql);
-	    		ps.setInt(1, boardNo);
-	    		
-	    		rs = ps.executeQuery();
-	    		while(rs.next()) {
-	    			ReplyDTO reply = new ReplyDTO(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4),rs.getInt(5), rs.getString(6));
-	    			list.add(reply);
-	    		}
-	    		
-	    	}finally {
-	    		DbUtil.dbClose(null, ps, rs);
-	    	}
-	    	
-	    	return list;
-	    }
+	@Override
+	public int replyDelete(int boardNo, int replyNo, int replyPwd) throws SQLException{
+		Connection con=null;
+		PreparedStatement ps=null;
+		int result=0;
+		String sql="delete reply where reply_no = ? and reply_pwd = ?";
+		try {
+			con = DbUtil.getConnection();
+			ps= con.prepareStatement(sql);
+			
+			ps.setInt(1, replyNo);
+			ps.setInt(2, replyPwd);
+		}finally {
+			DbUtil.dbClose(con, ps);
+		}		
+				
+		return replyPwd;
+		}
+	  
 
 
 }

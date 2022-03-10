@@ -23,20 +23,6 @@ public class BoardServiceImpl implements BoardService {
 		return list;
 	}
 
-	@Override
-	public List<BoardDTO> boardSelectBySubject(String keyWord) throws SQLException {
-		List<BoardDTO> list = boardDAO.boardSelectBySubject(keyWord);
-		if(list.isEmpty()) throw new SQLException(keyWord+"단어를 포함한 레코드의 정보 없습니다.");
-		return list;
-	}
-
-	@Override
-	public BoardDTO boardSelectByNo(int boardNo) throws SQLException {
-		BoardDTO boardDTO = boardDAO.boardSelectByNo(boardNo);
-		if(boardDTO==null)throw new SQLException(boardNo+"해당하는 정보가 없습니다.");
-		return boardDTO;
-	}
-
 	
 	@Override
 	public void insertBoard(String content, int boardPwd, String userId) throws SQLException {
@@ -45,14 +31,6 @@ public class BoardServiceImpl implements BoardService {
 
 	}
 	
-
-	@Override
-	public void boardUpdate(BoardDTO boardDTO) throws SQLException {
-		int result = boardDAO.boardUpdate(boardDTO);
-		if(result==0)throw new SQLException("수정되지 않았습니다.");
-
-	}
-
 	@Override
 	public void boardDelete(int boardNo) throws SQLException {
 		int result = boardDAO.boardDelete(boardNo);
@@ -68,13 +46,10 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public void replyDelete(int boardNo, int replyNo, int replyPwd) throws SQLException {
-		// TODO Auto-generated method stub
+		int result = boardDAO.replyDelete(boardNo,replyNo,replyPwd);
 		
 	}
 
-	
-
-	
 
 }
 

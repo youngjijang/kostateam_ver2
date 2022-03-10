@@ -14,23 +14,6 @@ public interface BoardService {
 	 */
 	List<BoardDTO> boardSelectAll() throws SQLException;
 
-	/**
-	 * 제목에 특정문자열 포함한 레코드 검색
-	 */
-	List<BoardDTO> boardSelectBySubject(String keyWord) throws SQLException;
-
-	/**
-	 * 글번호에 해당하는 레코드 검색
-	 */
-	BoardDTO boardSelectByNo(int boardNo) throws SQLException;
-
-	
-	
-
-	/**
-	 * 게시물 수정
-	 */
-	void boardUpdate(BoardDTO boardDTO) throws SQLException;
 
 	/**
 	 * 게시물 삭제
