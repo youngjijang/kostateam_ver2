@@ -42,5 +42,10 @@ public interface CourseDAO {
 	 * 강의 삭제
 	 */
 	int deleteCourse(String cCode) throws SQLException;
+	
+	/**
+	 * 강사 지정
+	 */
+	int choiceTeacher(String teacherId, String cCode)throws SQLException;
 
 }

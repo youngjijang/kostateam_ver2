@@ -78,5 +78,20 @@ public class CourseController {
 			FailView.errorMessage(e.getMessage());
 		}
 	}
+	
+	/**
+	 * 강사 지정
+	 */
+	public static void choiceTeacher(String teacherId, String cCode) {
+		try {
+			courseService.choiceTeacher(teacherId, cCode);
+			SuccessView.printMessage("강사지정에 성공하였습니다.");
+		}catch (Exception e) {
+//			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		}
+	}
+	
+	
 
 }
