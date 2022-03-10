@@ -49,10 +49,15 @@ public class CourseService {
 	 * 강의 등록
 	 */
 	public void insertCourse(CourseDTO courseDTO) throws SQLException {
-		int result = courseDAO.insertCourse(courseDTO);
-		if (result == 0) {
-			throw new SQLException("강의 등록에 실패했습니다.");
-		}
+		if(courseDAO.cCodeCheck(courseDTO.getcCode())) {
+			throw new SQLException("이미 존재하는 강의코드입니다. 강의등록에 실패했습니다.");
+		}else {
+			int result = courseDAO.insertCourse(courseDTO);
+			if (result == 0) {
+				throw new SQLException("강의 등록에 실패했습니다.");
+			}
+		}	
+
 	}
 
 	/**
