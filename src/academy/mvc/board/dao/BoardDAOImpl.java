@@ -50,6 +50,9 @@ public class BoardDAOImpl implements BoardDAO {
 		try {
 			con = DbUtil.getConnection();
 			ps= con.prepareStatement(sql);
+			ps.setString(1, content);
+			ps.setInt(2, boardPwd);
+			ps.setString(3, userId);	
 			result = ps.executeUpdate();
 			
 		}finally {
@@ -84,7 +87,7 @@ public class BoardDAOImpl implements BoardDAO {
 		Connection con=null;
 		PreparedStatement ps=null;
 		int result=0;
-		String sql=proFile.getProperty("select * from reply");
+		String sql="insert into reply values(reply_seq.nextval, ?, ?, ?, ?)";//proFile.getProperty("select * from reply");
 		try {
 			con = DbUtil.getConnection();
 			ps= con.prepareStatement(sql);
@@ -101,7 +104,7 @@ public class BoardDAOImpl implements BoardDAO {
 		Connection con=null;
 		PreparedStatement ps=null;
 		int result=0;
-		String sql=;
+		String sql="";
 		try {
 			
 		}finally {
