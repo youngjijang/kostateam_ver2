@@ -1,5 +1,9 @@
 package academy.mvc.view;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import academy.mvc.controller.CourseController;
 import academy.mvc.controller.SugangController;
 import academy.mvc.controller.UserController;
@@ -113,8 +117,16 @@ public class MyPageView {
 					String cStart = MenuView.sc.nextLine();
 					System.out.print("강의종료일> ");
 					String cEnd = MenuView.sc.nextLine();
-					CourseController.insertCourse(cCode, cName, cCapa, cHour, cContent, cStart, cEnd);
-					
+					try {
+						SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD");
+						java.util.Date startDate = dateFormat.parse(cStart);
+						java.util.Date endDate = dateFormat.parse(cEnd);
+						if(startDate.after(endDate))
+						CourseController.insertCourse(cCode, cName, cCapa, cHour, cContent, cStart, cEnd);
+						else FailView.errorMessage("시작일과 종료일을 올바르게 입력하세요.");
+					}catch(ParseException ex) {
+						FailView.errorMessage(ex.getMessage());
+					}
 					break;
 				case 2 : 
 					System.out.println("강의를 수정합니다.");

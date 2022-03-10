@@ -12,6 +12,17 @@ create table sugang(
  SCORE NUMBER
 );
 
+--뷰 생성
+select course_code, course_name, t_name, course_capa, course_hour, course_content, to_char(course_start, 'YYYY-MM-DD'), to_char(course_end, 'YYYY-MM-DD') from course join teacher using(course_code);
+
+select * from course join teacher using(course_code);
+
+create or replace view course_with_tname_view
+as select *
+from course natural join teacher;
+
+select * from course_with_tname_view;
+
 --초기 데이터
 insert into student values('초보사냥꾼', 1234, '김자바', '010-1111-1111', '컴공');
 insert into student values('거북이', 1234, '박자바', '010-2222-1111', '미디어');
@@ -100,3 +111,6 @@ insert into student values ('마리오', 1234, '김학생', '010-1234-1234', '�
 
 
 commit;
+
+--제약조건 추가
+alter table course modify course_capa check(course_capa>0);
