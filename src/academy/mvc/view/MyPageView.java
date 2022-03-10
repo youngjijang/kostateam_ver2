@@ -94,7 +94,7 @@ public class MyPageView {
 	public static void managerMenu(String userId, String kind) throws NumberFormatException{
 		while(true) {
 			System.out.println("---------------------------"+userId+ "님의 마이페이지 ( "+kind+" )---------------------------");
-			System.out.println("1.강의등록 | 2.강의수정 | 3.강의삭제 | 6.홈으로 | 9.로그아웃");
+			System.out.println("1.강의등록 | 2.강의수정 | 3.강의삭제 | 4. 개인정보확인 | 6.홈으로 | 9.로그아웃");
 			int menuNo = Integer.parseInt(MenuView.sc.nextLine());
 				switch(menuNo) {
 				case 1 :
@@ -129,6 +129,9 @@ public class MyPageView {
 					System.out.print("삭제할 강의> ");
 					cCode = MenuView.sc.nextLine();
 					CourseController.deleteCourse(cCode);
+					break;
+				case 4 :
+					UserController.showUser("manager", userId);
 					break;
 				case 6 :
 					MenuView.homeMenu(userId, kind);
