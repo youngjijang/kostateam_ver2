@@ -24,7 +24,10 @@ public interface SugangDAO {
  * */
 	List<SugangDTO> selectGrade(String studentId)throws SQLException;
 	
-	
+/**
+ * 학생정보 + 성적
+ * */
+	List<SugangDTO> selectStudentWithScoreList(String teacherId) throws SQLException;	
 	
 /**
  * 학생 성적 수정-강사
@@ -40,6 +43,8 @@ public interface SugangDAO {
  * 강의 철회-학생
  * */
 	int delectSugang(String studentId,String cCode)throws SQLException;
+
+
 	
 
 	

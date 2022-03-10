@@ -7,6 +7,10 @@ public class SugangDTO {
 	private String sID;
 	private int score;
 	
+	private String sName;
+	private String sTel;
+	private String sMajor;
+	
 	public SugangDTO() {}
 	
 	
@@ -23,6 +27,13 @@ public class SugangDTO {
 		this.cCode = cCode;
 		this.sID = sID;
 		this.score = score;
+	}
+	
+	public SugangDTO(int sNo, String cCode, String sID, String sName, String sTel, String sMajor, int score) {
+		this(sNo, cCode,sID, score);
+		this.sName = sName;
+		this.sTel = sTel;
+		this.sMajor = sMajor;
 	}
 	
 	public String getcName() {

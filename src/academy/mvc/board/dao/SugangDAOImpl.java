@@ -95,6 +95,38 @@ public class SugangDAOImpl implements SugangDAO {
 		return list;
 
 	}
+	
+	@Override
+	public List<SugangDTO> selectStudentWithScoreList(String teacherId) throws SQLException {
+		List<SugangDTO> list= new ArrayList<SugangDTO>();
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs = null;
+		String sql ="select sugang_no, course_code, s_id, s_name, s_tel, s_major, score from student join sugang using(s_id) where course_code in (select course_code from teacher where t_id = ?) order by sugang_no";
+		try {
+			con = DbUtil.getConnection();	
+			ps= con.prepareStatement(sql);
+			ps.setString(1, teacherId);
+			rs=ps.executeQuery();
+			
+			while(rs.next()) {
+				int sNo = rs.getInt(1);
+				String cCode = rs.getString(2);
+				String sId = rs.getString(3);
+				String sName = rs.getString(4);
+				String sTel = rs.getString(5);
+				String sMajor = rs.getString(6);
+				int score = rs.getInt(7);
+				
+				SugangDTO sugangDTO = new SugangDTO(sNo, cCode, sId, sName, sTel, sMajor, score);
+				list.add(sugangDTO);
+			}
+		}finally {
+			DbUtil.dbClose(con, ps, rs);
+		}
+		
+		return list;
+	}
 
 	@Override
 	public int updateScore(String studentId, int score,String userId) throws SQLException {
@@ -156,5 +188,7 @@ public class SugangDAOImpl implements SugangDAO {
 		}
 		return result;
 	}
+
+
 
 }

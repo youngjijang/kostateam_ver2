@@ -76,6 +76,17 @@ public class SuccessView {
 	}
 	
 	/**
+	 * 강사별 학생+성적 출력
+	 * */
+	public static void printAllScorebyTeacherId(List<SugangDTO> list) {
+		for(SugangDTO sugang : list) {
+			System.err.println(sugang);
+		}
+		System.out.println();
+		
+	}
+	
+	/**
 	 * 게시글 list 출력
 	 * */
 	public static void printBoardList(List<BoardDTO> list) {
@@ -123,5 +134,7 @@ public class SuccessView {
 		}
 	
 	}
+
+	
 	
 }

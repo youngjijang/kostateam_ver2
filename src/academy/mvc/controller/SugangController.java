@@ -51,6 +51,20 @@ public class SugangController {
 	}
 	
 	/**
+	 * 학생성적 전체확인-강사
+	 * */
+	public static void selectAllScorebyTeacherId(String userId) {
+		try {
+			List<SugangDTO> list = service.selectAllScorebyTeacherId(userId);
+			SuccessView.printAllScorebyTeacherId(list);
+		}catch(Exception e) {
+			FailView.errorMessage(e.getMessage());
+		}
+		
+	}
+	
+	
+	/**
 	 * 학생 성적 수정-강사
 	 * */
 	public static void updateScore(String studentId, int score,String userId) {
@@ -86,6 +100,8 @@ public class SugangController {
 			FailView.errorMessage(e.getMessage());
 		}	
 	}
+
+	
 	
 	
 
