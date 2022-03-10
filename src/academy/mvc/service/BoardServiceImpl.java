@@ -1,13 +1,11 @@
 package academy.mvc.service;
 
-
 import java.sql.SQLException;
 import java.util.List;
 
 import academy.mvc.board.dao.BoardDAO;
 import academy.mvc.board.dao.BoardDAOImpl;
 import academy.mvc.model.dto.BoardDTO;
-import academy.mvc.model.dto.ReplyDTO;
 
 public class BoardServiceImpl implements BoardService {
    private BoardDAO boardDAO = new BoardDAOImpl();
@@ -32,8 +30,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public void boardDelete(int boardNo) throws SQLException {
-		int result = boardDAO.boardDelete(boardNo);
+	public void deleteBoard(int boardNo) throws SQLException {
+		int result = boardDAO.deleteBoard(boardNo);
 		if(result==0)throw new SQLException("삭제되지 않았습니다.");
 
 	}

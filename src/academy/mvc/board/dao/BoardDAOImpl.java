@@ -62,15 +62,15 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public int boardDelete(int boardNo) throws SQLException {
+	public int deleteBoard(int boardNo) throws SQLException {
 		Connection con=null;
 		PreparedStatement ps=null;
 		int result=0;
-		String sql="delete board where board_no = ? and board_pwd = ?";//delete from board where board_no = ?
+		String sql="delete board where board_no = ?";
 		try {
 			con = DbUtil.getConnection();
 			ps= con.prepareStatement(sql);
-			
+	
 			ps.setInt(1, boardNo);
 			result = ps.executeUpdate();
 			
@@ -127,7 +127,7 @@ public class BoardDAOImpl implements BoardDAO {
 				
 		return result;
 		}
-	  
+
 
 
 }

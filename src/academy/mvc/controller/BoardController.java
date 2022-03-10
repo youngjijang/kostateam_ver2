@@ -30,7 +30,7 @@ public class BoardController {
 	   
 	   public static void deleteBoard(int deleteNo) {
 			try {
-				  boardService.boardDelete(deleteNo);
+				  boardService.deleteBoard(deleteNo);
 				  SuccessView.printMessage("삭제되었습니다.");
 				}catch (SQLException e) {
 					//e.printStackTrace();
@@ -79,7 +79,8 @@ public class BoardController {
 					FailView.errorMessage(e.getMessage());
 				}
 		  }
-		
+
+	
 
 		
 		

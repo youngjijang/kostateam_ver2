@@ -18,7 +18,7 @@ public interface BoardService {
 	/**
 	 * 게시물 삭제
 	 */
-	void boardDelete(int boardNo) throws SQLException;
+	void deleteBoard(int boardNo) throws SQLException;
 	
 	/**
 	 * 게시물 등록 
@@ -36,6 +36,12 @@ public interface BoardService {
 	* */	
 
 	void replyInsert(String content, int boardNo, String writer, int replyPwd)throws SQLException;
+
+
+	
+
+
+
 
 	
 }

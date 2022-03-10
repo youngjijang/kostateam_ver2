@@ -21,19 +21,22 @@ public interface BoardDAO {
 	/**
 	 * 게시판 삭제
 	 */
-	int boardDelete(int boardNo) throws SQLException;
+	int deleteBoard(int boardNo) throws SQLException;
+	
 	
 	/**
 	 * 댓글 등록하기
 	 * */
 	int replyInsert(String content, int boardNo, String writer, int replyPwd) throws SQLException;
 	
-	
-
 	/**
 	 * 댓글 삭제하기
 	 * */
 	int replyDelete(int boardNo, int replyNo, int replyPwd)throws SQLException;
+
 	
+
+	
+
 	
 }
