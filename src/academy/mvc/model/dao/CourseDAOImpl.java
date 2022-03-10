@@ -188,5 +188,28 @@ public class CourseDAOImpl implements CourseDAO {
 
 		return result;
 	}
+	
+	@Override
+	public int choiceTeacher(String teacherId, String cCode) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		String sql = "update teacher set course_code = ? where t_id = ?";
+
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+
+			ps.setString(1, cCode);
+			ps.setString(2, teacherId);
+
+			result = ps.executeUpdate();
+
+		} finally {
+			DbUtil.dbClose(con, ps);
+		}
+
+		return result;
+	}
 
 }

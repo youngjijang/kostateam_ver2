@@ -5,6 +5,8 @@ import java.util.List;
 
 import academy.mvc.model.dao.CourseDAO;
 import academy.mvc.model.dao.CourseDAOImpl;
+import academy.mvc.model.dao.UserDAO;
+import academy.mvc.model.dao.UserDAOImpl;
 import academy.mvc.model.dto.CourseDTO;
 import academy.mvc.model.dto.StudentDTO;
 
@@ -80,4 +82,28 @@ public class CourseService {
 		}
 	}
 
+	/**
+	 * 강사 지정
+	 */
+	public void choiceTeacher(String teacherId, String cCode)throws SQLException,NullPointerException {
+		List<CourseDTO> list = courseDAO.selectCourseList();
+		boolean result = false;
+		for(CourseDTO course : list) {
+			//System.out.println(course.getcCode());
+			if(cCode.equals(course.getcCode())) {
+				result = true; break;
+			}
+			
+		}
+		if(result) {
+			UserDAO userDAO = new UserDAOImpl();
+			if(userDAO.idCheck("teacher", teacherId)) {
+				if(courseDAO.choiceTeacher(teacherId, cCode)==0)
+					throw new SQLException("강사 지정에 실패했습니다.");
+			}else
+				throw new NullPointerException("존재하지않는 강사ID입니다.");
+		}else {
+			throw new NullPointerException("존재하지않는 강의코드입니다.");
+		}
+	}
 }
