@@ -81,17 +81,22 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 
-
+	//댓글등록안됨 ㅠ
 	@Override
-	public int replyInsert(String content, int boardNo, String writer, int replyPwd) throws SQLException { //댓글내용, 부모글번호
+	public int replyInsert(String content, int boardNo, String writer, int replyPwd) throws SQLException { 
 		Connection con=null;
 		PreparedStatement ps=null;
 		int result=0;
-		String sql="insert into reply values(reply_seq.nextval, ?, ?, ?, ?)";//proFile.getProperty("select * from reply");
+		String sql="insert into reply values(reply_seq.nextval, ?, ?, ?, ?)";
 		try {
 			con = DbUtil.getConnection();
 			ps= con.prepareStatement(sql);
 			result = ps.executeUpdate();
+			
+			ps.setString(1, content);
+			ps.setInt(2, boardNo);
+			ps.setString(3, writer);
+			ps.setInt(4, replyPwd);
 			
 		}finally {
 			DbUtil.dbClose(con, ps);
@@ -100,13 +105,17 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 	
 	@Override
-	public int replyDelete(int boardNo, int replyNo, int replyPwd){
+	public int replyDelete(int boardNo, int replyNo, int replyPwd) throws SQLException{
 		Connection con=null;
 		PreparedStatement ps=null;
 		int result=0;
-		String sql="";
+		String sql="delete reply where reply_no = ? and reply_pwd = ?";
 		try {
+			con = DbUtil.getConnection();
+			ps= con.prepareStatement(sql);
 			
+			ps.setInt(1, replyNo);
+			ps.setInt(2, replyPwd);
 		}finally {
 			DbUtil.dbClose(con, ps);
 		}		
@@ -114,25 +123,6 @@ public class BoardDAOImpl implements BoardDAO {
 		return replyPwd;
 		}
 	  
-	  private List<ReplyDTO> replySelect(Connection con)throws SQLException{
-			PreparedStatement ps =null;
-			ResultSet rs=null;
-			List<ReplyDTO>  list = new ArrayList<ReplyDTO>();
-			String sql="select * from reply";
-	    	try {
-	    		ps = con.prepareStatement(sql);
-	    		rs = ps.executeQuery();
-	    		while(rs.next()) {
-	    			ReplyDTO reply = new ReplyDTO(rs.getInt(1), rs.getString(2),rs.getInt(3), rs.getString(4),rs.getInt(5), rs.getString(6) );
-	    			list.add(reply);
-	    		}
-	    		
-	    	}finally {
-	    		DbUtil.dbClose(null, ps, rs);
-	    	}
-	    	
-	    	return list;
-	    }
 
 
 }
