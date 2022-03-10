@@ -2,11 +2,9 @@ package academy.mvc.model.dto;
 
 public class StudentDTO extends UserDTO {
 
-	private String major;//ㅎ
+	private String major;
 	
-	public StudentDTO() {
-		// TODO Auto-generated constructor stub
-	}
+	public StudentDTO() {}
 	public StudentDTO(String userId, String userName, String userTel, String major) {
 		super(userId, userName, userTel);
 		this.major = major;

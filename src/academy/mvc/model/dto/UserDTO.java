@@ -7,9 +7,7 @@ public class UserDTO {
 	private String userName;
 	private String userTel;
 	  
-	public UserDTO() {
-		// TODO Auto-generated constructor stubㅎ
-	}
+	public UserDTO() {}
 	
 	public UserDTO(String userId, String userName, String userTel) {
 		super();
@@ -60,6 +58,9 @@ public class UserDTO {
 		StringBuilder builder = new StringBuilder();
 		
 		builder.append(" 개인정보++++");
+		builder.append("\n");
+		builder.append("아이디: ");
+		builder.append(userId);
 		builder.append("\n");
 		builder.append("이름: ");
 		builder.append(userName);
