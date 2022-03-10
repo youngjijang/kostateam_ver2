@@ -47,7 +47,7 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void replyDelete(int boardNo, int replyNo, int replyPwd) throws SQLException {
 		int result = boardDAO.replyDelete(boardNo,replyNo,replyPwd);
-		
+		if(result==0)throw new RuntimeException("댓글 삭제에 실패하였습니다.");
 	}
 
 
