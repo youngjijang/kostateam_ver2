@@ -12,7 +12,7 @@ public interface CourseDAO {
 	 * 강의코드 중복 체크
 	 */
 	boolean cCodeCheck(String cCode) throws SQLException;
-	
+
 	/**
 	 * 전체 강의 조회
 	 */

@@ -16,21 +16,23 @@ public class CourseDAOImpl implements CourseDAO {
 
 	@Override
 	public boolean cCodeCheck(String cCode) throws SQLException {
-		 Connection con=null;
-		 PreparedStatement ps=null;
-		 ResultSet rs=null;
-		 con = DbUtil.getConnection();
-		 
-		 ps= con.prepareStatement("select count(*) from course where course_code=?");
-		 ps.setString(1, cCode);
-	
-         rs = ps.executeQuery(); 
-         
-         if(rs.next()) {
-	        	if(rs.getInt(1)==0) return false;
-	     }
-	     return true;
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		con = DbUtil.getConnection();
+
+		ps = con.prepareStatement("select count(*) from course where course_code=?");
+		ps.setString(1, cCode);
+
+		rs = ps.executeQuery();
+
+		if (rs.next()) {
+			if (rs.getInt(1) == 0)
+				return false;
+		}
+		return true;
 	}
+
 	@Override
 	public List<CourseDTO> selectCourseList() throws SQLException {
 		Connection con = null;
