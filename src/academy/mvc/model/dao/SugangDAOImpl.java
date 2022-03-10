@@ -153,17 +153,42 @@ public class SugangDAOImpl implements SugangDAO {
 	}
 
 	@Override
-	public int insertSugang(String studentId, String cCode) throws SQLException {
+	public int insertSugang(String studentId, String cCode) throws SQLException {	
+		List<String> listCount = new ArrayList<String>();
 		List<String> list = new ArrayList<String>();
 		Connection con = null;
 		PreparedStatement ps = null;
 		PreparedStatement ps1 = null;
+		PreparedStatement ps2 = null;
+		PreparedStatement ps3 = null;
+		ResultSet rs2 = null;
+		ResultSet rs1 = null;
 		ResultSet rs = null;
+		int capa = 0 ;
 		int result = 0;	
+		String sql4 = "select course_capa from course where course_code = ?";
+		String sql3 = "select course_code from sugang where course_code = ?";
 		String sql2 = "select course_code from sugang where s_id =?";
 		String sql = "insert into sugang values(sugang_seq.nextval, ?, ?, null)";// proFile.getProperty("");
 		try {
 			con = DbUtil.getConnection();
+			
+			
+			ps3= con.prepareStatement(sql4);
+			ps3.setString(1,cCode);
+			rs2 = ps3.executeQuery();
+			if(rs2.next()) {
+				capa = rs2.getInt(1);	
+			}
+	
+			ps2 = con.prepareStatement(sql3);
+			ps2.setString(1,cCode);
+			rs1 = ps2.executeQuery();
+			while(rs1.next()) {
+				String code = rs1.getString(1);
+				listCount.add(code);
+			}
+		
 			ps = con.prepareStatement(sql2);
 			ps.setString(1,studentId);			
 			rs = ps.executeQuery();
@@ -173,7 +198,7 @@ public class SugangDAOImpl implements SugangDAO {
 				list.add(courseCode);
 			}
 			
-			if(!list.contains(cCode)) {
+			if(!list.contains(cCode) &&  listCount.size()<=capa) {
 				ps1 = con.prepareStatement(sql);
 				ps1.setString(1, cCode);
 				ps1.setString(2, studentId);
@@ -183,7 +208,8 @@ public class SugangDAOImpl implements SugangDAO {
 			return result;
 			
 		} finally {
-			DbUtil.dbClose(null, ps1);
+			DbUtil.dbClose(null, ps2,rs1);
+			DbUtil.dbClose(null, ps,rs);
 			DbUtil.dbClose(con, ps1);
 		}
 		
