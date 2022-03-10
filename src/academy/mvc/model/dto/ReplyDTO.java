@@ -3,21 +3,16 @@ package academy.mvc.model.dto;
 public class ReplyDTO {
 	
 	private int replyNo; 
-	private String content; 
-	private int boardNo;  
-	private String writer;
+	private String replecontent; 
 	private int replyPwd;
 	private String userId;
 
-
 	
-
-	public ReplyDTO(int replyNo, String content, int boardNo, String writer, int replyPwd, String userId) {
+	public ReplyDTO(int replyNo, String replecontent, int replyPwd, String userId) {
+		// TODO Auto-generated constructor stub
 		super();
 		this.replyNo = replyNo;
-		this.content = content;
-		this.boardNo = boardNo;
-		this.writer = writer;
+		this.replecontent = replecontent;
 		this.replyPwd = replyPwd;
 		this.userId = userId;
 	}
@@ -26,23 +21,23 @@ public class ReplyDTO {
 	public int getReplyNo() {
 		return replyNo;
 	}
-
-
+	
 	public void setReplyNo(int replyNo) {
 		this.replyNo = replyNo;
 	}
 
 
-	public String getContent() {
-		return content;
+	public String getReplecontent() {
+		return replecontent;
 	}
 
 
-	public void setContent(String content) {
-		this.content = content;
+	public void setReplecontent(String replecontent) {
+		this.replecontent = replecontent;
 	}
 
 
+	/*
 	public int getBoardNo() {
 		return boardNo;
 	}
@@ -61,7 +56,7 @@ public class ReplyDTO {
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
-
+*/
 
 	public int getReplyPwd() {
 		return replyPwd;
@@ -82,18 +77,16 @@ public class ReplyDTO {
 		this.userId = userId;
 	}
 
-
-	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("ReplyDTO [replyNo=");
 		builder.append(replyNo);
 		builder.append(", content=");
-		builder.append(content);
+		builder.append(replecontent);
 		builder.append(", boardNo=");
-		builder.append(boardNo);
+		//builder.append(boardNo);
 		builder.append(", writer=");
-		builder.append(writer);
+		//builder.append(writer);
 		builder.append(", replyPwd=");
 		builder.append(replyPwd);
 		builder.append(", userId=");

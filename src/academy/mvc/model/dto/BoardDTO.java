@@ -2,26 +2,29 @@ package academy.mvc.model.dto;
 
 import java.util.List;
 
-public class BoardDTO {
+public class BoardDTO extends ReplyDTO {
 	private int boardNo; // 글번호
 	private String content; // 내용
 	private String boardDate; // 등록일
 	private int boardPwd;//비번
 	private String writer; // 작성자
-
-	private List<ReplyDTO> repliesList ;
 	
-	public BoardDTO() {}
-
-
-	public BoardDTO(int boardNo, String content, String boardDate, int boardPwd, String writer) {
-		super();
+	private int replyNo; 
+	private String replecontent; 
+	private int replyPwd;
+	private String userId;
+	
+	public BoardDTO(int boardNo, String content, String boardDate, int boardPwd, int replyNo, String replecontent, int replyPwd, String userId) {
+		super(replyNo, replecontent, replyPwd, userId);
+		this.replyNo = replyNo;
+		this.replecontent = replecontent;
+		this.replyPwd = replyPwd;
+		this.userId = userId;
 		this.boardNo = boardNo;
 		this.content = content;
-		this.boardDate = boardDate;
+		this.boardDate = boardDate; 
 		this.boardPwd = boardPwd;
-		this.writer = writer;
-	}
+	} 
 
 
 	public int getBoardNo() {
@@ -73,12 +76,9 @@ public class BoardDTO {
 		this.writer = writer;
 	}
 
-	public List<ReplyDTO> getReplyList() {
-		return repliesList;
-	}
-
 	@Override
 	public String toString() {
+		super.toString();
 		StringBuilder builder = new StringBuilder();
 		builder.append("BoardDTO [boardNo=");
 		builder.append(boardNo);
@@ -88,17 +88,24 @@ public class BoardDTO {
 		builder.append(boardDate);
 		builder.append(", boardPwd=");
 		builder.append(boardPwd);
+		builder.append(", replyNo=");
+		builder.append(replyNo);
+		builder.append(", replecontent=");
+		builder.append(replecontent);
+		builder.append(", replyPwd=");
+		builder.append(replyPwd);
+		builder.append(", userId=");
+		builder.append(userId);
 		builder.append(", writer=");
 		builder.append(writer);
 		builder.append("]");
+		
 		return builder.toString();
 	}
 
-
-	public void setRepliesList(List<ReplyDTO> replyList) {
+	public ReplyDTO[] getReplyList() {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
-	
-	
+
 }
