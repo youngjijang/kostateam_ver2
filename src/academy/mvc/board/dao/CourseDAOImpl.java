@@ -105,7 +105,7 @@ public class CourseDAOImpl implements CourseDAO {
 
 		try {
 			con = DbUtil.getConnection();
-			ps = con.prepareStatement("insert into course valuse(?, ?, ?, ?, ?, ?, ?)");
+			ps = con.prepareStatement("insert into course values(?, ?, ?, ?, ?, ?, ?)");
 
 			ps.setString(1, courseDTO.getcCode());
 			ps.setString(2, courseDTO.getcName());
