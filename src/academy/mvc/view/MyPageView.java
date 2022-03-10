@@ -94,7 +94,7 @@ public class MyPageView {
 	public static void managerMenu(String userId, String kind) throws NumberFormatException{
 		while(true) {
 			System.out.println("---------------------------"+userId+ "님의 마이페이지 ( "+kind+" )---------------------------");
-			System.out.println("1.강의등록 | 2.강의수정 | 3.강의삭제 | 4. 개인정보확인 | 6.홈으로 | 9.로그아웃");
+			System.out.println("1.강의등록 | 2.강의수정 | 3.강사지정 | 4.강의삭제 | 5. 개인정보확인 | 9.홈으로");
 			int menuNo = Integer.parseInt(MenuView.sc.nextLine());
 				switch(menuNo) {
 				case 1 :
@@ -125,21 +125,25 @@ public class MyPageView {
 					CourseController.updateCourese(cCode, cContent);
 					break;
 				case 3 : 
+					System.out.println("강사를 지정합니다.");
+					System.out.print("해당 강의코드> ");
+					cCode = MenuView.sc.nextLine();
+					System.out.println("강사코드> ");
+					cContent = MenuView.sc.nextLine();
+					break;
+				case 4 : 
 					System.out.println("강의를 삭제합니다.");
 					System.out.print("삭제할 강의> ");
 					cCode = MenuView.sc.nextLine();
 					CourseController.deleteCourse(cCode);
 					break;
-				case 4 :
+				case 5 :
 					UserController.showUser("manager", userId);
 					break;
-				case 6 :
+				case 9 :
 					MenuView.homeMenu(userId, kind);
 					break;
-				case 9 :
-					MenuView.loginMenu();
-					break;
-					//session...
+			
 				default :
 					FailView.errorMessage("메뉴를 잘못 입력하였습니다.");
 				}
