@@ -93,6 +93,12 @@ public class BoardDTO {
 		builder.append("]");
 		return builder.toString();
 	}
+
+
+	public void setRepliesList(List<ReplyDTO> replyList) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }

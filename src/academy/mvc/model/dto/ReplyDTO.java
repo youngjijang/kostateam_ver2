@@ -10,8 +10,7 @@ public class ReplyDTO {
 	private String userId;
 
 
-	public ReplyDTO() {}
-
+	
 
 	public ReplyDTO(int replyNo, String content, int boardNo, String writer, int replyPwd, String userId) {
 		super();
