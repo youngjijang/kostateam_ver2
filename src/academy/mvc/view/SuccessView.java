@@ -80,7 +80,7 @@ public class SuccessView {
 	 * */
 	public static void printAllScorebyTeacherId(List<SugangDTO> list) {
 		for(SugangDTO sugang : list) {
-			System.err.println(sugang);
+			System.out.println(sugang);
 		}
 		System.out.println();
 		
