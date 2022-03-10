@@ -19,18 +19,25 @@ public class CourseDAOImpl implements CourseDAO {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		con = DbUtil.getConnection();
+		boolean result = true;
+		try {
+			con = DbUtil.getConnection();
 
-		ps = con.prepareStatement("select count(*) from course where course_code=?");
-		ps.setString(1, cCode);
-
-		rs = ps.executeQuery();
-
-		if (rs.next()) {
-			if (rs.getInt(1) == 0)
-				return false;
+			ps = con.prepareStatement("select count(*) from course where course_code=?");
+			ps.setString(1, cCode);
+	
+			rs = ps.executeQuery();
+	
+			if (rs.next()) {
+				if (rs.getInt(1) == 0)
+					result= false;
+			}
+			
+		}finally {
+			DbUtil.dbClose(con, ps, rs);
 		}
-		return true;
+		
+		return result;
 	}
 
 	@Override
@@ -222,18 +229,25 @@ public class CourseDAOImpl implements CourseDAO {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		con = DbUtil.getConnection();
+		boolean result = true;
+		try {
+			con = DbUtil.getConnection();
 
-		ps = con.prepareStatement("select count(*) from teacher where course_code=?");
-		ps.setString(1, cCode);
-
-		rs = ps.executeQuery();
-
-		if (rs.next()) {
-			if (rs.getInt(1) == 0)
-				return false;
+			ps = con.prepareStatement("select count(*) from teacher where course_code=?");
+			ps.setString(1, cCode);
+	
+			rs = ps.executeQuery();
+	
+			if (rs.next()) {
+				if (rs.getInt(1) == 0)
+					result= false;
+			}
+			
+		}finally {
+			DbUtil.dbClose(con, ps, rs);
 		}
-		return true;
+		
+		return result;
 	}
 
 }
