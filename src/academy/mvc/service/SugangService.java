@@ -49,5 +49,12 @@ public class SugangService {
 		if(result == 0 )throw new SQLException("수강철회 안됨");
 		
 	}
+
+	public List<SugangDTO> selectAllScorebyTeacherId(String teacherId) throws SQLException{
+		//학생정보 + 성적
+		List<SugangDTO> studentWithScoreList = dao.selectStudentWithScoreList(teacherId);
+		if(studentWithScoreList.size()==0)throw new NullPointerException("수강중인 학생이 없습니다.");
+		return studentWithScoreList;
+	}
 	
 }

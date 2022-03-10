@@ -51,7 +51,8 @@ public class MyPageView {
 			int menuNo = Integer.parseInt(MenuView.sc.nextLine());
 				switch(menuNo) {
 					case 1 :
-						SugangController.selectStudentList(userId);
+						//내 강의의 학생정보 + 성적 전체 출력
+						SugangController.selectAllScorebyTeacherId(userId);
 						break;
 					case 2 :
 						System.out.print("학생ID> ");
