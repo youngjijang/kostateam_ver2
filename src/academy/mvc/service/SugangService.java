@@ -30,12 +30,10 @@ public class SugangService {
 	}
 	
 	
-	public void updateScore(String studentId, int score) throws SQLException{
-		int result = dao.updateScore(studentId, score);
+	public void updateScore(String studentId, int score,String userId) throws SQLException{
+		int result = dao.updateScore(studentId, score, userId);
 		if(result == 0 ) {
 			throw new SQLException("등록 실패");
-		} else {
-			dao.updateScore(studentId, score);
 		}
 		
 	}

@@ -97,16 +97,18 @@ public class SugangDAOImpl implements SugangDAO {
 	}
 
 	@Override
-	public int updateScore(String studentId, int score) throws SQLException {
+	public int updateScore(String studentId, int score,String userId) throws SQLException {
 		Connection con= null;		
 		PreparedStatement ps=null;	
 		int result =0;
-		String sql = "UPDATE SUGANG SET SCORE = ? WHERE S_ID = ?";//proFile.getProperty("");
+		String sql = "update sugang set score = ? where s_id = ? and course_code = (select course_code from teacher where t_id = ?)";//(select s_id from student where s_name = ?) //proFile.getProperty("");
+		
 		try {
 			con = DbUtil.getConnection();	
 			ps= con.prepareStatement(sql);
 			ps.setInt(1, score);
 			ps.setString(2, studentId);
+			ps.setString(3, userId);
 			result = ps.executeUpdate();
 			
 		} finally {

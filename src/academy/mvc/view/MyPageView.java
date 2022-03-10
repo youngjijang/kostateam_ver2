@@ -58,14 +58,14 @@ public class MyPageView {
 						String studentId = MenuView.sc.nextLine();
 						System.out.print("성적> ");
 						int score = Integer.parseInt(MenuView.sc.nextLine());
-						SugangController.updateScore(studentId, score);
+						SugangController.updateScore(studentId, score,userId);
 						break;
 					case 3 :
 						System.out.print("변경할 학생ID> ");
 						studentId = MenuView.sc.nextLine();
 						System.out.print("변경할 성적> ");
 						int newScore =  Integer.parseInt(MenuView.sc.nextLine());
-						SugangController.updateScore(studentId, newScore);
+						SugangController.updateScore(studentId, newScore,userId);
 						break;
 					case 4 :
 						UserController.showUser("teacher", userId);
