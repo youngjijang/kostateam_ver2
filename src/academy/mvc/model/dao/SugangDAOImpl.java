@@ -208,6 +208,7 @@ public class SugangDAOImpl implements SugangDAO {
 			return result;
 			
 		} finally {
+			DbUtil.dbClose(null, ps3,rs2);
 			DbUtil.dbClose(null, ps2,rs1);
 			DbUtil.dbClose(null, ps,rs);
 			DbUtil.dbClose(con, ps1);
