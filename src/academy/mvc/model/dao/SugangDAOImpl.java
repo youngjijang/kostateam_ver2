@@ -154,30 +154,39 @@ public class SugangDAOImpl implements SugangDAO {
 
 	@Override
 	public int insertSugang(String studentId, String cCode) throws SQLException {
-		
-		List<SugangDTO> list = this.selectMind(studentId);
+		List<String> list = new ArrayList<String>();
 		Connection con = null;
 		PreparedStatement ps = null;
-		int result = 0;
-		for(int i =0 ; i < list.size();i++) {
-			if(list.get(i).getcCode().contains(cCode)){
-				return result;
-			}else {			
-				String sql = "insert into sugang values(sugang_seq.nextval, ?, ?, null)";// proFile.getProperty("");
-				try {
-					con = DbUtil.getConnection();
-					ps = con.prepareStatement(sql);
-					ps.setString(1, cCode);
-					ps.setString(2, studentId);
-					result = ps.executeUpdate();
+		PreparedStatement ps1 = null;
+		ResultSet rs = null;
+		int result = 0;	
+		String sql2 = "select course_code from sugang where s_id =?";
+		String sql = "insert into sugang values(sugang_seq.nextval, ?, ?, null)";// proFile.getProperty("");
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql2);
+			ps.setString(1,studentId);			
+			rs = ps.executeQuery();
 
-				} finally {
-					DbUtil.dbClose(con, ps);
-				}
-				return result;	
+			while (rs.next()) {
+				String courseCode = rs.getString(1);	
+				list.add(courseCode);
 			}
+			
+			if(!list.contains(cCode)) {
+				ps1 = con.prepareStatement(sql);
+				ps1.setString(1, cCode);
+				ps1.setString(2, studentId);
+				result = ps1.executeUpdate();
+				return result;			
+			}
+			return result;
+			
+		} finally {
+			DbUtil.dbClose(null, ps1);
+			DbUtil.dbClose(con, ps1);
 		}
-		return result;
+		
 	}
 
 	@Override
