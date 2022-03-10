@@ -186,7 +186,7 @@ public class MenuView {
 						System.out.print("내용> ");
 						String content = sc.nextLine();
 						System.out.print("비밀번호> ");
-						int boardPwd = sc.nextInt();
+						int boardPwd = Integer.parseInt(sc.nextLine());
 						BoardController.insertBoard(content, boardPwd, userId); //boardNo, 날짜는 시퀀스와 sysdate사용
 					}else FailView.errorMessage("권한이 없습니다.");
 					break;
@@ -194,7 +194,7 @@ public class MenuView {
 					System.out.println("**게시글 삭제는 강사만 가능합니다**");
 					if(kind.equals("teacher")) {
 						System.out.print("삭제할 글번호>");
-						int deleteNo = sc.nextInt();
+						int deleteNo = Integer.parseInt(sc.nextLine());
 						BoardController.deleteBoard(deleteNo);
 					}else FailView.errorMessage("권한이 없습니다.");
 					break;
@@ -202,20 +202,20 @@ public class MenuView {
 					System.out.print("내용> ");
 					String content = sc.nextLine();
 					System.out.print("부모글 번호> ");
-					int boardNo = sc.nextInt();
+					int boardNo = Integer.parseInt(sc.nextLine());
 					System.out.print("작성자> ");
 					String writer = sc.nextLine();
 					System.out.print("비밀번호(숫자)>");
-					int replyPwd = sc.nextInt();
+					int replyPwd = Integer.parseInt(sc.nextLine());
 					BoardController.replyInsert(content, boardNo, writer, replyPwd); //BoardController에 List<Reply> 추가 필요
 					break;
 				case 5 :
 					System.out.print("부모글 번호> ");
-					boardNo = sc.nextInt();
+					boardNo = Integer.parseInt(sc.nextLine());
 					System.out.print("댓글 번호> ");
-					int replyNo = sc.nextInt();
+					int replyNo = Integer.parseInt(sc.nextLine());
 					System.out.print("비밀번호> ");
-					replyPwd = sc.nextInt();
+					replyPwd = Integer.parseInt(sc.nextLine());
 					BoardController.replyDelete(boardNo, replyNo, replyPwd);
 					break;
 				case 9 :
