@@ -86,6 +86,8 @@ public class BoardDTO extends ReplyDTO {
 		StringBuilder builder = new StringBuilder();
 		builder.append("BoardDTO [boardNo=");
 		builder.append(boardNo);
+		builder.append(", userId=");
+		builder.append(userId);
 		builder.append(", content=");
 		builder.append(content);
 		builder.append(", boardDate=");
@@ -94,12 +96,11 @@ public class BoardDTO extends ReplyDTO {
 		builder.append(boardPwd);
 		builder.append(", replyNo=");
 		builder.append(replyNo);
+	
 		builder.append(", replecontent=");
 		builder.append(replecontent);
 		builder.append(", replyPwd=");
 		builder.append(replyPwd);
-		builder.append(", userId=");
-		builder.append(userId);
 		builder.append(", writer=");
 		builder.append(writer);
 		builder.append("]");
