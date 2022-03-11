@@ -84,7 +84,7 @@ public class CourseService {
 		if(courseDAO.cCodeCheck(cCode)) {
 			int result = courseDAO.deleteCourse(cCode);
 			if (result == 0) {
-				throw new SQLException("강의 삭제에 실패했습니다.");
+				throw new SQLException("수강중인 학생 혹은 지정 강사가 존재하는 강의로 삭제가 불가능합니다.");
 			}
 		}else {
 			throw new SQLException("존재하지않는 강의코드입니다.");

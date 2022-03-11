@@ -179,19 +179,31 @@ public class CourseDAOImpl implements CourseDAO {
 	public int deleteCourse(String cCode) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
+		PreparedStatement ps2 = null;
 		int result = 0;
 		String sql = "delete course where course_code = ?";
+		ResultSet rs = null;
 
 		try {
 			con = DbUtil.getConnection();
-			ps = con.prepareStatement(sql);
-
+			ps = con.prepareStatement("select count(*) from teacher full join sugang using(course_code)  where course_code=?");
 			ps.setString(1, cCode);
-
-			result = ps.executeUpdate();
+	
+			rs = ps.executeQuery();
+	
+			if (rs.next()) {
+				if (rs.getInt(1) == 0) {
+					
+					ps2 = con.prepareStatement(sql);
+					ps2.setString(1, cCode);
+		
+					result = ps2.executeUpdate();
+				}
+			}
+			 
 
 		} finally {
-			DbUtil.dbClose(con, ps);
+			DbUtil.dbClose(con, ps,rs);
 		}
 
 		return result;
