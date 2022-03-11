@@ -29,8 +29,8 @@ public class BoardDAOImpl implements BoardDAO {
 				+ "       BOARD_CONTENT, \r\n"
 				+ "       BOARD_DATE,\r\n"
 				+ "		  T_ID,\r\n"
-				+ "       BOARD_PWD,\r\n"
 				+ "       REPLY_NO, \r\n"
+				+ "       BOARD_PWD,\r\n"
 				+ "       REPLY_CONTENT, \r\n"
 				+ "       REPLY_WRITER, \r\n"
 				+ "       REPLY_PWD\r\n"
@@ -45,8 +45,8 @@ public class BoardDAOImpl implements BoardDAO {
 				BoardDTO dto = new BoardDTO(rs.getInt("BOARD_NO"), 
 						rs.getString("BOARD_CONTENT"), 
 						rs.getString("BOARD_DATE"), 
-						rs.getInt("REPLY_NO"),
 						rs.getInt("BOARD_PWD"),
+						rs.getInt("REPLY_NO"),
 						rs.getString("T_ID"),
 						rs.getString("REPLY_CONTENT"),
 						rs.getInt("REPLY_PWD"),
@@ -114,6 +114,7 @@ public class BoardDAOImpl implements BoardDAO {
 		try {
 			con = DbUtil.getConnection();
 			ps= con.prepareStatement(sql);
+		
 			
 			ps.setString(1, content);
 			ps.setInt(2, boardNo);
@@ -137,7 +138,6 @@ public class BoardDAOImpl implements BoardDAO {
 		try {
 			con = DbUtil.getConnection();
 			ps= con.prepareStatement(sql);
-			
 			ps.setInt(1, replyNo);
 			ps.setInt(2, replyPwd);
 			
