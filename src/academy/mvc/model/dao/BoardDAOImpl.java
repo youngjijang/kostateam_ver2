@@ -47,8 +47,8 @@ public class BoardDAOImpl implements BoardDAO {
 						rs.getString("BOARD_DATE"), 
 						rs.getInt("BOARD_PWD"),
 						rs.getInt("REPLY_NO"),
-						rs.getString("T_ID"),
 						rs.getString("REPLY_CONTENT"),
+						rs.getString("T_ID"),
 						rs.getInt("REPLY_PWD"),
 						rs.getString("REPLY_WRITER"));
 				list.add(dto);
