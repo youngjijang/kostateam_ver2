@@ -198,7 +198,7 @@ public class SugangDAOImpl implements SugangDAO {
 				list.add(courseCode);
 			}
 			
-			if(!list.contains(cCode) &&  listCount.size()<=capa) {
+			if(!list.contains(cCode) &&  listCount.size()<capa) {
 				ps1 = con.prepareStatement(sql);
 				ps1.setString(1, cCode);
 				ps1.setString(2, studentId);
